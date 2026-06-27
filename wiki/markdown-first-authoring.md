@@ -22,7 +22,7 @@ JavaScript should not become the hidden source of product theory.
 | Navigation | `wiki/_quarto.yml` | Sidebar, navbar, search, and render scope. | Every major markdown page should be reachable from the sidebar. |
 | Interactive labs | `wiki/interactive.html` plus `wiki/assets/app.js` | Dense scenario switching, generated records, and live walkthroughs. | Every lab must have a markdown companion page. |
 | Generated lab data | Markdown data files such as `wiki/architecture-assembly-data.md` | Structured scenario data that powers focused interactive labs. | Generated JS files are build artifacts, not durable source. |
-| Styles | `wiki/quarto.css` and `wiki/assets/styles.css` | Quarto page style and carried lab style. | Styling should not encode architecture content. |
+| Styles | `wiki/docs.css` and `wiki/assets/styles.css` | Quarto page style and carried lab style. | Styling should not encode architecture content. |
 | Publishing | `.github/workflows/quarto-pages.yml` | Render and deploy Quarto to GitHub Pages. | CI must render from source, not commit generated `_site`. |
 
 ## Authoring Rules

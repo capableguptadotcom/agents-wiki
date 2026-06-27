@@ -89,7 +89,7 @@ for (const match of quartoConfig.matchAll(/^\s*-\s+([A-Za-z0-9_.\/-]+\.(?:md|qmd
   }
 }
 
-for (const required of ["_quarto.yml", "index.qmd", "interactive.html", "quarto.css"]) {
+for (const required of ["_quarto.yml", "index.qmd", "interactive.html", "docs.css"]) {
   if (!fs.existsSync(path.join(wikiRoot, required))) {
     problems.push(`wiki/${required} is required for the Quarto site`);
   }

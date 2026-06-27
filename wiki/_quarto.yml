@@ -106,7 +106,7 @@ website:
 format:
   html:
     theme: zephyr
-    css: quarto.css
+    css: docs.css
     page-layout: article
     grid:
       sidebar-width: 280px
