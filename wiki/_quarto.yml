@@ -107,6 +107,8 @@ format:
   html:
     theme: zephyr
     css: docs.css
+    include-after-body:
+      - diagram-viewer.html
     page-layout: article
     grid:
       sidebar-width: 280px

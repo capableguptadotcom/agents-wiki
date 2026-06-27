@@ -1,6 +1,8 @@
 # System Diagram Spine
 
-This page defines the canonical visual model for the wiki. These diagrams are not decoration. Each diagram must unlock an engineering decision.
+Canonical diagrams for the product architecture.
+
+Each diagram answers one implementation question. Use the `Expand` control on a rendered diagram to inspect it.
 
 ## Diagram Index
 
@@ -15,7 +17,7 @@ This page defines the canonical visual model for the wiki. These diagrams are no
 
 ## 1. Product Record ERD
 
-Use this to decide database tables, foreign-key style links, append-only records, and which store owns each object.
+Question: what records must exist before a product agent can safely act?
 
 ```{mermaid}
 erDiagram
@@ -44,13 +46,11 @@ erDiagram
   EVAL_RUN ||--o{ RELEASE_BUNDLE : gates
 ```
 
-Implementation rule:
-
-Every side effect must be reconstructable from `AgentRun`, `ToolCall`, `PolicyDecision`, `Approval`, `WorkflowEvent`, `SourceResponse`, `VerificationResult`, `TimelineEvent`, and `AuditEvent`.
+Rule: every side effect must be reconstructable from `AgentRun`, `ToolCall`, `PolicyDecision`, `Approval`, `WorkflowEvent`, `SourceResponse`, `VerificationResult`, `TimelineEvent`, and `AuditEvent`.
 
 ## 2. AgentRun State Machine
 
-Use this to implement UI status, workflow recovery, cancellation, and incident handling.
+Question: which run states can the UI, workflow engine, and incident process trust?
 
 ```{mermaid}
 stateDiagram-v2
@@ -87,13 +87,11 @@ stateDiagram-v2
   failed --> [*]
 ```
 
-Implementation rule:
-
-No UI may show `completed` from model text. Completion requires source confirmation or an explicit human reconciliation record.
+Rule: no UI may show `completed` from model text. Completion requires source confirmation or an explicit human reconciliation record.
 
 ## 3. Minimum Vertical Slice Sequence
 
-Use this as the first build target. It is the smallest slice that proves the architecture.
+Question: what is the smallest end-to-end build that proves the architecture?
 
 ```{mermaid}
 sequenceDiagram
@@ -130,13 +128,11 @@ sequenceDiagram
   RunAPI->>Eval: create EvalCase from trajectory
 ```
 
-Implementation rule:
-
-The sequence must pass with a fake bed hold before any broader agent platform work starts.
+Rule: pass this sequence with a fake bed hold before broader agent platform work starts.
 
 ## 4. Deployment Container Topology
 
-Use this to decide deployable services and which layer owns enforcement.
+Question: which deployable component owns each enforcement boundary?
 
 ```{mermaid}
 flowchart TB
@@ -207,13 +203,11 @@ flowchart TB
   MemoryStore --> AgentHarness
 ```
 
-Implementation rule:
-
-The model is not an enforcement boundary. Enforcement lives in context binding, capability grants, policy, approval, workflow, source adapters, audit, and release gates.
+Rule: the model is not an enforcement boundary. Enforcement lives in context binding, capability grants, policy, approval, workflow, source adapters, audit, and release gates.
 
 ## 5. Correlation Spine
 
-Use this to make debugging, audit, replay, and eval sampling possible.
+Question: which IDs must move together for debug, audit, replay, and eval sampling?
 
 ```{mermaid}
 flowchart LR
@@ -240,13 +234,11 @@ flowchart LR
   Memory --> MemoryReview["memory review queue"]
 ```
 
-Implementation rule:
-
-Every write-side effect needs `run_id`, `tool_call_id`, `policy_decision_id`, `approval_id` when applicable, `workflow_id`, `source_response_id`, `audit_id`, and `trace_id`.
+Rule: every write-side effect needs `run_id`, `tool_call_id`, `policy_decision_id`, `approval_id` when applicable, `workflow_id`, `source_response_id`, `audit_id`, and `trace_id`.
 
 ## 6. Policy And Approval Gate Flow
 
-Use this to keep dangerous transitions outside model discretion.
+Question: how does a proposed action become allowed, denied, clarified, or approval-bound?
 
 ```{mermaid}
 flowchart TD
@@ -273,9 +265,7 @@ flowchart TD
   SourceWrite --> Verify["source reconciliation"]
 ```
 
-Implementation rule:
-
-Approval authorizes only the canonical payload hash that was shown to the approver. Any modification re-enters policy.
+Rule: approval authorizes only the canonical payload hash shown to the approver. Any modification re-enters policy.
 
 ## Diagram Backlog
 

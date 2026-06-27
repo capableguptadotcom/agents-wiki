@@ -1,121 +1,88 @@
 ---
 title: "Enterprise Agents Wiki"
-subtitle: "An engineering research manual for building AI-native products."
+subtitle: "Product architecture for governed AI agents."
 ---
 
-This wiki exists to turn agent product ideas into buildable contracts.
+Build agents as product actors, not chat widgets.
 
-It is not a collection of essays. Each accepted page should define claims, sources, boundaries, records, diagrams, failure modes, and tests.
+[System diagrams](system-diagram-spine.qmd){.btn .btn-primary}
+[Research standard](research-operating-system.md){.btn .btn-secondary}
 
-[Research operating system](research-operating-system.md){.btn .btn-primary}
-[System diagram spine](system-diagram-spine.qmd){.btn .btn-secondary}
+## Context
 
-## Current Position
-
-The product problem:
+The product invariant:
 
 ```text
-Agents should not be bolted onto products as chat boxes.
-They should become governed product actors with explicit authority, tools, workflows, memory, audit, evals, and release controls.
+Agent coordinates.
+Product authorizes.
+Workflow executes.
+Source confirms.
+Audit records.
+Eval gates release.
 ```
 
-The engineering rule:
+The architecture starts when an intent becomes a governed product run:
 
 ```text
-The agent coordinates work.
-The product owns authority and records.
-The workflow owns side-effect recovery.
-The source systems own truth.
-The audit log owns accountability.
-The eval and release process owns improvement.
+intent
+-> AgentRun
+-> ContextManifest
+-> AccessDecision
+-> ToolCall preview
+-> PolicyDecision
+-> Approval
+-> WorkflowRun
+-> SourceResponse
+-> VerificationResult
+-> TimelineEvent + AuditEvent
+-> EvalCase
 ```
 
-## Canonical Architecture
+## First Slice
 
-```{mermaid}
-flowchart LR
-  Surface["Work surface"] --> Context["Context manifest"]
-  Context --> Access["Access decision"]
-  Access --> Runtime["Agent runtime"]
-  Runtime --> Gateway["Capability gateway"]
-  Gateway --> Policy["Policy decision"]
-  Policy --> Approval["Approval record"]
-  Approval --> Workflow["Durable workflow"]
-  Workflow --> Source["Source response"]
-  Source --> Verify["Verification result"]
-  Verify --> Timeline["Product timeline"]
-  Verify --> Audit["Audit event"]
-  Verify --> Eval["Eval case"]
-  Eval --> Release["Release bundle"]
-```
+Use a fake bed-reservation flow. It is concrete enough to expose the hard parts without needing a live hospital system.
 
-Every layer must answer:
-
-| Question | Required artifact |
+| Step | Required proof |
 |---|---|
-| What boundary is this? | Architecture decision or system contract |
-| What proves the claim? | Claim ID and source evidence |
-| What records are written? | Schema, ERD, event, or API contract |
-| What can fail? | Negative case and recovery path |
-| What blocks release? | Eval fixture or acceptance test |
+| Bind request | selected encounter, tenant, actor, role, source freshness |
+| Check authority | user grants, agent grants, connector grants, source ACL |
+| Gather evidence | source references with timestamps and data class |
+| Propose action | exact `reserve_bed` payload before execution |
+| Gate policy | allow, deny, clarify, or approval-required decision |
+| Approve | payload hash, approver, expiry, resume token |
+| Execute | durable workflow with idempotency key |
+| Verify | source-system confirmation or `needs_reconciliation` |
+| Learn | eval case or reviewed memory proposal, never silent mutation |
 
-## Read First
+## Read Order
 
-| Order | Page | Why |
-|---|---|---|
-| 1 | [Research operating system](research-operating-system.md) | Defines the quality bar: claim ledger, evidence classes, page gates, rewrite queue. |
-| 2 | [Site template decision](site-template-decision.md) | Explains why Quarto remains the base and why the old HTML lab is demoted. |
-| 3 | [System diagram spine](system-diagram-spine.qmd) | Establishes the ERD, state machine, sequence, topology, correlation, and policy diagrams. |
-| 4 | [Architecture blueprint](architecture-blueprint.md) | Gives the current layer model and minimum vertical slice. |
-| 5 | [Implementation lab](implementation-lab.md) | Should become the canonical backend contract spec. |
-| 6 | [References](references.md) and [Source atlas](source-atlas.md) | Current source library; needs conversion into claim-level registry. |
+| Page | Use it for |
+|---|---|
+| [System diagram spine](system-diagram-spine.qmd) | Canonical ERD, state machine, sequence, topology, correlation, and policy flow. |
+| [Architecture blueprint](architecture-blueprint.md) | Layer boundaries and the minimum product architecture. |
+| [Implementation lab](implementation-lab.md) | API, schema, event, and error-contract work queue. |
+| [Runtime ledger](runtime-ledger.md) | Run state, correlation IDs, timeline, audit, trace, and eval records. |
+| [Approval handoff](approval-handoff.md) | Human approval as a payload-bound product record. |
+| [References](references.md) | Source inventory; still needs claim-level citations. |
 
-## Build Path
+## Current Standard
 
-The first real implementation target is a fake but contract-complete bed-flow run:
+Accepted pages must contain:
 
-```text
-POST /agent-runs
--> bind ContextManifest
--> create AccessDecision
--> plan TaskGraph
--> read source evidence
--> preview reserve_bed
--> require exact Approval
--> start durable WorkflowRun
--> store SourceResponse
--> create VerificationResult
--> write TimelineEvent and AuditEvent
--> sample EvalCase
-```
+| Requirement | Meaning |
+|---|---|
+| Boundary | What this page owns and what it does not own. |
+| Contract | Schema, API, state machine, event, or invariant. |
+| Evidence | Claim-level source or explicit assumption. |
+| Failure mode | At least one negative path. |
+| Release test | What blocks promotion. |
 
-Acceptance:
+## Next Work
 
-- ambiguous context stops before source reads
-- denied scope produces no tool call
-- malformed payload is rejected by schema
-- approval binds to canonical payload hash
-- rejected approval never starts workflow
-- workflow retry cannot duplicate a side effect
-- source mismatch becomes `needs_reconciliation`
-- patient-specific facts are not stored as durable memory
-- release is blocked by failed approval, memory, denial, or source-truth evals
-
-## What Changed
-
-The old [interactive app](interactive.html) is no longer the center of the wiki. It is now a derived lab surface indexed at [Interactive labs](interactive-labs.md). Deep links are kept because some simulations are useful, but durable knowledge must move into markdown, diagrams, schemas, and tests.
-
-## Rewrite Priorities
-
-| Priority | Work | Definition of done |
-|---|---|---|
-| 1 | Source registry | `references.md` becomes a claim-level source registry with citation keys, dates, evidence class, caveats, and supported claims. |
-| 2 | Backend contracts | `implementation-lab.md` defines JSON Schemas, API contracts, event payloads, lifecycle enums, and error responses. |
-| 3 | Identity and grants | `identity-access-lab.md` and `capability-registry.md` define a deterministic grant-resolution algorithm and denial taxonomy. |
-| 4 | Approval boundary | `approval-handoff.md` defines state transitions, canonical payload hashing, expiry, modification, escalation, and resume-token rules. |
-| 5 | Eval harness | `eval-release-harness.md` defines fixtures, trajectory assertions, release thresholds, reports, and CI integration. |
-| 6 | Threat model | `agent-threat-model.md` replaces simulated debate with threat cases, controls, denial evals, evidence records, and incident paths. |
-
-## Template Direction
-
-We stay with Quarto for now because the core artifact is research-heavy markdown with diagrams, citations, sidebars, search, and static publishing. Astro/Starlight remains a candidate only if the site becomes a component-driven docs app with many focused interactive islands.
+| Priority | Output |
+|---|---|
+| 1 | Convert `references.md` into a claim-level source registry. |
+| 2 | Turn `implementation-lab.md` into JSON Schemas and API contracts. |
+| 3 | Define deterministic grant resolution in identity and capability pages. |
+| 4 | Specify approval payload hashing, expiry, modification, and resume semantics. |
+| 5 | Define eval fixtures and trajectory assertions for release gating. |
