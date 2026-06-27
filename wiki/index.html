@@ -1,0 +1,1634 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Enterprise Agents Wiki</title>
+    <link rel="stylesheet" href="assets/styles.css">
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Wiki navigation">
+        <div class="brand">
+          <span class="brand-mark">EA</span>
+          <div>
+            <strong>Enterprise Agents</strong>
+            <span>Interactive wiki</span>
+          </div>
+        </div>
+        <nav class="nav-list">
+          <button class="nav-button active" data-target="overview">Overview</button>
+          <button class="nav-button" data-target="primitives">Primitives</button>
+          <button class="nav-button" data-target="object-model">Object Model</button>
+          <button class="nav-button" data-target="intent-router">Intent Router</button>
+          <button class="nav-button" data-target="capability-registry">Capability Registry</button>
+          <button class="nav-button" data-target="skill-lifecycle">Skill Lifecycle</button>
+          <button class="nav-button" data-target="identity-access">Identity & Access</button>
+          <button class="nav-button" data-target="walkthrough">Bed-flow Walkthrough</button>
+          <button class="nav-button" data-target="approval-handoff">Approval Handoff</button>
+          <button class="nav-button" data-target="durable-execution">Durable Execution</button>
+          <button class="nav-button" data-target="lifecycle">Lifecycle</button>
+          <button class="nav-button" data-target="security">Security & Memory</button>
+          <button class="nav-button" data-target="memory-governance">Memory Governance</button>
+          <button class="nav-button" data-target="threat-model">Threat Model</button>
+          <button class="nav-button" data-target="patterns">Real Examples</button>
+          <button class="nav-button" data-target="case-studies">Case Studies</button>
+          <button class="nav-button" data-target="case-architecture">Case Architecture</button>
+          <button class="nav-button" data-target="visual-maps">Visual Maps</button>
+          <button class="nav-button" data-target="architecture-review">Architecture Review</button>
+          <button class="nav-button" data-target="design-philosophy">Design Philosophy</button>
+          <button class="nav-button" data-target="research-standards">Research & Standards</button>
+          <button class="nav-button" data-target="evidence-chain">Evidence Chain</button>
+          <button class="nav-button" data-target="composition-workbench">Composition</button>
+          <button class="nav-button" data-target="protocol-runtime">Protocol Runtime</button>
+          <button class="nav-button" data-target="theory-lab">Theory Lab</button>
+          <button class="nav-button" data-target="source-atlas">Source Atlas</button>
+          <button class="nav-button" data-target="decision-workbench">Decision Workbench</button>
+          <button class="nav-button" data-target="maturity-matrix">Maturity Matrix</button>
+          <button class="nav-button" data-target="surface-lab">Surface Lab</button>
+          <button class="nav-button" data-target="blueprint">Blueprint</button>
+          <button class="nav-button" data-target="deployment-topology">Deployment Topology</button>
+          <button class="nav-button" data-target="source-systems">Source Systems</button>
+          <button class="nav-button" data-target="deep-run">Deep Run</button>
+          <button class="nav-button" data-target="control-plane">Control Plane</button>
+          <button class="nav-button" data-target="agentops">AgentOps</button>
+          <button class="nav-button" data-target="simulator">Simulator</button>
+          <button class="nav-button" data-target="labs">Labs</button>
+          <button class="nav-button" data-target="implementation">Implementation</button>
+          <button class="nav-button" data-target="runtime-ledger">Runtime Ledger</button>
+          <button class="nav-button" data-target="learning-path">Learning Path</button>
+          <button class="nav-button" data-target="dives">Deep Dives</button>
+        </nav>
+        <div class="sidebar-note">
+          <span>Thesis</span>
+          <p>Agents become product actors only when identity, tools, memory, approvals, workflows, and evals are first-class.</p>
+        </div>
+      </aside>
+
+      <main class="content">
+        <section class="page-section active" id="overview">
+          <div class="section-header">
+            <p class="eyebrow">Architecture map</p>
+            <h1>Agent-native products are execution systems, not chat boxes.</h1>
+            <p class="lead">The user may start with voice, chat, Slack, or a button inside a workflow. The product must still convert that request into governed actions, durable execution, observable state, and recoverable outcomes.</p>
+          </div>
+
+          <div class="architecture-grid">
+            <div class="flow-panel" aria-label="Agent execution flow">
+              <button class="flow-node selected" data-layer="intent">1. Intent</button>
+              <button class="flow-node" data-layer="agent">2. Agent Runtime</button>
+              <button class="flow-node" data-layer="policy">3. Policy Gateway</button>
+              <button class="flow-node" data-layer="approval">4. Approval</button>
+              <button class="flow-node" data-layer="workflow">5. Durable Workflow</button>
+              <button class="flow-node" data-layer="state">6. Product State</button>
+              <button class="flow-node" data-layer="ops">7. Ops Feedback</button>
+            </div>
+            <article class="detail-panel" id="layer-detail" aria-live="polite"></article>
+          </div>
+
+          <div class="principle-strip">
+            <div>
+              <strong>Runtime split</strong>
+              <span>Agent reasons. Workflow recovers. Tool gateway enforces.</span>
+            </div>
+            <div>
+              <strong>Source of truth</strong>
+              <span>Product DB and domain systems stay authoritative.</span>
+            </div>
+            <div>
+              <strong>Trust model</strong>
+              <span>Approvals, audits, scopes, and evals build confidence.</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="page-section" id="primitives">
+          <div class="section-header">
+            <p class="eyebrow">Product object model</p>
+            <h2>Seven primitives make agents first-class.</h2>
+            <p class="lead">A useful product model separates identity, capability, execution, governance, and release controls.</p>
+          </div>
+          <div class="card-grid" id="primitive-grid"></div>
+          <div class="split-layout">
+            <article class="panel">
+              <h3>Product table sketch</h3>
+              <pre><code>agents
+agent_versions
+agent_runs
+agent_steps
+tool_registry
+tool_calls
+approvals
+memory_items
+audit_events
+eval_runs
+release_bundles</code></pre>
+            </article>
+            <article class="panel">
+              <h3>Release bundle</h3>
+              <p>A release should pin prompts, model IDs, tool versions, memory schemas, policies, eval sets, and workflow code. Without this, you cannot reproduce behavior after a failure.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="page-section" id="object-model">
+          <div class="section-header">
+            <p class="eyebrow">Product object graph</p>
+            <h2>Turn agent architecture into records that can be queried, audited, replayed, and improved.</h2>
+            <p class="lead">Pick a scenario and a product object. The lab shows ownership, writer, readers, keys, foreign-key style links, invariants, failure modes, and an example record for a real run.</p>
+          </div>
+
+          <div class="object-model-scenarios" id="object-model-scenarios"></div>
+
+          <div class="object-model-layout">
+            <div class="object-model-list" id="object-model-list"></div>
+            <article class="object-model-detail" id="object-model-detail"></article>
+          </div>
+
+          <div class="object-model-board">
+            <article class="object-model-panel">
+              <div class="object-model-record-header">
+                <h3>Example persisted record</h3>
+                <a href="product-object-model-lab.md">Open companion note</a>
+              </div>
+              <pre class="example-code"><code id="object-model-record"></code></pre>
+            </article>
+            <article class="object-model-panel">
+              <h3>Relationship path</h3>
+              <div class="object-model-relations" id="object-model-relations"></div>
+            </article>
+          </div>
+
+          <article class="object-model-panel object-model-matrix-panel">
+            <h3>Record ownership matrix</h3>
+            <div class="object-model-matrix" id="object-model-matrix"></div>
+          </article>
+        </section>
+
+        <section class="page-section" id="intent-router">
+          <div class="section-header">
+            <p class="eyebrow">Intent to action</p>
+            <h2>Route a user request into context, tools, approval, or clarification.</h2>
+            <p class="lead">Voice, chat, Slack, and buttons are only entry points. The product must bind the request to a work object, compare candidate tools, classify risk, ask clarification when needed, and stop at an exact action proposal before durable execution.</p>
+          </div>
+
+          <div class="intent-router-scenarios" id="intent-router-scenarios"></div>
+
+          <div class="intent-router-layout">
+            <div class="intent-router-stages" id="intent-router-stages"></div>
+            <article class="intent-router-detail" id="intent-router-detail"></article>
+          </div>
+
+          <div class="intent-router-board">
+            <article class="intent-router-panel">
+              <h3>Route record preview</h3>
+              <pre class="example-code"><code id="intent-router-record"></code></pre>
+            </article>
+            <article class="intent-router-panel">
+              <h3>Candidate tools</h3>
+              <div class="intent-router-tools" id="intent-router-tools"></div>
+            </article>
+          </div>
+
+          <div class="intent-router-board">
+            <article class="intent-router-panel">
+              <h3>Signal stack</h3>
+              <div class="intent-router-signals" id="intent-router-signals"></div>
+            </article>
+            <article class="intent-router-panel">
+              <h3>Routing evals</h3>
+              <div class="intent-router-evals" id="intent-router-evals"></div>
+            </article>
+          </div>
+        </section>
+
+        <section class="page-section" id="capability-registry">
+          <div class="section-header">
+            <p class="eyebrow">Skills and tools</p>
+            <h2>Grant agent capabilities through a registry, not through prompts.</h2>
+            <p class="lead">Pick a workflow and a capability type. The lab shows what the capability does, how access is granted, which records prove it is safe, and how it composes with context, tools, workflows, memory, and observability.</p>
+          </div>
+
+          <div class="capability-scenarios" id="capability-scenarios"></div>
+
+          <div class="capability-layout">
+            <div class="capability-types" id="capability-types"></div>
+            <article class="capability-detail" id="capability-detail"></article>
+          </div>
+
+          <div class="capability-board">
+            <article class="capability-panel">
+              <h3>Access grant record</h3>
+              <pre class="example-code"><code id="capability-record"></code></pre>
+            </article>
+            <article class="capability-panel">
+              <h3>Connection path</h3>
+              <div class="capability-flow" id="capability-flow"></div>
+            </article>
+          </div>
+
+          <article class="capability-panel capability-composition-panel">
+            <h3>Scenario composition recipe</h3>
+            <div class="capability-composition" id="capability-composition"></div>
+          </article>
+        </section>
+
+        <section class="page-section" id="skill-lifecycle">
+          <div class="section-header">
+            <p class="eyebrow">Skill lifecycle</p>
+            <h2>Let skills evolve through evidence, review, evals, and release bundles.</h2>
+            <p class="lead">Pick a workflow and lifecycle gate. The lab shows how a skill change moves from trace evidence into authored instructions, owner review, trajectory evals, rollout, runtime use, and learning without silent prompt drift.</p>
+          </div>
+
+          <div class="skill-scenarios" id="skill-scenarios"></div>
+
+          <div class="skill-layout">
+            <div class="skill-stages" id="skill-stages"></div>
+            <article class="skill-detail" id="skill-detail"></article>
+          </div>
+
+          <div class="skill-board">
+            <article class="skill-panel">
+              <h3>Skill lifecycle record</h3>
+              <pre class="example-code"><code id="skill-record"></code></pre>
+            </article>
+            <article class="skill-panel">
+              <h3>Dependency and authority map</h3>
+              <div class="skill-dependencies" id="skill-dependencies"></div>
+            </article>
+          </div>
+
+          <article class="skill-panel skill-eval-panel">
+            <div class="skill-eval-header">
+              <h3>Release-blocking evals</h3>
+              <a href="skill-lifecycle-lab.md">Open companion note</a>
+            </div>
+            <div class="skill-evals" id="skill-evals"></div>
+          </article>
+        </section>
+
+        <section class="page-section" id="identity-access">
+          <div class="section-header">
+            <p class="eyebrow">Identity and authority</p>
+            <h2>Agents act only inside the intersection of user authority, agent grants, connector scopes, policy, and approval.</h2>
+            <p class="lead">Pick a workflow and an authority boundary. The lab traces who the agent is acting for, which credential is being used, what is allowed or denied, which record proves it, and how revocation works.</p>
+          </div>
+
+          <div class="identity-access-scenarios" id="identity-access-scenarios"></div>
+
+          <div class="identity-access-layout">
+            <div class="identity-access-boundaries" id="identity-access-boundaries"></div>
+            <article class="identity-access-detail" id="identity-access-detail"></article>
+          </div>
+
+          <div class="identity-access-board">
+            <article class="identity-access-panel">
+              <h3>Access decision record</h3>
+              <pre class="example-code"><code id="identity-access-record"></code></pre>
+            </article>
+            <article class="identity-access-panel">
+              <h3>Authority flow</h3>
+              <div class="identity-access-flow" id="identity-access-flow"></div>
+            </article>
+          </div>
+
+          <article class="identity-access-panel identity-access-matrix-panel">
+            <h3>Subject and credential matrix</h3>
+            <div class="identity-access-matrix" id="identity-access-matrix"></div>
+          </article>
+        </section>
+
+        <section class="page-section" id="walkthrough">
+          <div class="section-header">
+            <p class="eyebrow">Interactive walkthrough</p>
+            <h2>Healthcare bed-flow agent, end to end.</h2>
+            <p class="lead">This walkthrough shows how voice input, agent reasoning, tools, approvals, workflow execution, state updates, memory, audit, and evals combine in one product journey.</p>
+          </div>
+
+          <div class="walkthrough-layout">
+            <div class="step-list" id="step-list"></div>
+            <article class="walkthrough-card">
+              <div class="step-meta">
+                <span id="step-number">Step 1</span>
+                <span id="step-layer">Input</span>
+              </div>
+              <h3 id="step-title"></h3>
+              <p id="step-body"></p>
+              <div class="state-box">
+                <div class="state-title">Current run state</div>
+                <pre><code id="run-state"></code></pre>
+              </div>
+              <div class="action-row">
+                <button class="secondary-button" id="prev-step">Previous</button>
+                <button class="primary-button" id="next-step">Next</button>
+                <button class="danger-button hidden" id="reject-action">Reject</button>
+                <button class="confirm-button hidden" id="approve-action">Approve action</button>
+              </div>
+            </article>
+          </div>
+
+          <div class="timeline-panel">
+            <h3>Run timeline</h3>
+            <ol id="timeline"></ol>
+          </div>
+        </section>
+
+        <section class="page-section" id="approval-handoff">
+          <div class="section-header">
+            <p class="eyebrow">Approval and handoff</p>
+            <h2>Approval must bind to exact payloads and resume safely.</h2>
+            <p class="lead">Pick a scenario and a human decision. The lab shows the approval card, payload hash behavior, audit record, workflow resume path, and what the agent or workflow may do next.</p>
+          </div>
+
+          <div class="approval-scenarios" id="approval-scenarios"></div>
+
+          <div class="approval-layout">
+            <div class="approval-decision-tabs" id="approval-decision-tabs"></div>
+            <article class="approval-detail" id="approval-detail"></article>
+          </div>
+
+          <div class="approval-board">
+            <article class="approval-panel">
+              <h3>Approval record</h3>
+              <pre class="example-code"><code id="approval-record"></code></pre>
+            </article>
+            <article class="approval-panel">
+              <h3>Resume state path</h3>
+              <div class="approval-state-path" id="approval-state-path"></div>
+            </article>
+          </div>
+
+          <div class="approval-board">
+            <article class="approval-panel">
+              <h3>Payload comparison</h3>
+              <div class="approval-payloads" id="approval-payloads"></div>
+            </article>
+            <article class="approval-panel">
+              <h3>Audit and eval evidence</h3>
+              <div class="approval-evidence" id="approval-evidence"></div>
+            </article>
+          </div>
+        </section>
+
+        <section class="page-section" id="durable-execution">
+          <div class="section-header">
+            <p class="eyebrow">Durable execution</p>
+            <h2>Workflow owns recovery after the agent proposes action.</h2>
+            <p class="lead">Pick a scenario and a workflow concern. The lab shows what stays in the agent loop, what moves into durable workflow, how retries avoid duplicate side effects, and how cancellation, compensation, verification, and platform choices fit together.</p>
+          </div>
+
+          <div class="durable-scenarios" id="durable-scenarios"></div>
+
+          <div class="durable-layout">
+            <div class="durable-concern-tabs" id="durable-concern-tabs"></div>
+            <article class="durable-detail" id="durable-detail"></article>
+          </div>
+
+          <div class="durable-board">
+            <article class="durable-panel">
+              <h3>Workflow record preview</h3>
+              <pre class="example-code"><code id="durable-record"></code></pre>
+            </article>
+            <article class="durable-panel">
+              <h3>State path</h3>
+              <div class="durable-state-path" id="durable-state-path"></div>
+            </article>
+          </div>
+
+          <div class="durable-board">
+            <article class="durable-panel">
+              <h3>Agent loop vs workflow</h3>
+              <div class="durable-split" id="durable-split"></div>
+            </article>
+            <article class="durable-panel">
+              <h3>Platform fit</h3>
+              <div class="durable-platforms" id="durable-platforms"></div>
+            </article>
+          </div>
+        </section>
+
+        <section class="page-section" id="lifecycle">
+          <div class="section-header">
+            <p class="eyebrow">Lifecycle</p>
+            <h2>Agents need a release lifecycle, not silent daily drift.</h2>
+            <p class="lead">Improvements should move through traces, analysis, changes, evals, rollout, and rollback. Production behavior should be reproducible.</p>
+          </div>
+
+          <div class="lifecycle-track" id="lifecycle-track"></div>
+          <div class="panel">
+            <h3>Autonomy ladder</h3>
+            <label for="autonomy-range" class="range-label">Select autonomy level</label>
+            <input id="autonomy-range" type="range" min="0" max="5" value="2">
+            <div class="autonomy-output" id="autonomy-output"></div>
+          </div>
+        </section>
+
+        <section class="page-section" id="security">
+          <div class="section-header">
+            <p class="eyebrow">Controls</p>
+            <h2>Prompt text is not security.</h2>
+            <p class="lead">Tools enforce policy. Memory writes are product mutations. Audit logs prove accountability.</p>
+          </div>
+
+          <div class="split-layout">
+            <article class="panel">
+              <h3>Tool policy builder</h3>
+              <div class="form-grid">
+                <label>Data class
+                  <select id="data-class">
+                    <option value="public">Public</option>
+                    <option value="internal">Internal</option>
+                    <option value="pii">PII</option>
+                    <option value="phi">PHI</option>
+                  </select>
+                </label>
+                <label>Side effect
+                  <select id="side-effect">
+                    <option value="read">Read</option>
+                    <option value="draft">Draft</option>
+                    <option value="write">Write</option>
+                    <option value="external">External communication</option>
+                  </select>
+                </label>
+                <label>Autonomy
+                  <select id="policy-autonomy">
+                    <option value="suggest">Suggest</option>
+                    <option value="draft">Draft with approval</option>
+                    <option value="supervised">Supervised execute</option>
+                    <option value="bounded">Bounded autonomous</option>
+                  </select>
+                </label>
+              </div>
+              <div class="policy-output" id="policy-output"></div>
+            </article>
+
+            <article class="panel">
+              <h3>Memory classifier</h3>
+              <div class="memory-list" id="memory-list"></div>
+            </article>
+          </div>
+        </section>
+
+        <section class="page-section" id="memory-governance">
+          <div class="section-header">
+            <p class="eyebrow">Memory governance</p>
+            <h2>Memory is a product mutation, not a hidden prompt scratchpad.</h2>
+            <p class="lead">Pick a scenario and memory class. The lab shows whether the candidate should be stored, who can approve it, where it can be reused, how users correct or delete it, and what evals prevent bad memory from changing future behavior.</p>
+          </div>
+
+          <div class="memory-scenarios" id="memory-scenarios"></div>
+
+          <div class="memory-governance-layout">
+            <div class="memory-class-tabs" id="memory-class-tabs"></div>
+            <article class="memory-governance-detail" id="memory-governance-detail"></article>
+          </div>
+
+          <div class="memory-governance-board">
+            <article class="memory-governance-panel">
+              <h3>Memory item preview</h3>
+              <pre class="example-code"><code id="memory-record"></code></pre>
+            </article>
+            <article class="memory-governance-panel">
+              <h3>Lifecycle path</h3>
+              <div class="memory-lifecycle" id="memory-lifecycle"></div>
+            </article>
+          </div>
+
+          <div class="memory-governance-board">
+            <article class="memory-governance-panel">
+              <h3>Use audit</h3>
+              <div class="memory-use-audit" id="memory-use-audit"></div>
+            </article>
+            <article class="memory-governance-panel">
+              <h3>Eval cases</h3>
+              <div class="memory-evals" id="memory-evals"></div>
+            </article>
+          </div>
+
+          <div class="memory-proposal-lab">
+            <div class="section-subheader">
+              <p class="eyebrow">Memory lifecycle lab</p>
+              <h3>Trace how a memory proposal becomes active product context.</h3>
+              <p>Switch scenario and stage to see the record, control gates, retrieval use, and correction path. The key distinction is that a memory proposal is evidence for review; it is not active memory until policy, owner approval, release, and eval gates pass.</p>
+            </div>
+
+            <div class="memory-proposal-scenarios" id="memory-proposal-scenarios"></div>
+
+            <div class="memory-proposal-layout">
+              <div class="memory-proposal-stages" id="memory-proposal-stages"></div>
+              <article class="memory-proposal-detail" id="memory-proposal-detail"></article>
+            </div>
+
+            <div class="memory-proposal-board">
+              <article class="memory-proposal-panel">
+                <h3>Lifecycle record</h3>
+                <pre class="example-code"><code id="memory-proposal-record"></code></pre>
+              </article>
+              <article class="memory-proposal-panel">
+                <h3>Runtime use</h3>
+                <div class="memory-proposal-use" id="memory-proposal-use"></div>
+              </article>
+            </div>
+
+            <div class="memory-proposal-board">
+              <article class="memory-proposal-panel">
+                <h3>Control gates</h3>
+                <div class="memory-proposal-controls" id="memory-proposal-controls"></div>
+              </article>
+              <article class="memory-proposal-panel">
+                <h3>Release evals</h3>
+                <div class="memory-proposal-evals" id="memory-proposal-evals"></div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section class="page-section" id="threat-model">
+          <div class="section-header">
+            <p class="eyebrow">Risk architecture</p>
+            <h2>Threat model agent actions across product surfaces.</h2>
+            <p class="lead">A first-class agent needs explicit threat stories, enforcement boundaries, evidence records, evals, and recovery paths for every scenario where it reads sensitive context or changes product state.</p>
+          </div>
+
+          <div class="threat-scenarios" id="threat-scenarios"></div>
+          <div class="threat-layout">
+            <div class="threat-tabs" id="threat-tabs"></div>
+            <article class="threat-detail" id="threat-detail"></article>
+          </div>
+
+          <div class="threat-board">
+            <article class="threat-panel">
+              <h3>Threat record preview</h3>
+              <pre><code id="threat-record"></code></pre>
+            </article>
+            <article class="threat-panel">
+              <h3>Control chain</h3>
+              <div class="threat-chain" id="threat-chain"></div>
+            </article>
+          </div>
+        </section>
+
+        <section class="page-section" id="patterns">
+          <div class="section-header">
+            <p class="eyebrow">Industry pattern library</p>
+            <h2>Use platforms as pattern sources, not blind templates.</h2>
+            <p class="lead">Each platform highlights one useful piece of the stack. The product architecture still has to compose them into a governed lifecycle.</p>
+          </div>
+          <div class="pattern-tabs" id="pattern-tabs"></div>
+          <article class="pattern-detail" id="pattern-detail"></article>
+
+          <div class="teardown-panel">
+            <div class="teardown-header">
+              <div>
+                <h3>Product pattern teardown</h3>
+                <p>Pick a real platform or product pattern. The teardown separates what the user sees from the hidden architecture pieces, what we can copy, what remains unproven, and which evidence we would require before shipping a similar agent.</p>
+              </div>
+              <a href="industry-pattern-teardowns.md">Open teardown note</a>
+            </div>
+            <div class="teardown-tabs" id="teardown-tabs"></div>
+            <article class="teardown-detail" id="teardown-detail"></article>
+          </div>
+
+          <div class="teardown-board">
+            <article class="teardown-card">
+              <h3>Architecture decomposition</h3>
+              <div class="teardown-layers" id="teardown-layers"></div>
+            </article>
+            <article class="teardown-card">
+              <h3>Evidence questions</h3>
+              <div class="teardown-evidence" id="teardown-evidence"></div>
+            </article>
+          </div>
+        </section>
+
+        <section class="page-section" id="case-studies">
+          <div class="section-header">
+            <p class="eyebrow">Case studies</p>
+            <h2>See how the same primitives change by domain.</h2>
+            <p class="lead">These are not vendor scorecards. They are product-pattern studies that map real-life workflows to agent-native architecture decisions.</p>
+          </div>
+
+          <div class="case-layout">
+            <div class="case-tabs" id="case-tabs"></div>
+            <article class="case-detail" id="case-detail"></article>
+          </div>
+
+          <div class="case-compare-panel">
+            <h3>Cross-case comparison</h3>
+            <div class="case-compare-grid" id="case-compare-grid"></div>
+          </div>
+        </section>
+
+        <section class="page-section" id="case-architecture">
+          <div class="section-header">
+            <p class="eyebrow">Industry case architecture lab</p>
+            <h2>Separate public evidence, architecture inference, and product responsibility.</h2>
+            <p class="lead">Pick a workflow. The lab maps papers, standards, platform examples, lifecycle records, and case-specific risks into one adoption decision record.</p>
+          </div>
+
+          <div class="case-arch-tabs" id="case-arch-tabs"></div>
+          <div class="case-arch-layout">
+            <article class="case-arch-detail" id="case-arch-detail"></article>
+            <article class="case-arch-record-panel">
+              <div class="case-arch-record-header">
+                <h3>Adoption decision record</h3>
+                <a href="industry-case-architecture-lab.md">Open companion note</a>
+              </div>
+              <pre id="case-arch-record"></pre>
+            </article>
+          </div>
+
+          <div class="case-arch-board">
+            <article class="case-arch-panel">
+              <h3>Evidence ladder</h3>
+              <div class="case-arch-evidence" id="case-arch-evidence"></div>
+            </article>
+            <article class="case-arch-panel">
+              <h3>Architecture path</h3>
+              <div class="case-arch-path" id="case-arch-path"></div>
+            </article>
+          </div>
+        </section>
+
+        <section class="page-section" id="visual-maps">
+          <div class="section-header">
+            <p class="eyebrow">Visual maps</p>
+            <h2>Inspect the system as flows, states, and feedback loops.</h2>
+            <p class="lead">Use these maps to reason about what happens over time: who acts, what state changes, where approval pauses execution, and how production learning becomes a controlled release.</p>
+          </div>
+
+          <div class="visual-layout">
+            <div class="visual-tabs" id="visual-tabs"></div>
+            <article class="visual-detail" id="visual-detail"></article>
+          </div>
+        </section>
+
+        <section class="page-section" id="architecture-review">
+          <div class="section-header">
+            <p class="eyebrow">Architecture review</p>
+            <h2>Debate each part before turning it into platform code.</h2>
+            <p class="lead">Each aspect has a different failure mode. This review room makes the tradeoffs explicit so we can decide what belongs in product infrastructure, what belongs in the agent runtime, and what needs deeper research.</p>
+          </div>
+
+          <div class="review-layout">
+            <div class="review-tabs" id="review-tabs"></div>
+            <article class="review-detail" id="review-detail"></article>
+          </div>
+        </section>
+
+        <section class="page-section" id="design-philosophy">
+          <div class="section-header">
+            <p class="eyebrow">Design philosophy</p>
+            <h2>Use deep modules to keep agent-native products understandable.</h2>
+            <p class="lead">Pick a scenario and a product boundary. The lab tests whether the boundary has a narrow interface, hides real complexity, owns an invariant, avoids shallow orchestration, and has a proof test.</p>
+          </div>
+
+          <div class="design-scenarios" id="design-scenarios"></div>
+
+          <div class="design-layout">
+            <div class="design-boundaries" id="design-boundaries"></div>
+            <article class="design-detail" id="design-detail"></article>
+          </div>
+
+          <div class="design-board">
+            <article class="design-panel">
+              <div class="design-panel-header">
+                <h3>Design review record</h3>
+                <a href="design-philosophy-lab.md">Open companion note</a>
+              </div>
+              <pre class="example-code"><code id="design-record"></code></pre>
+            </article>
+            <article class="design-panel">
+              <h3>Boundary connection path</h3>
+              <div class="design-path" id="design-path"></div>
+            </article>
+          </div>
+
+          <article class="design-panel design-matrix-panel">
+            <h3>Module depth matrix</h3>
+            <div class="design-matrix" id="design-matrix"></div>
+          </article>
+        </section>
+
+        <section class="page-section" id="research-standards">
+          <div class="section-header">
+            <p class="eyebrow">Research spine</p>
+            <h2>Connect papers, standards, and product architecture.</h2>
+            <p class="lead">Agent-native products sit at the intersection of research loops, interoperability protocols, security standards, observability schemas, domain models, and real work surfaces. This section maps each source family to the architecture layer it should influence.</p>
+          </div>
+
+          <div class="research-layout">
+            <div class="research-tabs" id="research-tabs"></div>
+            <article class="research-detail" id="research-detail"></article>
+          </div>
+
+          <div class="research-stack-panel">
+            <h3>Architecture connection map</h3>
+            <p>Use this as the system blueprint: papers explain how agents reason and learn, standards define the boundaries, and product cases show which surfaces users actually trust.</p>
+            <div class="research-stack" id="research-stack"></div>
+          </div>
+
+          <div class="research-contract-panel">
+            <div class="research-contract-header">
+              <div>
+                <h3>Standards-to-product contract map</h3>
+                <p>Select a paper, protocol, standard, or case pattern. The workbench translates it into the product boundary it should constrain, the artifact we should build, and the evidence that proves the boundary is real.</p>
+              </div>
+              <a href="research-standards.md">Open companion note</a>
+            </div>
+            <div class="research-contract-layout">
+              <div class="research-contract-list" id="source-contract-list"></div>
+              <article class="research-contract-detail" id="source-contract-detail"></article>
+            </div>
+            <div class="research-contract-board">
+              <article class="research-contract-card">
+                <h3>Contract record preview</h3>
+                <pre class="example-code"><code id="source-contract-record"></code></pre>
+              </article>
+              <article class="research-contract-card">
+                <h3>Boundary chain</h3>
+                <div class="source-contract-chain" id="source-contract-chain"></div>
+              </article>
+            </div>
+          </div>
+
+          <div class="research-discussion-panel">
+            <h3>Simulated architecture discussion</h3>
+            <p>This is a synthesized discussion between roles, not quotes from real people. It highlights where a product team should agree, where it should disagree, and what evidence should settle the argument.</p>
+            <div class="research-discussion" id="research-discussion"></div>
+          </div>
+        </section>
+
+        <section class="page-section" id="evidence-chain">
+          <div class="section-header">
+            <p class="eyebrow">Evidence architecture</p>
+            <h2>Trace each agent layer from papers to deployed product components.</h2>
+            <p class="lead">Pick a layer. The map separates what research actually justifies, which standards constrain the boundary, which public industry cases show the pattern, and what we need to deploy, observe, and evaluate.</p>
+          </div>
+
+          <div class="evidence-layers" id="evidence-layers"></div>
+
+          <div class="evidence-layout">
+            <article class="evidence-detail" id="evidence-detail"></article>
+            <article class="evidence-record-panel">
+              <div class="evidence-record-header">
+                <h3>Architecture evidence record</h3>
+                <a href="evidence-chain-architecture.md">Open companion note</a>
+              </div>
+              <pre class="example-code"><code id="evidence-record"></code></pre>
+            </article>
+          </div>
+
+          <div class="evidence-board">
+            <article class="evidence-panel">
+              <h3>Primary sources and cases</h3>
+              <div class="evidence-sources" id="evidence-sources"></div>
+            </article>
+            <article class="evidence-panel">
+              <h3>Deployable connection path</h3>
+              <div class="evidence-path" id="evidence-path"></div>
+            </article>
+          </div>
+
+          <article class="evidence-panel evidence-matrix-panel">
+            <h3>Crux map</h3>
+            <div class="evidence-matrix" id="evidence-matrix"></div>
+          </article>
+        </section>
+
+        <section class="page-section" id="composition-workbench">
+          <div class="section-header">
+            <p class="eyebrow">System composition</p>
+            <h2>Put papers, standards, product cases, and records on the same architecture layer.</h2>
+            <p class="lead">Pick a workflow and a product layer. The workbench shows what research contributes, which standard constrains the boundary, which industry pattern resembles it, what product record proves it, and which eval should block release.</p>
+          </div>
+
+          <div class="composition-scenarios" id="composition-scenarios"></div>
+
+          <div class="composition-layout">
+            <div class="composition-layers" id="composition-layers"></div>
+            <article class="composition-detail" id="composition-detail"></article>
+          </div>
+
+          <div class="composition-board">
+            <article class="composition-panel">
+              <h3>Layer crosswalk</h3>
+              <div class="composition-crosswalk" id="composition-crosswalk"></div>
+            </article>
+            <article class="composition-panel">
+              <h3>Composition decision record</h3>
+              <pre class="example-code"><code id="composition-record"></code></pre>
+            </article>
+          </div>
+
+          <article class="composition-panel composition-trail-panel">
+            <h3>End-to-end stack trail</h3>
+            <div class="composition-trail" id="composition-trail"></div>
+          </article>
+        </section>
+
+        <section class="page-section" id="protocol-runtime">
+          <div class="section-header">
+            <p class="eyebrow">Runtime and protocol choices</p>
+            <h2>Choose the right boundary: agent loop, internal API, MCP, workflow, A2A, event, or control plane.</h2>
+            <p class="lead">Pick a workflow and a platform pattern. The lab shows what that pattern should own, what it must not own, which records prove the boundary, and which eval catches misuse.</p>
+          </div>
+
+          <div class="protocol-scenarios" id="protocol-scenarios"></div>
+
+          <div class="protocol-layout">
+            <div class="protocol-options" id="protocol-options"></div>
+            <article class="protocol-detail" id="protocol-detail"></article>
+          </div>
+
+          <div class="protocol-board">
+            <article class="protocol-panel">
+              <h3>Decision matrix</h3>
+              <div class="protocol-matrix" id="protocol-matrix"></div>
+            </article>
+            <article class="protocol-panel">
+              <h3>Boundary decision record</h3>
+              <pre class="example-code"><code id="protocol-record"></code></pre>
+            </article>
+          </div>
+
+          <article class="protocol-panel protocol-path-panel">
+            <h3>How the choices combine</h3>
+            <div class="protocol-path" id="protocol-path"></div>
+          </article>
+        </section>
+
+        <section class="page-section" id="theory-lab">
+          <div class="section-header">
+            <p class="eyebrow">Paper-to-product lab</p>
+            <h2>Translate agent papers into product architecture.</h2>
+            <p class="lead">Select a research primitive and a real workflow. The lab shows what the paper contributes, what it does not solve, which architecture layers it touches, and what evidence a product team should capture.</p>
+          </div>
+
+          <div class="theory-scenarios" id="theory-scenarios"></div>
+          <div class="theory-layout">
+            <div class="theory-papers" id="theory-papers"></div>
+            <article class="theory-detail" id="theory-detail"></article>
+          </div>
+
+          <div class="theory-board">
+            <article class="theory-panel">
+              <h3>Architecture translation</h3>
+              <div class="theory-translation" id="theory-translation"></div>
+            </article>
+            <article class="theory-panel">
+              <h3>Trace sketch</h3>
+              <pre><code id="theory-trace"></code></pre>
+            </article>
+          </div>
+
+          <article class="theory-panel theory-combination-panel">
+            <h3>How it combines with the rest of the stack</h3>
+            <div class="theory-combination" id="theory-combination"></div>
+          </article>
+        </section>
+
+        <section class="page-section" id="source-atlas">
+          <div class="section-header">
+            <p class="eyebrow">Evidence atlas</p>
+            <h2>Inspect each paper, standard, and case study as an architecture input.</h2>
+            <p class="lead">This atlas keeps us honest about what each source actually contributes. Filter by source family or product layer, then inspect the boundary it affects, the product implication, the caveat, and the design question it forces.</p>
+          </div>
+
+          <div class="source-atlas-controls panel">
+            <label>Source family
+              <select id="source-family">
+                <option value="all">All sources</option>
+                <option value="paper">Papers and benchmarks</option>
+                <option value="standard">Standards and protocols</option>
+                <option value="platform">Product and platform cases</option>
+                <option value="healthcare">Healthcare domain sources</option>
+              </select>
+            </label>
+            <label>Architecture layer
+              <select id="source-layer">
+                <option value="all">All layers</option>
+                <option value="surface">Work surface</option>
+                <option value="context">Context and identity</option>
+                <option value="loop">Agent loop</option>
+                <option value="tools">Tools and skills</option>
+                <option value="connector">Connector boundary</option>
+                <option value="policy">Policy and security</option>
+                <option value="workflow">Durable workflow</option>
+                <option value="memory">Memory and learning</option>
+                <option value="observability">Observability</option>
+                <option value="release">Risk and release</option>
+                <option value="domain">Domain source of truth</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="source-atlas-layout">
+            <div class="source-atlas-list" id="source-atlas-list"></div>
+            <article class="source-atlas-detail" id="source-atlas-detail"></article>
+          </div>
+
+          <div class="source-atlas-map-panel">
+            <h3>Layer coverage</h3>
+            <p>Use this to spot architecture gaps. A source can inspire a layer, but it does not replace the product contract for that layer.</p>
+            <div class="source-atlas-map" id="source-atlas-map"></div>
+          </div>
+        </section>
+
+        <section class="page-section" id="decision-workbench">
+          <div class="section-header">
+            <p class="eyebrow">Architecture decisions</p>
+            <h2>Turn research and examples into product architecture decisions.</h2>
+            <p class="lead">For each boundary, inspect what we adopt, what we reject, what evidence is required, and how the decision changes across healthcare, scheduling, support, and coding-agent examples.</p>
+          </div>
+
+          <div class="decision-scenarios" id="decision-scenarios"></div>
+
+          <div class="decision-workbench-layout">
+            <div class="decision-list" id="decision-list"></div>
+            <article class="decision-detail" id="decision-detail"></article>
+          </div>
+
+          <div class="decision-board">
+            <article class="decision-panel">
+              <h3>ADR preview</h3>
+              <pre class="example-code"><code id="decision-adr"></code></pre>
+            </article>
+            <article class="decision-panel">
+              <h3>Combination dependencies</h3>
+              <div class="decision-dependencies" id="decision-dependencies"></div>
+            </article>
+          </div>
+        </section>
+
+        <section class="page-section" id="maturity-matrix">
+          <div class="section-header">
+            <p class="eyebrow">Readiness model</p>
+            <h2>Assess whether an agent is ready for a higher autonomy level.</h2>
+            <p class="lead">Select a real scenario and autonomy target. The matrix shows which product capabilities meet the bar, which are gaps, what evidence is missing, and which deep dives should happen next.</p>
+          </div>
+
+          <div class="maturity-controls panel">
+            <label>Scenario
+              <select id="maturity-scenario">
+                <option value="bed">Healthcare bed flow</option>
+                <option value="schedule">Enterprise scheduling</option>
+                <option value="support">Support resolution</option>
+                <option value="coding">Code-change agent</option>
+              </select>
+            </label>
+            <label>Target autonomy
+              <select id="maturity-target">
+                <option value="1">Level 1: suggest only</option>
+                <option value="2" selected>Level 2: draft with approval</option>
+                <option value="3">Level 3: supervised execution</option>
+                <option value="4">Level 4: policy-bounded autonomous</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="maturity-summary" id="maturity-summary"></div>
+          <div class="maturity-grid" id="maturity-grid"></div>
+
+          <div class="maturity-board">
+            <article class="maturity-panel">
+              <h3>Promotion path</h3>
+              <div class="maturity-path" id="maturity-path"></div>
+            </article>
+            <article class="maturity-panel">
+              <h3>Deep-dive queue</h3>
+              <div class="maturity-queue" id="maturity-queue"></div>
+            </article>
+          </div>
+        </section>
+
+        <section class="page-section" id="surface-lab">
+          <div class="section-header">
+            <p class="eyebrow">Product UX surfaces</p>
+            <h2>See how users interact with agents and what records change behind the scenes.</h2>
+            <p class="lead">Pick a scenario and a surface. The lab shows the user-facing interface, the control available to the user, the product records created behind it, and the failure or recovery path that keeps the agent trustworthy.</p>
+          </div>
+
+          <div class="surface-scenarios" id="surface-scenarios"></div>
+
+          <div class="surface-layout">
+            <div class="surface-tabs" id="surface-tabs"></div>
+            <article class="surface-detail" id="surface-detail"></article>
+          </div>
+
+          <div class="surface-board">
+            <article class="surface-panel">
+              <h3>Record preview</h3>
+              <pre class="example-code"><code id="surface-record"></code></pre>
+            </article>
+            <article class="surface-panel">
+              <h3>Surface connection path</h3>
+              <div class="surface-flow" id="surface-flow"></div>
+            </article>
+          </div>
+
+          <div class="voice-invocation-lab">
+            <div class="section-subheader">
+              <p class="eyebrow">Voice invocation</p>
+              <h3>Turn a spoken request into a governed product run.</h3>
+              <p>Pick a scenario and stage. The workbench shows what the user says, what the interface should show, what confidence and context checks happen behind the scenes, and where the system must clarify, preview, approve, or stop.</p>
+            </div>
+
+            <div class="voice-scenarios" id="voice-scenarios"></div>
+
+            <div class="voice-layout">
+              <div class="voice-stages" id="voice-stages"></div>
+              <article class="voice-detail" id="voice-detail"></article>
+            </div>
+
+            <div class="voice-board">
+              <article class="voice-panel">
+                <h3>Voice run record</h3>
+                <pre class="example-code"><code id="voice-record"></code></pre>
+              </article>
+              <article class="voice-panel">
+                <h3>Voice to product path</h3>
+                <div class="voice-path" id="voice-path"></div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section class="page-section" id="blueprint">
+          <div class="section-header">
+            <p class="eyebrow">Operating blueprint</p>
+            <h2>See which layer owns each part of an agentic product run.</h2>
+            <p class="lead">This is the concrete architecture map behind the wiki. Choose a scenario, then inspect each layer: what enters, what leaves, who owns it, what standards apply, what can fail, and what evidence proves it worked.</p>
+          </div>
+
+          <div class="blueprint-scenarios" id="blueprint-scenarios"></div>
+
+          <div class="blueprint-layout">
+            <div class="blueprint-layers" id="blueprint-layers"></div>
+            <article class="blueprint-detail" id="blueprint-detail"></article>
+          </div>
+
+          <div class="blueprint-flow-panel">
+            <h3>End-to-end connection trail</h3>
+            <p>Follow the same request as it crosses product UX, agent runtime, tools, policy, workflow, state, memory, observability, and release gates.</p>
+            <div class="blueprint-flow" id="blueprint-flow"></div>
+          </div>
+
+          <div class="blueprint-contract-panel">
+            <h3>Boundary contract matrix</h3>
+            <div class="blueprint-contracts" id="blueprint-contracts"></div>
+          </div>
+        </section>
+
+        <section class="page-section" id="deployment-topology">
+          <div class="section-header">
+            <p class="eyebrow">Deployment topology</p>
+            <h2>Map the product agent into deployable planes, services, stores, and event paths.</h2>
+            <p class="lead">Pick a workflow and deployment plane. The lab shows deployable units, contracts, state ownership, protocol anchors, source-system adapters, control hooks, and failure gates for a production topology.</p>
+          </div>
+
+          <div class="deployment-scenarios" id="deployment-scenarios"></div>
+
+          <div class="deployment-layout">
+            <div class="deployment-planes" id="deployment-planes"></div>
+            <article class="deployment-detail" id="deployment-detail"></article>
+          </div>
+
+          <div class="deployment-board">
+            <article class="deployment-panel">
+              <h3>Topology decision record</h3>
+              <pre class="example-code"><code id="deployment-record"></code></pre>
+            </article>
+            <article class="deployment-panel">
+              <h3>Runtime request path</h3>
+              <div class="deployment-path" id="deployment-path"></div>
+            </article>
+          </div>
+
+          <article class="deployment-panel deployment-matrix-panel">
+            <div class="deployment-matrix-header">
+              <h3>Plane contract matrix</h3>
+              <a href="deployment-topology-lab.md">Open companion note</a>
+            </div>
+            <div class="deployment-matrix" id="deployment-matrix"></div>
+          </article>
+        </section>
+
+        <section class="page-section" id="source-systems">
+          <div class="section-header">
+            <p class="eyebrow">Source-system integration</p>
+            <h2>Map every agent-visible field to an authoritative system.</h2>
+            <p class="lead">Pick a scenario and field. The lab shows source ownership, standard or API anchor, read adapter, write path, cache rule, policy scope, reconciliation check, and the product record proving the agent did not become the system of record.</p>
+          </div>
+
+          <div class="source-system-scenarios" id="source-system-scenarios"></div>
+
+          <div class="source-system-layout">
+            <div class="source-system-fields" id="source-system-fields"></div>
+            <article class="source-system-detail" id="source-system-detail"></article>
+          </div>
+
+          <div class="source-system-board">
+            <article class="source-system-panel">
+              <h3>Integration contract record</h3>
+              <pre class="example-code"><code id="source-system-record"></code></pre>
+            </article>
+            <article class="source-system-panel">
+              <h3>Connection and reconciliation path</h3>
+              <div class="source-system-flow" id="source-system-flow"></div>
+            </article>
+          </div>
+
+          <article class="source-system-panel source-system-matrix-panel">
+            <h3>Authoritative field matrix</h3>
+            <div class="source-system-matrix" id="source-system-matrix"></div>
+          </article>
+        </section>
+
+        <section class="page-section" id="deep-run">
+          <div class="section-header">
+            <p class="eyebrow">Deep agent runbook</p>
+            <h2>Watch a deep agent work over multiple iterations.</h2>
+            <p class="lead">A deep agent is a harness around planning, workspace artifacts, subagents, tools, approvals, verification, memory, and release feedback. Pick a scenario and inspect what changes at each stage of the run.</p>
+          </div>
+
+          <div class="deep-run-scenarios" id="deep-run-scenarios"></div>
+
+          <div class="deep-run-layout">
+            <div class="deep-run-steps" id="deep-run-steps"></div>
+            <article class="deep-run-detail" id="deep-run-detail"></article>
+          </div>
+
+          <div class="deep-run-board">
+            <article class="deep-run-panel">
+              <h3>Workspace artifacts</h3>
+              <div class="deep-run-artifacts" id="deep-run-artifacts"></div>
+            </article>
+            <article class="deep-run-panel">
+              <h3>Handoff and control state</h3>
+              <div class="deep-run-state" id="deep-run-state"></div>
+            </article>
+          </div>
+
+          <div class="deep-run-board">
+            <article class="deep-run-panel">
+              <h3>Stage ownership map</h3>
+              <div class="deep-run-ownership" id="deep-run-ownership"></div>
+            </article>
+            <article class="deep-run-panel">
+              <h3>Run contract record</h3>
+              <pre class="example-code"><code id="deep-run-record"></code></pre>
+            </article>
+          </div>
+        </section>
+
+        <section class="page-section" id="control-plane">
+          <div class="section-header">
+            <p class="eyebrow">Agent control plane</p>
+            <h2>Manage agents as governed product actors.</h2>
+            <p class="lead">The control plane is where agents get identity, tool access, skills, memory policy, deployment gates, observability, incident controls, and release history. This is the product layer that stops agents from becoming unmanaged prompt scripts.</p>
+          </div>
+
+          <div class="control-plane-layout">
+            <div class="control-plane-tabs" id="control-plane-tabs"></div>
+            <article class="control-plane-detail" id="control-plane-detail"></article>
+          </div>
+
+          <div class="control-plane-board">
+            <article class="control-plane-panel">
+              <h3>Release gate simulator</h3>
+              <p>Select a change request and inspect which reviews, evals, rollout controls, and rollback paths the product should require.</p>
+              <div class="control-change-list" id="control-change-list"></div>
+            </article>
+            <article class="control-plane-panel">
+              <h3>Agent manifest preview</h3>
+              <pre class="example-code"><code id="control-manifest"></code></pre>
+            </article>
+          </div>
+        </section>
+
+        <section class="page-section" id="agentops">
+          <div class="section-header">
+            <p class="eyebrow">Operations lifecycle</p>
+            <h2>Operate agent releases from change request to rollback.</h2>
+            <p class="lead">Pick a real change request and inspect the operational gates, evidence, telemetry, rollout policy, incident controls, and learning loop required before an agent capability becomes production behavior.</p>
+          </div>
+
+          <div class="ops-changes" id="ops-changes"></div>
+
+          <div class="ops-layout">
+            <div class="ops-stages" id="ops-stages"></div>
+            <article class="ops-detail" id="ops-detail"></article>
+          </div>
+
+          <div class="ops-board">
+            <article class="ops-panel">
+              <h3>Operational telemetry</h3>
+              <div class="ops-telemetry" id="ops-telemetry"></div>
+            </article>
+            <article class="ops-panel">
+              <h3>Release operation record</h3>
+              <pre class="example-code"><code id="ops-record"></code></pre>
+            </article>
+          </div>
+
+          <article class="ops-panel ops-timeline-panel">
+            <h3>Lifecycle timeline</h3>
+            <div class="ops-timeline" id="ops-timeline"></div>
+          </article>
+
+          <div class="improvement-loop-lab">
+            <div class="section-subheader">
+              <p class="eyebrow">Governed improvement loop</p>
+              <h3>Turn production signals into controlled agent improvements.</h3>
+              <p>Pick a real signal and a change route. The workbench shows whether the evidence should become memory, a skill update, a tool contract, a policy patch, an eval case, or a release bundle change, and when the model is allowed to use it.</p>
+            </div>
+
+            <div class="improvement-scenarios" id="improvement-scenarios"></div>
+
+            <div class="improvement-layout">
+              <div class="improvement-routes" id="improvement-routes"></div>
+              <article class="improvement-detail" id="improvement-detail"></article>
+            </div>
+
+            <div class="improvement-board">
+              <article class="improvement-panel">
+                <h3>Improvement decision record</h3>
+                <pre class="example-code"><code id="improvement-record"></code></pre>
+              </article>
+              <article class="improvement-panel">
+                <h3>Activation chain</h3>
+                <div class="improvement-chain" id="improvement-chain"></div>
+              </article>
+            </div>
+          </div>
+
+          <div class="eval-harness-lab">
+            <div class="section-subheader">
+              <p class="eyebrow">Eval and release harness</p>
+              <h3>Turn production evidence into release-blocking trajectory tests.</h3>
+              <p>Pick a change and an eval case to see the fixture, trajectory, assertions, blocking rule, observability evidence, and release-gate record. This is the part that prevents agent improvement from becoming silent drift.</p>
+            </div>
+
+            <div class="eval-harness-changes" id="eval-harness-changes"></div>
+
+            <div class="eval-harness-layout">
+              <div class="eval-harness-cases" id="eval-harness-cases"></div>
+              <article class="eval-harness-detail" id="eval-harness-detail"></article>
+            </div>
+
+            <div class="eval-harness-board">
+              <article class="eval-harness-panel">
+                <h3>EvalCase record</h3>
+                <pre class="example-code"><code id="eval-harness-record"></code></pre>
+              </article>
+              <article class="eval-harness-panel">
+                <h3>Coverage and gate</h3>
+                <div class="eval-harness-coverage" id="eval-harness-coverage"></div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section class="page-section" id="simulator">
+          <div class="section-header">
+            <p class="eyebrow">Implementation simulator</p>
+            <h2>Run a fake agent workflow and inspect the records it creates.</h2>
+            <p class="lead">This browser-only simulator turns the wiki model into a concrete vertical slice. Step through a bed-flow run, inject failures, approve or reject the action, and inspect AgentRun, ToolCall, Approval, Workflow, Audit, Timeline, Memory, and Eval records.</p>
+          </div>
+
+          <div class="simulator-controls panel">
+            <label>Failure mode
+              <select id="simulator-failure">
+                <option value="happy">Happy path</option>
+                <option value="ambiguous">Ambiguous context</option>
+                <option value="tool-timeout">Tool timeout and retry</option>
+                <option value="approval-rejected">Approval rejected</option>
+                <option value="source-mismatch">Source-system mismatch</option>
+                <option value="bad-memory">Bad memory proposal</option>
+              </select>
+            </label>
+            <div class="action-row">
+              <button class="secondary-button" id="simulator-reset">Reset run</button>
+              <button class="primary-button" id="simulator-next">Next event</button>
+              <button class="confirm-button hidden" id="simulator-approve">Approve payload</button>
+              <button class="danger-button hidden" id="simulator-reject">Reject payload</button>
+            </div>
+          </div>
+
+          <div class="simulator-grid">
+            <article class="panel simulator-panel">
+              <h3>Current run state</h3>
+              <pre class="example-code"><code id="simulator-state"></code></pre>
+            </article>
+            <article class="panel simulator-panel">
+              <h3>Event stream</h3>
+              <div class="simulator-events" id="simulator-events"></div>
+            </article>
+          </div>
+
+          <div class="panel simulator-record-panel">
+            <h3>Persisted product records</h3>
+            <div class="simulator-records" id="simulator-records"></div>
+          </div>
+
+          <div class="panel simulator-eval-panel">
+            <h3>Eval checks</h3>
+            <div class="simulator-evals" id="simulator-evals"></div>
+          </div>
+        </section>
+
+        <section class="page-section" id="labs">
+          <div class="section-header">
+            <p class="eyebrow">Interactive labs</p>
+            <h2>Understand how deep agents work inside products.</h2>
+            <p class="lead">These labs show the internal harness, how architecture changes based on risk and duration, and why trace and audit data are different but connected.</p>
+          </div>
+
+          <div class="lab-grid">
+            <article class="panel lab-panel">
+              <h3>Deep agent harness anatomy</h3>
+              <p>Select a part of the harness to see what it does in a real product, what can fail, and what evidence proves it worked.</p>
+              <div class="harness-layout">
+                <div class="harness-parts" id="harness-parts"></div>
+                <div class="harness-detail" id="harness-detail"></div>
+              </div>
+            </article>
+
+            <article class="panel lab-panel">
+              <h3>Architecture composer</h3>
+              <p>Change the scenario constraints and see which architecture path the product should use.</p>
+              <div class="composer-form">
+                <label>Scenario
+                  <select id="composer-scenario">
+                    <option value="bed">Healthcare bed request</option>
+                    <option value="schedule">Enterprise scheduling</option>
+                    <option value="support">Customer support resolution</option>
+                    <option value="coding">Code change agent</option>
+                  </select>
+                </label>
+                <label>Duration
+                  <select id="composer-duration">
+                    <option value="seconds">Seconds</option>
+                    <option value="minutes">Minutes</option>
+                    <option value="hours">Hours or days</option>
+                  </select>
+                </label>
+                <label>Side effect
+                  <select id="composer-effect">
+                    <option value="none">No write</option>
+                    <option value="draft">Draft only</option>
+                    <option value="write">Product write</option>
+                    <option value="external">External communication</option>
+                  </select>
+                </label>
+                <label>Data class
+                  <select id="composer-data">
+                    <option value="internal">Internal</option>
+                    <option value="pii">PII</option>
+                    <option value="phi">PHI</option>
+                    <option value="source">Source code</option>
+                  </select>
+                </label>
+              </div>
+              <div class="composer-output" id="composer-output"></div>
+            </article>
+          </div>
+
+          <article class="panel lab-panel subagent-panel">
+            <h3>Subagent handoff simulator</h3>
+            <p>Pick a scenario and inspect how the owner agent delegates bounded work to specialists without losing policy, source, approval, or workflow control.</p>
+            <div class="subagent-scenarios" id="subagent-scenarios"></div>
+            <div class="subagent-layout">
+              <div class="subagent-list" id="subagent-list"></div>
+              <div class="subagent-detail" id="subagent-detail"></div>
+            </div>
+            <div class="subagent-board">
+              <article class="subagent-card">
+                <h3>Handoff record</h3>
+                <pre class="example-code"><code id="subagent-record"></code></pre>
+              </article>
+              <article class="subagent-card">
+                <h3>Owner synthesis path</h3>
+                <div class="subagent-synthesis" id="subagent-synthesis"></div>
+              </article>
+            </div>
+          </article>
+
+          <div class="lab-grid lower-labs">
+            <article class="panel lab-panel">
+              <h3>Trace and audit explorer</h3>
+              <p>Trace data answers how the run behaved. Audit data answers what accountable action happened.</p>
+              <div class="trace-layout">
+                <div class="trace-list" id="trace-list"></div>
+                <div class="trace-detail" id="trace-detail"></div>
+              </div>
+            </article>
+
+            <article class="panel lab-panel">
+              <h3>Combination map</h3>
+              <p>The same primitive appears in multiple layers. This map shows how one voice request touches product, agent, workflow, governance, and operations.</p>
+              <div class="combo-map" id="combo-map"></div>
+            </article>
+          </div>
+        </section>
+
+        <section class="page-section" id="implementation">
+          <div class="section-header">
+            <p class="eyebrow">Implementation lab</p>
+            <h2>Turn the product model into schemas, APIs, events, and failure handling.</h2>
+            <p class="lead">This layer shows how the abstract primitives become implementation contracts. Use it to reason about what the backend must persist, what the frontend should show, and what the agent runtime is allowed to do.</p>
+          </div>
+
+          <div class="implementation-grid">
+            <article class="panel implementation-panel">
+              <h3>Schema explorer</h3>
+              <p>Select a product object to see required fields, why they exist, and an example record.</p>
+              <div class="schema-layout">
+                <div class="schema-list" id="schema-list"></div>
+                <div class="schema-detail" id="schema-detail"></div>
+              </div>
+            </article>
+
+            <article class="panel implementation-panel">
+              <h3>API contract explorer</h3>
+              <p>These are not final endpoints. They are learning contracts that show how product actions should cross boundaries.</p>
+              <div class="api-layout">
+                <div class="api-list" id="api-list"></div>
+                <div class="api-detail" id="api-detail"></div>
+              </div>
+            </article>
+          </div>
+
+          <div class="implementation-grid lower-implementation">
+            <article class="panel implementation-panel">
+              <h3>Event stream simulator</h3>
+              <p>Pick a real-life scenario and inspect the events that let the UI, workflow, audit log, and eval loop stay aligned.</p>
+              <label>Scenario
+                <select id="event-scenario">
+                  <option value="bed">Healthcare bed flow</option>
+                  <option value="schedule">Enterprise scheduling</option>
+                  <option value="support">Support resolution</option>
+                  <option value="coding">Code change agent</option>
+                </select>
+              </label>
+              <div class="event-stream" id="event-stream"></div>
+            </article>
+
+            <article class="panel implementation-panel">
+              <h3>Failure drill</h3>
+              <p>Failure handling is where agent-native products become real systems instead of demos.</p>
+              <label>Failure mode
+                <select id="failure-mode">
+                  <option value="ambiguous">Ambiguous context</option>
+                  <option value="timeout">Tool timeout</option>
+                  <option value="rejected">Approval rejected</option>
+                  <option value="mismatch">Source-system mismatch</option>
+                  <option value="memory">Bad memory proposal</option>
+                </select>
+              </label>
+              <div class="failure-output" id="failure-output"></div>
+            </article>
+          </div>
+
+          <article class="panel implementation-contract-panel">
+            <div class="implementation-contract-header">
+              <div>
+                <h3>Minimum product slice contracts</h3>
+                <p>Pick a scenario and contract. The workbench shows the API boundary, persisted record, emitted event, UI projection, runtime permission, and release-blocking test for the first shippable agent slice.</p>
+              </div>
+              <a href="implementation-lab.md">Open companion note</a>
+            </div>
+
+            <div class="implementation-scenarios" id="implementation-scenarios"></div>
+
+            <div class="implementation-contract-layout">
+              <div class="implementation-contract-list" id="implementation-contract-list"></div>
+              <article class="implementation-contract-detail" id="implementation-contract-detail"></article>
+            </div>
+
+            <div class="implementation-contract-board">
+              <article class="implementation-contract-card">
+                <h3>Contract record</h3>
+                <pre class="example-code"><code id="implementation-contract-record"></code></pre>
+              </article>
+              <article class="implementation-contract-card">
+                <h3>Build order</h3>
+                <div class="implementation-build-order" id="implementation-build-order"></div>
+              </article>
+            </div>
+          </article>
+        </section>
+
+        <section class="page-section" id="runtime-ledger">
+          <div class="section-header">
+            <p class="eyebrow">Runtime ledger</p>
+            <h2>Connect every agent action to the records that prove what happened.</h2>
+            <p class="lead">Pick a scenario and stage. The ledger shows the correlated IDs, records, event payload, product views, and standards anchors that let the UI, workflow engine, audit export, trace viewer, and eval loop agree on one run.</p>
+          </div>
+
+          <div class="runtime-scenarios" id="runtime-scenarios"></div>
+
+          <div class="runtime-layout">
+            <div class="runtime-stages" id="runtime-stages"></div>
+            <article class="runtime-detail" id="runtime-detail"></article>
+          </div>
+
+          <div class="runtime-board">
+            <article class="runtime-panel">
+              <h3>Correlated ledger records</h3>
+              <div class="runtime-records" id="runtime-ledger-records"></div>
+            </article>
+            <article class="runtime-panel">
+              <h3>Event payload</h3>
+              <pre class="example-code"><code id="runtime-event-payload"></code></pre>
+            </article>
+          </div>
+
+          <div class="runtime-board">
+            <article class="runtime-panel">
+              <h3>Which product view reads this?</h3>
+              <div class="runtime-views" id="runtime-views"></div>
+            </article>
+            <article class="runtime-panel">
+              <h3>Standards map</h3>
+              <div class="runtime-standard-map" id="runtime-standard-map"></div>
+            </article>
+          </div>
+        </section>
+
+        <section class="page-section" id="learning-path">
+          <div class="section-header">
+            <p class="eyebrow">Learning path</p>
+            <h2>Study the system in the order a product architect would build it.</h2>
+            <p class="lead">Each module gives theory, a real-life example, a build exercise, proof criteria, and a self-check question. Use it to turn the wiki into a structured curriculum.</p>
+          </div>
+
+          <div class="learning-layout">
+            <div class="learning-tabs" id="learning-tabs"></div>
+            <article class="learning-detail" id="learning-detail"></article>
+          </div>
+
+          <div class="learning-checklist-panel">
+            <h3>Completion checkpoints</h3>
+            <div class="learning-checklist" id="learning-checklist"></div>
+          </div>
+        </section>
+
+        <section class="page-section" id="dives">
+          <div class="section-header">
+            <p class="eyebrow">Study plan</p>
+            <h2>Deep dives to turn this into implementation knowledge.</h2>
+            <p class="lead">Each card can become its own article, diagram, schema, test harness, and product walkthrough.</p>
+          </div>
+          <div class="doc-links">
+            <a href="agent-native-product-wiki.md">Core wiki notes</a>
+            <a href="aspect-playbook.md">Aspect playbook</a>
+            <a href="product-object-model-lab.md">Product object model lab</a>
+            <a href="intent-to-action-router.md">Intent to action router</a>
+            <a href="capability-registry.md">Capability registry</a>
+            <a href="skill-lifecycle-lab.md">Skill lifecycle lab</a>
+            <a href="identity-access-lab.md">Identity and access lab</a>
+            <a href="memory-governance.md">Memory governance</a>
+            <a href="memory-lifecycle-simulator.md">Memory lifecycle simulator</a>
+            <a href="approval-handoff.md">Approval handoff</a>
+            <a href="durable-execution.md">Durable execution</a>
+            <a href="deep-agent-lab.md">Deep agent lab</a>
+            <a href="deep-agent-runbook.md">Deep agent runbook</a>
+            <a href="subagent-handoff-simulator.md">Subagent handoff simulator</a>
+            <a href="implementation-lab.md">Implementation lab</a>
+            <a href="case-studies.md">Case studies</a>
+            <a href="industry-pattern-teardowns.md">Industry pattern teardowns</a>
+            <a href="industry-case-architecture-lab.md">Industry case architecture lab</a>
+            <a href="visual-maps.md">Visual maps</a>
+            <a href="architecture-review.md">Architecture review</a>
+            <a href="research-standards.md">Research and standards</a>
+            <a href="evidence-chain-architecture.md">Evidence chain architecture</a>
+            <a href="architecture-composition-workbench.md">Composition workbench</a>
+            <a href="protocol-runtime-decision-lab.md">Protocol runtime decision lab</a>
+            <a href="paper-to-product-lab.md">Paper-to-product lab</a>
+            <a href="source-atlas.md">Source atlas</a>
+            <a href="architecture-decisions.md">Architecture decisions</a>
+            <a href="agent-maturity-model.md">Agent maturity model</a>
+            <a href="product-ux-surfaces.md">Product UX surfaces</a>
+            <a href="agent-threat-model.md">Agent threat model</a>
+            <a href="architecture-blueprint.md">Architecture blueprint</a>
+            <a href="deployment-topology-lab.md">Deployment topology lab</a>
+            <a href="source-system-integration-lab.md">Source-system integration lab</a>
+            <a href="learning-path.md">Learning path</a>
+            <a href="agent-control-plane.md">Agent control plane</a>
+            <a href="agent-operations-lifecycle.md">Agent operations lifecycle</a>
+            <a href="eval-release-harness.md">Eval and release harness</a>
+            <a href="run-simulator.md">Run simulator</a>
+            <a href="runtime-ledger.md">Runtime ledger</a>
+            <a href="deep-dive-backlog.md">Backlog</a>
+            <a href="references.md">References</a>
+          </div>
+          <div class="deep-dive-grid" id="deep-dive-grid"></div>
+        </section>
+      </main>
+    </div>
+
+    <script src="assets/app.js"></script>
+  </body>
+</html>
