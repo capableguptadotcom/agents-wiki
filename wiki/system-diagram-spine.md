@@ -19,7 +19,7 @@ Each diagram answers one implementation question. Use the `Expand` control on a 
 
 Question: what records must exist before a product agent can safely act?
 
-```{mermaid}
+``` mermaid
 erDiagram
   AGENT ||--o{ AGENT_VERSION : releases
   RELEASE_BUNDLE ||--o{ AGENT_VERSION : pins
@@ -52,7 +52,7 @@ Rule: every side effect must be reconstructable from `AgentRun`, `ToolCall`, `Po
 
 Question: which run states can the UI, workflow engine, and incident process trust?
 
-```{mermaid}
+``` mermaid
 stateDiagram-v2
   [*] --> received
   received --> binding_context
@@ -93,7 +93,7 @@ Rule: no UI may show `completed` from model text. Completion requires source con
 
 Question: what is the smallest end-to-end build that proves the architecture?
 
-```{mermaid}
+``` mermaid
 sequenceDiagram
   participant Surface as Work surface
   participant RunAPI as AgentRun API
@@ -134,7 +134,7 @@ Rule: pass this sequence with a fake bed hold before broader agent platform work
 
 Question: which deployable component owns each enforcement boundary?
 
-```{mermaid}
+``` mermaid
 flowchart TB
   subgraph Client["Product surfaces"]
     Voice["Voice or command bar"]
@@ -209,7 +209,7 @@ Rule: the model is not an enforcement boundary. Enforcement lives in context bin
 
 Question: which IDs must move together for debug, audit, replay, and eval sampling?
 
-```{mermaid}
+``` mermaid
 flowchart LR
   Request["request_id"] --> Run["run_id"]
   Run --> Trace["trace_id"]
@@ -240,7 +240,7 @@ Rule: every write-side effect needs `run_id`, `tool_call_id`, `policy_decision_i
 
 Question: how does a proposed action become allowed, denied, clarified, or approval-bound?
 
-```{mermaid}
+``` mermaid
 flowchart TD
   Proposed["Tool call or action proposal"] --> Schema["Schema validation"]
   Schema -->|invalid| DenyMalformed["deny: malformed payload"]
@@ -271,7 +271,7 @@ Rule: approval authorizes only the canonical payload hash shown to the approver.
 
 | Diagram | Next page to update | Acceptance |
 |---|---|---|
-| Owner-agent and specialist graph | [Deep agent application architecture](deep-agent-application-architecture.qmd) | Shows owner synthesis, scoped subagents, workspace artifacts, prohibited authority. |
+| Owner-agent and specialist graph | [Deep agent application architecture](deep-agent-application-architecture.md) | Shows owner synthesis, scoped subagents, workspace artifacts, prohibited authority. |
 | Source reconciliation state machine | [Runtime ledger](runtime-ledger.md) | Shows `waiting`, `completed`, `needs_reconciliation`, `failed`, `cancelled`. |
 | Release bundle dependency graph | [Eval and release harness](eval-release-harness.md) | Shows model, prompt, tools, policy, workflow, memory schema, eval run, rollout. |
 | Store ownership map | [Product object model lab](product-object-model-lab.md) | Shows product DB, workflow history, audit log, trace store, eval store, memory store. |

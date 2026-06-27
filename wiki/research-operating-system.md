@@ -126,8 +126,8 @@ The first pages to bring under this standard:
 
 ## Source Anchors For This Standard
 
-- Quarto website docs: https://quarto.org/docs/websites/
-- Quarto diagrams docs: https://quarto.org/docs/authoring/diagrams.html
+- Material for MkDocs docs: https://squidfunk.github.io/mkdocs-material/
+- Material for MkDocs diagrams: https://squidfunk.github.io/mkdocs-material/reference/diagrams/
 - Diataxis documentation framework: https://diataxis.fr/
 - OWASP Top 10 for LLM Applications: https://genai.owasp.org/llm-top-10/
 - NIST AI Risk Management Framework: https://www.nist.gov/itl/ai-risk-management-framework

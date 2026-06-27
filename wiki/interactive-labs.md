@@ -28,8 +28,8 @@ Rules:
 |---|---|---|
 | Large overview sections | Duplicates markdown and hides durable concepts in JavaScript. | Move to contract pages and diagrams. |
 | Pattern browsing | Too broad; weak evidence and no claim IDs. | Source registry plus claim ledger. |
-| Visual maps | Not tied to implementation diagrams. | [System diagram spine](system-diagram-spine.qmd). |
-| Learning path cards | Mostly static prose. | Quarto pages with exercises and proof checks. |
+| Visual maps | Not tied to implementation diagrams. | [System diagram spine](system-diagram-spine.md). |
+| Learning path cards | Mostly static prose. | Material docs pages with exercises and proof checks. |
 
 ## Next Lab Standard
 
@@ -46,6 +46,6 @@ Any new lab needs:
 
 - `interactive.html` is too large for the role it plays.
 - The old app initializes every lab up front.
-- The visual design does not match the Quarto site.
+- The visual design does not match the Material docs site.
 - Lab data is only partially markdown-backed.
 - The app should eventually be split into focused widgets or retired.

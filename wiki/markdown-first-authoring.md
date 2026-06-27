@@ -2,13 +2,13 @@
 title: "Markdown-First Authoring System"
 ---
 
-This page defines how the wiki should evolve now that Quarto owns the static site.
+This page defines how the wiki should evolve now that Material for MkDocs owns the static site.
 
 The goal is simple:
 
 ```text
 Markdown is the source of understanding.
-Quarto renders the documentation system.
+Material for MkDocs renders the documentation system.
 Interactive labs prove selected contracts.
 JavaScript should not become the hidden source of product theory.
 ```
@@ -18,12 +18,12 @@ JavaScript should not become the hidden source of product theory.
 | Artifact | Source of truth | Role | Rule |
 | --- | --- | --- | --- |
 | Concept notes | `wiki/*.md` | Explain theory, examples, standards, and product decisions. | Every durable idea belongs in markdown first. |
-| Site home | `wiki/index.qmd` | Introduce the learning path and route readers. | Keep it short; link to deeper notes. |
-| Navigation | `wiki/_quarto.yml` | Sidebar, navbar, search, and render scope. | Every major markdown page should be reachable from the sidebar. |
+| Site home | `wiki/index.md` | Introduce the learning path and route readers. | Keep it short; link to deeper notes. |
+| Navigation | `mkdocs.yml` | Sidebar, navigation sections, search, theme, and render scope. | Every major markdown page should be reachable from the nav. |
 | Interactive labs | `wiki/interactive.html` plus `wiki/assets/app.js` | Dense scenario switching, generated records, and live walkthroughs. | Every lab must have a markdown companion page. |
 | Generated lab data | Markdown data files such as `wiki/architecture-assembly-data.md` | Structured scenario data that powers focused interactive labs. | Generated JS files are build artifacts, not durable source. |
-| Styles | `wiki/docs.css` and `wiki/assets/styles.css` | Quarto page style and carried lab style. | Styling should not encode architecture content. |
-| Publishing | `.github/workflows/quarto-pages.yml` | Render and deploy Quarto to GitHub Pages. | CI must render from source, not commit generated `_site`. |
+| Styles | `wiki/assets/stylesheets/research.css` and `wiki/assets/styles.css` | Material theme refinement and carried lab style. | Styling should not encode architecture content. |
+| Publishing | `.github/workflows/mkdocs-pages.yml` | Build and deploy Material for MkDocs to GitHub Pages. | CI must render from source, not commit generated `site/`. |
 
 ## Authoring Rules
 
@@ -33,7 +33,7 @@ JavaScript should not become the hidden source of product theory.
 4. If a lab introduces a new workflow, add it to the home-page workflow table or a dedicated scenario page.
 5. If a lab link uses `interactive.html#some-section`, the section ID must exist in `interactive.html`.
 6. Do not put long-lived product decisions only inside `wiki/assets/app.js`.
-7. Generated output stays out of Git: `wiki/_site/` and `wiki/.quarto/` are ignored.
+7. Generated output stays out of Git: `site/`, `wiki/_site/`, and `wiki/.quarto/` are ignored.
 
 ## Lab Manifest
 
@@ -54,7 +54,7 @@ This table is the current manifest for the carried interactive lab. It tells us 
 | [Threat model](interactive.html#threat-model) | [Agent threat model](agent-threat-model.md) | Failure scenarios mapped to controls, records, evals, recovery. | Add threat-to-record tables in markdown before adding new threat cases. |
 | [Patterns](interactive.html#patterns) | [Industry pattern teardowns](industry-pattern-teardowns.md) | Product/platform pattern comparison. | Prefer markdown source tables for vendor patterns. |
 | [Case architecture](interactive.html#case-architecture) | [Industry case architecture lab](industry-case-architecture-lab.md) | Adoption records grounded in evidence, inference, product responsibility, release gates. | Good candidate for markdown data tables. |
-| [Design philosophy](interactive.html#design-philosophy) | [Design philosophy lab](design-philosophy-lab.qmd) | Deep modules and information hiding checks. | Keep markdown as canonical decision checklist. |
+| [Design philosophy](interactive.html#design-philosophy) | [Design philosophy lab](design-philosophy-lab.md) | Deep modules and information hiding checks. | Keep markdown as canonical decision checklist. |
 | [Research and standards](interactive.html#research-standards) | [Research and standards](research-standards.md) | Source-to-product contract workbench. | Move source contract records into markdown tables over time. |
 | [Evidence chain](interactive.html#evidence-chain) | [Evidence chain architecture](evidence-chain-architecture.md) | Papers, standards, public cases, records, failures, eval gates. | Markdown is canonical; lab is crosswalk UI. |
 | [Composition workbench](interactive.html#composition-workbench) | [Architecture composition workbench](architecture-composition-workbench.md) | Combine papers, standards, product cases, records, failures, evals by layer. | Keep as guided comparison. |
@@ -67,11 +67,11 @@ This table is the current manifest for the carried interactive lab. It tells us 
 | [Blueprint](interactive.html#blueprint) | [Architecture blueprint](architecture-blueprint.md) | Operating blueprint by layer and workflow. | Markdown owns deployment logic. |
 | [Deployment topology](interactive.html#deployment-topology) | [Deployment topology lab](deployment-topology-lab.md) | Deployable planes, stores, services, source adapters, controls, observability. | Add Mermaid topology diagrams in markdown. |
 | [Source systems](interactive.html#source-systems) | [Source-system integration lab](source-system-integration-lab.md) | Field-level source contracts and reconciliation. | Markdown tables should remain canonical. |
-| [Deep run](interactive.html#deep-run) | [Deep agent runbook](deep-agent-runbook.md) and [Deep agent application architecture](deep-agent-application-architecture.qmd) | Long-horizon run stages, subsystem boundaries, and ownership. | Keep stage ownership interactive. |
+| [Deep run](interactive.html#deep-run) | [Deep agent runbook](deep-agent-runbook.md) and [Deep agent application architecture](deep-agent-application-architecture.md) | Long-horizon run stages, subsystem boundaries, and ownership. | Keep stage ownership interactive. |
 | [Control plane](interactive.html#control-plane) | [Agent control plane](agent-control-plane.md) | Registry, grants, memory policy, deployment, observability, incidents, release. | Move manifest examples to markdown. |
 | [AgentOps](interactive.html#agentops) | [Agent operations lifecycle](agent-operations-lifecycle.md) and [Eval and release harness](eval-release-harness.md) | Change lifecycle, governed improvement loop, eval harness. | Markdown owns release process. |
 | [Simulator](interactive.html#simulator) | [Run simulator](run-simulator.md) | Browser-only run event simulator. | Keep as interactive artifact. |
-| [Labs](interactive.html#labs) | [Deep agent lab](deep-agent-lab.md), [Deep agent application architecture](deep-agent-application-architecture.qmd), [Subagent handoff simulator](subagent-handoff-simulator.md), [Implementation lab](implementation-lab.md) | Harness anatomy, product subsystem boundaries, subagent handoff, composer, trace, combo map. | Split into smaller markdown-owned labs later. |
+| [Labs](interactive.html#labs) | [Deep agent lab](deep-agent-lab.md), [Deep agent application architecture](deep-agent-application-architecture.md), [Subagent handoff simulator](subagent-handoff-simulator.md), [Implementation lab](implementation-lab.md) | Harness anatomy, product subsystem boundaries, subagent handoff, composer, trace, combo map. | Split into smaller markdown-owned labs later. |
 | [Implementation](interactive.html#implementation) | [Implementation lab](implementation-lab.md) | Schemas, APIs, event stream, failures, minimum product-slice contracts. | Strong candidate for generated examples from markdown tables. |
 | [Runtime ledger](interactive.html#runtime-ledger) | [Runtime ledger](runtime-ledger.md) | Correlated records and event payloads. | Markdown owns ledger schema; lab renders scenarios. |
 | [Learning path](interactive.html#learning-path) | [Learning path](learning-path.md) | Structured study path and self-checks. | Markdown can fully own this page. |

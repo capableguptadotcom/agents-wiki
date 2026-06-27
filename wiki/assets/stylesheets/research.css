@@ -1,0 +1,211 @@
+:root {
+  --md-primary-fg-color: #3447a5;
+  --md-primary-fg-color--light: #4d63c6;
+  --md-primary-fg-color--dark: #1f2f75;
+  --md-accent-fg-color: #0f766e;
+}
+
+[data-md-color-scheme="default"] {
+  --ea-surface: #ffffff;
+  --ea-soft: #f6f8fc;
+  --ea-line: #d8deeb;
+  --ea-ink: #172033;
+  --ea-muted: #5c667a;
+  --ea-code: #f3f6fb;
+}
+
+[data-md-color-scheme="slate"] {
+  --ea-surface: #1e2533;
+  --ea-soft: #171d29;
+  --ea-line: #39445a;
+  --ea-ink: #edf2ff;
+  --ea-muted: #aab4c8;
+  --ea-code: #111827;
+}
+
+.md-typeset {
+  font-size: 0.78rem;
+}
+
+.md-typeset h1 {
+  color: var(--ea-ink);
+  font-weight: 800;
+  letter-spacing: 0;
+}
+
+.md-typeset h2 {
+  margin-top: 2rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid var(--ea-line);
+  color: var(--md-primary-fg-color);
+  font-weight: 800;
+  letter-spacing: 0;
+}
+
+.md-typeset h3 {
+  color: var(--ea-ink);
+  font-weight: 750;
+  letter-spacing: 0;
+}
+
+.md-typeset p,
+.md-typeset li {
+  line-height: 1.62;
+}
+
+.md-typeset table:not([class]) {
+  border: 1px solid var(--ea-line);
+  border-radius: 0.25rem;
+  overflow: hidden;
+}
+
+.md-typeset table:not([class]) th {
+  background: var(--ea-soft);
+  color: var(--ea-ink);
+  font-weight: 750;
+}
+
+.md-typeset table:not([class]) td,
+.md-typeset table:not([class]) th {
+  vertical-align: top;
+}
+
+.md-typeset code {
+  border-radius: 0.2rem;
+}
+
+.md-typeset pre > code {
+  font-size: 0.72rem;
+}
+
+.md-typeset .agent-diagram,
+.md-typeset .diagram-frame {
+  position: relative;
+}
+
+.md-typeset .agent-diagram {
+  margin: 1rem 0 1.5rem;
+  padding: 1rem;
+  border: 1px solid var(--ea-line);
+  border-radius: 0.35rem;
+  background: var(--ea-surface);
+}
+
+.md-typeset .agent-diagram svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.agent-diagram-error {
+  margin: 1rem 0 1.5rem;
+  padding: 0.75rem 1rem;
+  border-left: 4px solid #b91c1c;
+  background: #fef2f2;
+  color: #7f1d1d;
+}
+
+.diagram-expand-button {
+  position: absolute;
+  top: 0.55rem;
+  right: 0.55rem;
+  z-index: 2;
+  border: 1px solid var(--ea-line);
+  border-radius: 0.25rem;
+  background: var(--ea-surface);
+  color: var(--md-primary-fg-color);
+  cursor: pointer;
+  font-size: 0.64rem;
+  font-weight: 750;
+  padding: 0.18rem 0.45rem;
+}
+
+.diagram-expand-button:hover,
+.diagram-expand-button:focus {
+  border-color: var(--md-accent-fg-color);
+  color: var(--md-accent-fg-color);
+}
+
+.diagram-lightbox-open {
+  overflow: hidden;
+}
+
+.diagram-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 99;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: rgba(10, 15, 30, 0.78);
+}
+
+.diagram-lightbox-panel {
+  display: flex;
+  flex-direction: column;
+  width: min(1220px, 96vw);
+  height: min(840px, 92vh);
+  border: 1px solid var(--ea-line);
+  border-radius: 0.35rem;
+  background: var(--ea-surface);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.36);
+}
+
+.diagram-lightbox-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.65rem 0.75rem;
+  border-bottom: 1px solid var(--ea-line);
+}
+
+.diagram-lightbox-toolbar strong {
+  min-width: 0;
+  overflow: hidden;
+  color: var(--ea-ink);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.diagram-lightbox-toolbar button {
+  border: 1px solid var(--ea-line);
+  border-radius: 0.25rem;
+  background: var(--ea-soft);
+  color: var(--ea-ink);
+  cursor: pointer;
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 0.28rem 0.5rem;
+}
+
+.diagram-lightbox-toolbar button:hover,
+.diagram-lightbox-toolbar button:focus {
+  border-color: var(--md-accent-fg-color);
+  color: var(--md-accent-fg-color);
+}
+
+.diagram-lightbox-spacer {
+  flex: 1;
+}
+
+.diagram-lightbox-scroll {
+  flex: 1;
+  overflow: auto;
+  padding: 1rem;
+  background: var(--ea-soft);
+}
+
+.diagram-lightbox-svg {
+  display: block;
+  min-width: 760px;
+  max-width: none;
+  height: auto;
+}
+
+@media screen and (max-width: 76.1875em) {
+  .diagram-expand-button {
+    position: static;
+    margin-top: 0.5rem;
+  }
+}

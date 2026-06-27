@@ -37,7 +37,7 @@ If a model can bypass this chain, the product does not have an agent architectur
 
 ## Product Boundary
 
-```{mermaid}
+``` mermaid
 flowchart LR
   Surface["Work surface"] --> Binder["Context binder"]
   Binder --> Access["Access decision"]
@@ -131,7 +131,7 @@ Book a monitored bed for this patient.
 
 The product must not call `reserve_bed` from this text. It must create a governed run.
 
-```{mermaid}
+``` mermaid
 sequenceDiagram
   participant User
   participant Surface as Bed board or voice surface
@@ -183,7 +183,7 @@ Subagents return evidence-bound results. They do not receive ambient authority.
 
 ## Memory And Skill Updates
 
-```{mermaid}
+``` mermaid
 flowchart LR
   Run["Production run"] --> Signal["Correction or failure"]
   Signal --> Eval["Eval case"]

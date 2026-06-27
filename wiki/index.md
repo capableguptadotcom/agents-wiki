@@ -5,8 +5,8 @@ subtitle: "Product architecture for governed AI agents."
 
 Build agents as product actors, not chat widgets.
 
-[System diagrams](system-diagram-spine.qmd){.btn .btn-primary}
-[Research standard](research-operating-system.md){.btn .btn-secondary}
+[System diagrams](system-diagram-spine.md)
+[Research standard](research-operating-system.md)
 
 ## Context
 
@@ -58,7 +58,7 @@ Use a fake bed-reservation flow. It is concrete enough to expose the hard parts 
 
 | Page | Use it for |
 |---|---|
-| [System diagram spine](system-diagram-spine.qmd) | Canonical ERD, state machine, sequence, topology, correlation, and policy flow. |
+| [System diagram spine](system-diagram-spine.md) | Canonical ERD, state machine, sequence, topology, correlation, and policy flow. |
 | [Architecture blueprint](architecture-blueprint.md) | Layer boundaries and the minimum product architecture. |
 | [Implementation lab](implementation-lab.md) | API, schema, event, and error-contract work queue. |
 | [Runtime ledger](runtime-ledger.md) | Run state, correlation IDs, timeline, audit, trace, and eval records. |

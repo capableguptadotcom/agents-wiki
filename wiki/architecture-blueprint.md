@@ -2,14 +2,14 @@
 
 This note explains how the pieces connect in an agent-native product. It builds on:
 
-- [System diagram spine](system-diagram-spine.qmd)
+- [System diagram spine](system-diagram-spine.md)
 - [Research and standards](research-standards.md)
 - [Evidence chain architecture](evidence-chain-architecture.md)
 - [Product object model lab](product-object-model-lab.md)
 - [Architecture composition workbench](architecture-composition-workbench.md)
 - [Protocol runtime decision lab](protocol-runtime-decision-lab.md)
 - [Architecture review](architecture-review.md)
-- [Design philosophy lab](design-philosophy-lab.qmd)
+- [Design philosophy lab](design-philosophy-lab.md)
 - [Implementation lab](implementation-lab.md)
 - [Case studies](case-studies.md)
 - [Runtime ledger](runtime-ledger.md)

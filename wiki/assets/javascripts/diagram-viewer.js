@@ -1,7 +1,55 @@
 (function () {
+  let renderId = 0;
+
+  async function renderMermaidSources() {
+    if (!window.mermaid) {
+      setTimeout(renderMermaidSources, 300);
+      return;
+    }
+
+    if (!window.__agentMermaidInitialized) {
+      window.mermaid.initialize({ startOnLoad: false, securityLevel: "strict", theme: "default" });
+      window.__agentMermaidInitialized = true;
+    }
+
+    const blocks = [...document.querySelectorAll("pre.agent-mermaid-source")]
+      .filter((block) => !block.dataset.mermaidRendered);
+
+    for (const block of blocks) {
+      block.dataset.mermaidRendered = "true";
+      const source = block.querySelector("code")?.textContent?.trim();
+      if (!source) continue;
+
+      try {
+        const id = `agent_mermaid_${Date.now()}_${renderId++}`;
+        const rendered = await window.mermaid.render(id, source);
+        const frame = document.createElement("div");
+        frame.className = "agent-diagram diagram-frame";
+        frame.innerHTML = rendered.svg;
+        block.replaceWith(frame);
+      } catch (error) {
+        const message = document.createElement("div");
+        message.className = "agent-diagram-error";
+        message.textContent = `Diagram failed to render: ${error.message || error}`;
+        block.replaceWith(message);
+      }
+    }
+  }
+
   function diagramLabel(svg, index) {
-    const heading = svg.closest("section")?.querySelector("h1, h2, h3");
-    return heading?.textContent?.trim() || `Diagram ${index + 1}`;
+    let node = svg.parentElement;
+    while (node && !node.matches(".md-content")) {
+      let previous = node.previousElementSibling;
+      while (previous) {
+        if (previous.matches("h1, h2, h3")) return previous.textContent.trim();
+        const nested = previous.querySelector?.("h1, h2, h3");
+        if (nested) return nested.textContent.trim();
+        previous = previous.previousElementSibling;
+      }
+      node = node.parentElement;
+    }
+    const title = document.querySelector(".md-content h1");
+    return title?.textContent?.trim() || `Diagram ${index + 1}`;
   }
 
   function eligibleDiagram(svg) {
@@ -82,12 +130,12 @@
   }
 
   function enhanceDiagrams() {
-    const diagrams = [...document.querySelectorAll("main.content svg")]
+    const diagrams = [...document.querySelectorAll(".md-content svg")]
       .filter((svg) => !svg.dataset.diagramViewerReady && eligibleDiagram(svg));
 
     diagrams.forEach((svg, index) => {
       svg.dataset.diagramViewerReady = "true";
-      const frame = svg.closest(".cell-output-display, .mermaid") || svg.parentElement;
+      const frame = svg.closest(".agent-diagram, .mermaid") || svg.parentElement;
       if (!frame) return;
       frame.classList.add("diagram-frame");
       const label = diagramLabel(svg, index);
@@ -102,10 +150,22 @@
   }
 
   document.addEventListener("DOMContentLoaded", () => {
-    enhanceDiagrams();
+    renderMermaidSources().then(enhanceDiagrams);
     setTimeout(enhanceDiagrams, 750);
     setTimeout(enhanceDiagrams, 1800);
   });
+
+  document.addEventListener("DOMContentSwitch", () => {
+    renderMermaidSources().then(enhanceDiagrams);
+    setTimeout(enhanceDiagrams, 750);
+  });
+
+  if (window.document$?.subscribe) {
+    window.document$.subscribe(() => {
+      renderMermaidSources().then(enhanceDiagrams);
+      setTimeout(enhanceDiagrams, 750);
+    });
+  }
 
   document.addEventListener("keydown", (event) => {
     if (event.key !== "Escape") return;

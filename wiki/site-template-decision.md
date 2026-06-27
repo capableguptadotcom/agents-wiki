@@ -5,68 +5,52 @@ Status: accepted for current phase.
 Decision:
 
 ```text
-Keep Quarto as the canonical publishing stack for now.
-Demote the old custom interactive app to derived labs.
-Do not migrate to Astro/Starlight until reusable interactive islands become the main product.
+Use Material for MkDocs as the canonical publishing stack.
+Keep Markdown as source.
+Keep the legacy interactive app as a carried lab, not the primary site.
 ```
 
-## Why This Decision Exists
+## Why
 
-The current site has two problems:
+The site needs to feel like a research documentation product:
 
-1. The content is too broad and prose-heavy.
-2. The custom `interactive.html` app is too large, visually weak, and not integrated with the Quarto documentation model.
+- clear left navigation
+- readable typography
+- visible headings
+- built-in search
+- dark and light modes with accessible contrast
+- Mermaid diagrams without custom rendering hacks
+- GitHub Pages deployment from source
 
-Changing frameworks will not fix weak research standards. The first fix is a stronger documentation operating system, stricter navigation, diagrams, and a quieter engineering template.
+Quarto was workable for publishing, but the visual system felt academic and brittle after customization. Material for MkDocs is closer to the desired documentation experience.
 
-## Template Comparison
+## Comparison
 
-| Option | Fit now | Strength | Cost | Decision |
-|---|---|---|---|---|
-| Quarto website | High | Markdown-first writing, citations, Mermaid diagrams, sidebars, search, GitHub Pages. | Less polished for component-heavy apps. | Keep. |
-| Astro Starlight | Medium later | Excellent docs UX, MDX/components, better interactive islands. | Migration cost and frontend build ownership. | Revisit after contract pages stabilize. |
-| Docusaurus | Medium later | Versioned docs, React ecosystem, large docs sites. | More framework surface than needed now. | Not now. |
-| Nextra | Low to medium | Good MDX docs inside Next.js. | Couples wiki to Next.js app stack. | Not now. |
-| Custom HTML app | Low | Full UI control. | Becomes a second product with hidden content. | Demote. |
+| Option | Fit | Decision |
+|---|---|---|
+| Material for MkDocs | Strong docs UX, Markdown-first, search, Mermaid, GitHub Pages, low framework surface. | Adopt. |
+| Jekyll / Just the Docs | Good GitHub Pages fit, but weaker built-in research-doc polish and diagram experience. | Do not use now. |
+| Astro Starlight | Excellent if the site becomes component-heavy. More frontend ownership than needed today. | Revisit later. |
+| Docusaurus | Strong large-docs framework, but React/versioning surface is heavier than needed. | Not now. |
+| Custom HTML app | Full control but hides source and becomes a separate product. | Keep only as legacy lab. |
 
-## Target Aesthetic
+## Implementation
 
-The wiki should feel like an architecture manual:
-
-- dense but readable pages
-- left sidebar plus right table of contents
-- restrained color and borders
-- diagrams close to contracts
-- compact tables for records and decisions
-- callouts for Decision, Evidence, Failure, Proof
-- no marketing hero
-- no large decorative app shell
-
-## Interactive Policy
-
-Interactive work is allowed only when it does one of these:
-
-- compares states that are hard to compare in prose
-- runs a small deterministic simulator
-- validates a schema or event trajectory
-- exposes a visual graph that would be too dense as a static table
-
-Interactive work is not allowed to be the only source of a contract, claim, or decision.
-
-## Migration Plan
-
-1. Keep Quarto and improve the template.
-2. Add [Research operating system](research-operating-system.md).
-3. Add [System diagram spine](system-diagram-spine.qmd).
-4. Add [Interactive labs index](interactive-labs.md) and demote `interactive.html`.
-5. Fix `interactive.html#section` deep links while the legacy app remains.
-6. Rewrite contract pages under the new standard.
-7. Revisit Astro/Starlight only after two or three labs prove they need component islands.
+| Concern | Decision |
+|---|---|
+| Source directory | `wiki/` |
+| Site config | `mkdocs.yml` |
+| Theme | `material` |
+| Custom style | `wiki/assets/stylesheets/research.css` |
+| Diagram viewer | `wiki/assets/javascripts/diagram-viewer.js` |
+| CI build | `.github/workflows/mkdocs-pages.yml` |
+| Output | `site/` |
 
 ## Official Docs Consulted
 
-- Quarto websites: https://quarto.org/docs/websites/
-- Quarto diagrams: https://quarto.org/docs/authoring/diagrams.html
+- Material for MkDocs: https://squidfunk.github.io/mkdocs-material/
+- Material diagrams: https://squidfunk.github.io/mkdocs-material/reference/diagrams/
+- Material publishing: https://squidfunk.github.io/mkdocs-material/publishing-your-site/
+- MkDocs configuration: https://www.mkdocs.org/user-guide/configuration/
+- Just the Docs: https://just-the-docs.com/
 - Astro Starlight: https://starlight.astro.build/
-- Docusaurus docs: https://docusaurus.io/docs
-- Nextra docs: https://nextra.site/docs

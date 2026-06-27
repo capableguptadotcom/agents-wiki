@@ -2,7 +2,7 @@
 
 Current as of 2026-06-27.
 
-For the canonical product record ERD and store ownership direction, see [System diagram spine](system-diagram-spine.qmd).
+For the canonical product record ERD and store ownership direction, see [System diagram spine](system-diagram-spine.md).
 
 This note complements the interactive Object Model section in [interactive.html](interactive.html#object-model).
 

@@ -9,7 +9,7 @@ function walk(dir, predicate, out = []) {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
     const fullPath = path.join(dir, entry.name);
     if (entry.isDirectory()) {
-      if (!["_site", ".quarto"].includes(entry.name)) walk(fullPath, predicate, out);
+      if (!["_site", ".quarto", "site"].includes(entry.name)) walk(fullPath, predicate, out);
     } else if (predicate(fullPath)) {
       out.push(fullPath);
     }
@@ -21,7 +21,7 @@ function existsAsSourceOrOutput(resolvedPath) {
   if (fs.existsSync(resolvedPath)) return true;
   if (resolvedPath.endsWith(".html")) {
     const withoutHtml = resolvedPath.slice(0, -5);
-    return fs.existsSync(`${withoutHtml}.md`) || fs.existsSync(`${withoutHtml}.qmd`);
+    return fs.existsSync(`${withoutHtml}.md`);
   }
   return false;
 }
@@ -47,7 +47,8 @@ function fragment(raw) {
 }
 
 const sourceFiles = [
-  ...walk(wikiRoot, (file) => /\.(md|qmd|html|yml|yaml)$/i.test(file)),
+  ...walk(wikiRoot, (file) => /\.(md|html|yml|yaml)$/i.test(file)),
+  path.join(root, "mkdocs.yml"),
   path.join(root, "README.md")
 ];
 
@@ -75,24 +76,33 @@ for (const file of sourceFiles) {
     }
 
     if (target.endsWith("index.html")) {
-      problems.push(`${relativeFile}: local links should target index.qmd or interactive.html, not ${raw}`);
+      problems.push(`${relativeFile}: local links should target index.md or interactive.html, not ${raw}`);
     }
   }
 }
 
-const quartoConfig = fs.readFileSync(path.join(wikiRoot, "_quarto.yml"), "utf8");
-for (const match of quartoConfig.matchAll(/^\s*-\s+([A-Za-z0-9_.\/-]+\.(?:md|qmd|html))\s*$/gm)) {
+const mkdocsConfig = fs.readFileSync(path.join(root, "mkdocs.yml"), "utf8");
+for (const match of mkdocsConfig.matchAll(/:\s+([A-Za-z0-9_.\/-]+\.md)\s*$/gm)) {
   const listed = match[1];
   const resolved = path.join(wikiRoot, listed);
   if (!existsAsSourceOrOutput(resolved)) {
-    problems.push(`wiki/_quarto.yml: missing sidebar/navbar target ${listed}`);
+    problems.push(`mkdocs.yml: missing nav target ${listed}`);
   }
 }
 
-for (const required of ["_quarto.yml", "index.qmd", "interactive.html", "docs.css"]) {
-  if (!fs.existsSync(path.join(wikiRoot, required))) {
-    problems.push(`wiki/${required} is required for the Quarto site`);
-  }
+for (const required of ["mkdocs.yml"]) {
+  if (!fs.existsSync(path.join(root, required))) problems.push(`${required} is required for the MkDocs site`);
+}
+
+for (const required of [
+  "index.md",
+  "interactive.html",
+  "assets/stylesheets/research.css",
+  "assets/javascripts/diagram-viewer.js",
+  "assets/images/logo.svg",
+  "assets/images/favicon.svg"
+]) {
+  if (!fs.existsSync(path.join(wikiRoot, required))) problems.push(`wiki/${required} is required for the MkDocs site`);
 }
 
 if (problems.length) {

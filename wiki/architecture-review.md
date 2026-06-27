@@ -14,7 +14,7 @@ What evidence proves the design works?
 What do we need to dive into next?
 ```
 
-Then run the module-depth check from [Design philosophy lab](design-philosophy-lab.qmd):
+Then run the module-depth check from [Design philosophy lab](design-philosophy-lab.md):
 
 ```text
 Does this boundary hide real complexity behind a narrow interface?

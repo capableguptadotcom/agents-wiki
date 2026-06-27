@@ -3,4 +3,5 @@
 .codex-wiki-server*.log
 wiki/.quarto/
 wiki/_site/
+site/
 wiki/assets/generated/

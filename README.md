@@ -10,9 +10,9 @@ Published site:
 
 Local source entry points:
 
-- [wiki/index.qmd](wiki/index.qmd)
+- [wiki/index.md](wiki/index.md)
 - [wiki/research-operating-system.md](wiki/research-operating-system.md)
-- [wiki/system-diagram-spine.qmd](wiki/system-diagram-spine.qmd)
+- [wiki/system-diagram-spine.md](wiki/system-diagram-spine.md)
 - [wiki/implementation-lab.md](wiki/implementation-lab.md)
 
 ## Quality Bar
@@ -65,11 +65,11 @@ create AgentRun
 -> sample EvalCase
 ```
 
-See [System diagram spine](wiki/system-diagram-spine.qmd) for the ERD, run state machine, sequence diagram, deployment topology, correlation map, and policy gate flow.
+See [System diagram spine](wiki/system-diagram-spine.md) for the ERD, run state machine, sequence diagram, deployment topology, correlation map, and policy gate flow.
 
 ## Site Stack
 
-We are keeping Quarto for the current phase because the durable artifact is markdown-heavy research, diagrams, citations, contracts, and static publishing.
+The site now uses Material for MkDocs because the artifact is a research documentation system: Markdown source, polished navigation, search, Mermaid diagrams, readable tables, and GitHub Pages deployment.
 
 Decision record:
 
@@ -100,4 +100,4 @@ node --check wiki/assets/app.js
 node scripts/verify-wiki.mjs
 ```
 
-GitHub Actions installs Quarto, renders `wiki/`, uploads `wiki/_site`, and deploys GitHub Pages.
+GitHub Actions installs Material for MkDocs, builds `wiki/` into `site/`, uploads the static artifact, and deploys GitHub Pages.

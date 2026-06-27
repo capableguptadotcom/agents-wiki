@@ -1,0 +1,139 @@
+site_name: Enterprise Agents Wiki
+site_description: Product architecture for governed AI agents.
+site_url: https://capableguptadotcom.github.io/agents-wiki/
+repo_url: https://github.com/capableguptadotcom/agents-wiki
+repo_name: capableguptadotcom/agents-wiki
+docs_dir: wiki
+site_dir: site
+use_directory_urls: false
+
+theme:
+  name: material
+  language: en
+  logo: assets/images/logo.svg
+  favicon: assets/images/favicon.svg
+  font:
+    text: Inter
+    code: JetBrains Mono
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: teal
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: teal
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.sections
+    - navigation.indexes
+    - navigation.top
+    - toc.follow
+    - search.highlight
+    - search.suggest
+    - content.code.copy
+
+nav:
+  - Start:
+      - Home: index.md
+      - Research Operating System: research-operating-system.md
+      - Site Template Decision: site-template-decision.md
+      - System Diagram Spine: system-diagram-spine.md
+      - Markdown-First Authoring: markdown-first-authoring.md
+      - Agent-Native Product Wiki: agent-native-product-wiki.md
+      - Learning Path: learning-path.md
+  - Source Library:
+      - References: references.md
+      - Source Atlas: source-atlas.md
+      - Research Standards: research-standards.md
+      - Evidence Chain Architecture: evidence-chain-architecture.md
+      - Paper To Product Lab: paper-to-product-lab.md
+      - Case Studies: case-studies.md
+      - Industry Pattern Teardowns: industry-pattern-teardowns.md
+      - Industry Case Architecture Lab: industry-case-architecture-lab.md
+  - Decisions:
+      - Architecture Decisions: architecture-decisions.md
+      - Protocol Runtime Decision Lab: protocol-runtime-decision-lab.md
+      - Architecture Review: architecture-review.md
+      - Design Philosophy Lab: design-philosophy-lab.md
+      - Architecture Composition Workbench: architecture-composition-workbench.md
+      - Agent Maturity Model: agent-maturity-model.md
+  - System Contracts:
+      - Architecture Blueprint: architecture-blueprint.md
+      - Implementation Lab: implementation-lab.md
+      - Product Object Model Lab: product-object-model-lab.md
+      - Runtime Ledger: runtime-ledger.md
+      - Intent To Action Router: intent-to-action-router.md
+      - Capability Registry: capability-registry.md
+      - Identity Access Lab: identity-access-lab.md
+      - Source System Integration Lab: source-system-integration-lab.md
+      - Deployment Topology Lab: deployment-topology-lab.md
+  - Vertical Slices:
+      - End To End Architecture Walkthrough: end-to-end-architecture-walkthrough.md
+      - Architecture Assembly Data: architecture-assembly-data.md
+      - Deep Agent Application Architecture: deep-agent-application-architecture.md
+      - Deep Agent Lab: deep-agent-lab.md
+      - Deep Agent Runbook: deep-agent-runbook.md
+      - Subagent Handoff Simulator: subagent-handoff-simulator.md
+  - Governance:
+      - Approval Handoff: approval-handoff.md
+      - Durable Execution: durable-execution.md
+      - Memory Governance: memory-governance.md
+      - Memory Lifecycle Simulator: memory-lifecycle-simulator.md
+      - Skill Lifecycle Lab: skill-lifecycle-lab.md
+      - Agent Control Plane: agent-control-plane.md
+      - Agent Operations Lifecycle: agent-operations-lifecycle.md
+      - Eval Release Harness: eval-release-harness.md
+      - Agent Threat Model: agent-threat-model.md
+  - Labs And UX:
+      - Interactive Labs: interactive-labs.md
+      - Run Simulator: run-simulator.md
+      - Product UX Surfaces: product-ux-surfaces.md
+      - Visual Maps: visual-maps.md
+      - Aspect Playbook: aspect-playbook.md
+  - Backlog:
+      - Deep Dive Backlog: deep-dive-backlog.md
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: agent-mermaid-source
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+
+extra_css:
+  - assets/stylesheets/research.css
+
+extra_javascript:
+  - https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js
+  - assets/javascripts/diagram-viewer.js
+
+plugins:
+  - search
+
+exclude_docs: |
+  _site/
+  .quarto/
