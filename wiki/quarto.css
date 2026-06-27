@@ -108,7 +108,10 @@ main.content a {
 }
 
 main table {
+  display: block;
   width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
   font-size: 0.91rem;
   border: 1px solid var(--agent-line);
   background: var(--agent-paper);
