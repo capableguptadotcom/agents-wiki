@@ -109,7 +109,6 @@ main.content a {
 
 main table {
   width: 100%;
-  min-width: 720px;
   font-size: 0.91rem;
   border: 1px solid var(--agent-line);
   background: var(--agent-paper);
@@ -124,6 +123,7 @@ main table th {
 
 main table td {
   vertical-align: top;
+  overflow-wrap: anywhere;
 }
 
 .table-responsive,
@@ -202,10 +202,6 @@ hr {
 }
 
 @media (max-width: 991px) {
-  main table {
-    min-width: 640px;
-  }
-
   .quarto-title h1.title {
     font-size: 1.65rem;
   }
