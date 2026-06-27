@@ -42,6 +42,7 @@ The agent is one actor inside a product execution system. The product still owns
 ## Start Here
 
 - [End-to-end architecture walkthrough](end-to-end-architecture-walkthrough.md): the assembly map that shows how all layers connect in one run.
+- [Markdown-first authoring system](markdown-first-authoring.md): the source contract for evolving the wiki without hiding durable knowledge inside JavaScript.
 - [Agent-native product wiki](agent-native-product-wiki.md): the core mental model and product primitives.
 - [Architecture blueprint](architecture-blueprint.md): deployable layers and ownership boundaries.
 - [Product object model lab](product-object-model-lab.md): the records needed to make runs queryable and auditable.
@@ -67,6 +68,6 @@ Good migration candidates:
 - add Mermaid diagrams to architecture notes
 - add executable examples only where they clarify contracts
 - keep the custom `interactive.html` lab for dense scenario switching and contract records
-- eventually split the large JavaScript lab into smaller data files generated from markdown or YAML
+- split the large JavaScript lab into smaller data files generated from markdown-backed sources
 
 The target state is not "one big app." The target state is a browsable knowledge system where markdown explains the architecture and interactive labs prove the contracts.

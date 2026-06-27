@@ -36,6 +36,7 @@ website:
       - section: "Start"
         contents:
           - index.qmd
+          - markdown-first-authoring.md
           - end-to-end-architecture-walkthrough.md
           - agent-native-product-wiki.md
           - learning-path.md

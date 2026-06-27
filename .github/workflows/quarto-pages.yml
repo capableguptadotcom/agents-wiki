@@ -24,6 +24,11 @@ jobs:
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
 
+      - name: Verify wiki source
+        run: |
+          node --check wiki/assets/app.js
+          node scripts/verify-wiki.mjs
+
       - name: Render Quarto website
         uses: quarto-dev/quarto-actions/render@v2
         with:

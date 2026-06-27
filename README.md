@@ -15,6 +15,7 @@ The published site is rendered from the markdown and Quarto sources in `wiki/` u
 Supporting notes:
 
 - [Agent-native product wiki](wiki/agent-native-product-wiki.md)
+- [Markdown-first authoring system](wiki/markdown-first-authoring.md)
 - [End-to-end architecture walkthrough](wiki/end-to-end-architecture-walkthrough.md)
 - [Aspect-by-aspect playbook](wiki/aspect-playbook.md)
 - [Product object model lab](wiki/product-object-model-lab.md)
@@ -97,4 +98,4 @@ Use the research and standards map plus the deep-dive backlog to turn each wiki 
 
 We are standardizing on Quarto for the documentation site because the durable source is markdown-heavy architecture knowledge. Astro remains a good option if this becomes primarily a component application, but Quarto better fits the current wiki, source maps, diagrams, sidebars, search, and GitHub Pages publishing flow.
 
-The GitHub Actions workflow at `.github/workflows/quarto-pages.yml` installs Quarto, renders `wiki/`, uploads `wiki/_site`, and deploys GitHub Pages.
+The GitHub Actions workflow at `.github/workflows/quarto-pages.yml` verifies wiki links and interactive anchors, installs Quarto, renders `wiki/`, uploads `wiki/_site`, and deploys GitHub Pages.
