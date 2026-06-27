@@ -26,6 +26,8 @@ jobs:
 
       - name: Verify wiki source
         run: |
+          node scripts/generate-assembly-data.mjs
+          node --check wiki/assets/generated/assembly-data.js
           node --check wiki/assets/app.js
           node scripts/verify-wiki.mjs
 

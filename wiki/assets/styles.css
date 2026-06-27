@@ -1378,6 +1378,16 @@ pre code {
   background: #eef5ff;
 }
 
+.assembly-missing-data {
+  grid-column: 1 / -1;
+  padding: 14px;
+  border: 1px solid #f1b8af;
+  border-radius: 8px;
+  background: #fff7f6;
+  color: var(--red);
+  font-weight: 700;
+}
+
 .assembly-layout {
   display: grid;
   grid-template-columns: minmax(250px, 0.75fr) minmax(340px, 1.25fr);

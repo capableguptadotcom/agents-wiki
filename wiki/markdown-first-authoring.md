@@ -21,6 +21,7 @@ JavaScript should not become the hidden source of product theory.
 | Site home | `wiki/index.qmd` | Introduce the learning path and route readers. | Keep it short; link to deeper notes. |
 | Navigation | `wiki/_quarto.yml` | Sidebar, navbar, search, and render scope. | Every major markdown page should be reachable from the sidebar. |
 | Interactive labs | `wiki/interactive.html` plus `wiki/assets/app.js` | Dense scenario switching, generated records, and live walkthroughs. | Every lab must have a markdown companion page. |
+| Generated lab data | Markdown data files such as `wiki/architecture-assembly-data.md` | Structured scenario data that powers focused interactive labs. | Generated JS files are build artifacts, not durable source. |
 | Styles | `wiki/quarto.css` and `wiki/assets/styles.css` | Quarto page style and carried lab style. | Styling should not encode architecture content. |
 | Publishing | `.github/workflows/quarto-pages.yml` | Render and deploy Quarto to GitHub Pages. | CI must render from source, not commit generated `_site`. |
 
@@ -46,7 +47,7 @@ This table is the current manifest for the carried interactive lab. It tells us 
 | [Capability registry](interactive.html#capability-registry) | [Capability registry](capability-registry.md) | Skills, resources, tools, workflows, memory classes, and connectors as governable grants. | Move grant templates into markdown. |
 | [Skill lifecycle](interactive.html#skill-lifecycle) | [Skill lifecycle lab](skill-lifecycle-lab.md) | Skill change from trace evidence to release and runtime proof. | Markdown owner is strong; lab can stay as simulator. |
 | [Identity and access](interactive.html#identity-access) | [Identity and access lab](identity-access-lab.md) | User, agent, connector, tool, approval, workflow, source ACL, audit, revocation. | Keep as interactive authority-chain inspector. |
-| [End-to-end walkthrough](interactive.html#walkthrough) | [End-to-end architecture walkthrough](end-to-end-architecture-walkthrough.md) | Assembly path across surface, context, authority, loop, gateway, approval, workflow, source truth, memory, observability, release. | New canonical markdown exists; lab proves contracts. |
+| [End-to-end walkthrough](interactive.html#walkthrough) | [End-to-end architecture walkthrough](end-to-end-architecture-walkthrough.md) and [Architecture Assembly Data](architecture-assembly-data.md) | Assembly path across surface, context, authority, loop, gateway, approval, workflow, source truth, memory, observability, release. | Scenario data now comes from markdown and generates a browser data asset. |
 | [Approval handoff](interactive.html#approval-handoff) | [Approval handoff](approval-handoff.md) | Exact-payload approval, modification, rejection, escalation, resume. | Keep interactive because decision states are easier to compare live. |
 | [Durable execution](interactive.html#durable-execution) | [Durable execution](durable-execution.md) | Workflow ownership, waits, retries, cancellation, compensation, reconciliation. | Move platform comparison into markdown tables. |
 | [Memory governance](interactive.html#memory-governance) | [Memory governance](memory-governance.md) and [Memory lifecycle simulator](memory-lifecycle-simulator.md) | Memory classes, proposal, review, activation, retrieval, audit, correction, quarantine. | Keep lifecycle simulator; markdown owns policy. |
@@ -86,4 +87,4 @@ The next migration should be incremental:
 4. Update `wiki/assets/app.js` to read the generated data for that one lab.
 5. Repeat only where the interaction benefits from structured data.
 
-The first good candidate is the Architecture Assembly lab because it already has a canonical markdown companion in [End-to-end architecture walkthrough](end-to-end-architecture-walkthrough.md).
+The first migration is the Architecture Assembly lab. Its explanatory source is [End-to-end architecture walkthrough](end-to-end-architecture-walkthrough.md), and its structured scenario source is [Architecture Assembly Data](architecture-assembly-data.md).

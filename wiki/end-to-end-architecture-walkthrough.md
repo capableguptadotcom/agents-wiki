@@ -1,6 +1,6 @@
 # End-To-End Architecture Walkthrough
 
-This note is the long-form companion to the Architecture Assembly lab in [interactive.html](interactive.html#walkthrough).
+This note is the long-form companion to the Architecture Assembly lab in [interactive.html](interactive.html#walkthrough). The structured scenario data for that lab lives in [Architecture Assembly Data](architecture-assembly-data.md).
 
 The purpose is to answer the core product question:
 

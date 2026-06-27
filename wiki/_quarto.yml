@@ -38,6 +38,7 @@ website:
           - index.qmd
           - markdown-first-authoring.md
           - end-to-end-architecture-walkthrough.md
+          - architecture-assembly-data.md
           - agent-native-product-wiki.md
           - learning-path.md
           - deep-dive-backlog.md
