@@ -82,11 +82,13 @@ main.content h3 {
 main.content p,
 main.content li {
   line-height: 1.62;
+  overflow-wrap: anywhere;
 }
 
 main.content a {
   color: var(--agent-blue);
   font-weight: 650;
+  overflow-wrap: anywhere;
   text-decoration-thickness: 1px;
   text-underline-offset: 2px;
 }
@@ -127,6 +129,10 @@ main table th {
 
 main table td {
   vertical-align: top;
+  overflow-wrap: anywhere;
+}
+
+main table th {
   overflow-wrap: anywhere;
 }
 
