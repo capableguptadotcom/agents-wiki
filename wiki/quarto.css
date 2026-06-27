@@ -107,11 +107,12 @@ main.content a {
   color: var(--agent-ink);
 }
 
+#quarto-document-content table.table,
 main table {
-  display: block;
-  width: 100%;
-  max-width: 100%;
-  overflow-x: auto;
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow-x: auto !important;
   font-size: 0.91rem;
   border: 1px solid var(--agent-line);
   background: var(--agent-paper);
