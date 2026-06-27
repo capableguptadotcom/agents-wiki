@@ -2,7 +2,7 @@
 
 Current as of 2026-06-27.
 
-This note complements the interactive Case Architecture section in [index.html](index.html#case-architecture).
+This note complements the interactive Case Architecture section in [interactive.html](interactive.html#case-architecture).
 
 The purpose is to study public industry examples without overclaiming. Vendor pages, papers, and standards rarely expose a full production architecture. They are still useful when we separate:
 

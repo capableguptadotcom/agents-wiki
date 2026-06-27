@@ -149,7 +149,7 @@ release_bundles</code></pre>
             <article class="object-model-panel">
               <div class="object-model-record-header">
                 <h3>Example persisted record</h3>
-                <a href="product-object-model-lab.md">Open companion note</a>
+                <a href="product-object-model-lab.html">Open companion note</a>
               </div>
               <pre class="example-code"><code id="object-model-record"></code></pre>
             </article>
@@ -261,7 +261,7 @@ release_bundles</code></pre>
           <article class="skill-panel skill-eval-panel">
             <div class="skill-eval-header">
               <h3>Release-blocking evals</h3>
-              <a href="skill-lifecycle-lab.md">Open companion note</a>
+              <a href="skill-lifecycle-lab.html">Open companion note</a>
             </div>
             <div class="skill-evals" id="skill-evals"></div>
           </article>
@@ -330,6 +330,36 @@ release_bundles</code></pre>
           <div class="timeline-panel">
             <h3>Run timeline</h3>
             <ol id="timeline"></ol>
+          </div>
+
+          <div class="assembly-lab">
+            <div class="assembly-header">
+              <div>
+                <p class="eyebrow">Architecture assembly</p>
+                <h3>See how the pieces connect in one product run.</h3>
+              </div>
+              <a href="end-to-end-architecture-walkthrough.html">Open companion note</a>
+            </div>
+            <p class="assembly-intro">Pick a real workflow and a product layer. The lab shows the layer owner, required records, upstream and downstream dependencies, current standards, industry patterns, and the failure that appears if this piece is missing.</p>
+            <div class="assembly-scenarios" id="assembly-scenarios"></div>
+            <div class="assembly-layout">
+              <div class="assembly-layers" id="assembly-layers"></div>
+              <article class="assembly-detail" id="assembly-detail"></article>
+            </div>
+            <div class="assembly-board">
+              <article class="assembly-panel">
+                <h3>Boundary contract</h3>
+                <pre class="example-code"><code id="assembly-record"></code></pre>
+              </article>
+              <article class="assembly-panel">
+                <h3>Combined architecture path</h3>
+                <div class="assembly-path" id="assembly-path"></div>
+              </article>
+            </div>
+            <article class="assembly-panel">
+              <h3>Source and implementation anchors</h3>
+              <div class="assembly-anchors" id="assembly-anchors"></div>
+            </article>
           </div>
         </section>
 
@@ -583,7 +613,7 @@ release_bundles</code></pre>
                 <h3>Product pattern teardown</h3>
                 <p>Pick a real platform or product pattern. The teardown separates what the user sees from the hidden architecture pieces, what we can copy, what remains unproven, and which evidence we would require before shipping a similar agent.</p>
               </div>
-              <a href="industry-pattern-teardowns.md">Open teardown note</a>
+              <a href="industry-pattern-teardowns.html">Open teardown note</a>
             </div>
             <div class="teardown-tabs" id="teardown-tabs"></div>
             <article class="teardown-detail" id="teardown-detail"></article>
@@ -632,7 +662,7 @@ release_bundles</code></pre>
             <article class="case-arch-record-panel">
               <div class="case-arch-record-header">
                 <h3>Adoption decision record</h3>
-                <a href="industry-case-architecture-lab.md">Open companion note</a>
+                <a href="industry-case-architecture-lab.html">Open companion note</a>
               </div>
               <pre id="case-arch-record"></pre>
             </article>
@@ -694,7 +724,7 @@ release_bundles</code></pre>
             <article class="design-panel">
               <div class="design-panel-header">
                 <h3>Design review record</h3>
-                <a href="design-philosophy-lab.md">Open companion note</a>
+                <a href="design-philosophy-lab.html">Open companion note</a>
               </div>
               <pre class="example-code"><code id="design-record"></code></pre>
             </article>
@@ -734,7 +764,7 @@ release_bundles</code></pre>
                 <h3>Standards-to-product contract map</h3>
                 <p>Select a paper, protocol, standard, or case pattern. The workbench translates it into the product boundary it should constrain, the artifact we should build, and the evidence that proves the boundary is real.</p>
               </div>
-              <a href="research-standards.md">Open companion note</a>
+              <a href="research-standards.html">Open companion note</a>
             </div>
             <div class="research-contract-layout">
               <div class="research-contract-list" id="source-contract-list"></div>
@@ -773,7 +803,7 @@ release_bundles</code></pre>
             <article class="evidence-record-panel">
               <div class="evidence-record-header">
                 <h3>Architecture evidence record</h3>
-                <a href="evidence-chain-architecture.md">Open companion note</a>
+                <a href="evidence-chain-architecture.html">Open companion note</a>
               </div>
               <pre class="example-code"><code id="evidence-record"></code></pre>
             </article>
@@ -1108,7 +1138,7 @@ release_bundles</code></pre>
           <article class="deployment-panel deployment-matrix-panel">
             <div class="deployment-matrix-header">
               <h3>Plane contract matrix</h3>
-              <a href="deployment-topology-lab.md">Open companion note</a>
+              <a href="deployment-topology-lab.html">Open companion note</a>
             </div>
             <div class="deployment-matrix" id="deployment-matrix"></div>
           </article>
@@ -1497,7 +1527,7 @@ release_bundles</code></pre>
                 <h3>Minimum product slice contracts</h3>
                 <p>Pick a scenario and contract. The workbench shows the API boundary, persisted record, emitted event, UI projection, runtime permission, and release-blocking test for the first shippable agent slice.</p>
               </div>
-              <a href="implementation-lab.md">Open companion note</a>
+              <a href="implementation-lab.html">Open companion note</a>
             </div>
 
             <div class="implementation-scenarios" id="implementation-scenarios"></div>
@@ -1582,47 +1612,48 @@ release_bundles</code></pre>
             <p class="lead">Each card can become its own article, diagram, schema, test harness, and product walkthrough.</p>
           </div>
           <div class="doc-links">
-            <a href="agent-native-product-wiki.md">Core wiki notes</a>
-            <a href="aspect-playbook.md">Aspect playbook</a>
-            <a href="product-object-model-lab.md">Product object model lab</a>
-            <a href="intent-to-action-router.md">Intent to action router</a>
-            <a href="capability-registry.md">Capability registry</a>
-            <a href="skill-lifecycle-lab.md">Skill lifecycle lab</a>
-            <a href="identity-access-lab.md">Identity and access lab</a>
-            <a href="memory-governance.md">Memory governance</a>
-            <a href="memory-lifecycle-simulator.md">Memory lifecycle simulator</a>
-            <a href="approval-handoff.md">Approval handoff</a>
-            <a href="durable-execution.md">Durable execution</a>
-            <a href="deep-agent-lab.md">Deep agent lab</a>
-            <a href="deep-agent-runbook.md">Deep agent runbook</a>
-            <a href="subagent-handoff-simulator.md">Subagent handoff simulator</a>
-            <a href="implementation-lab.md">Implementation lab</a>
-            <a href="case-studies.md">Case studies</a>
-            <a href="industry-pattern-teardowns.md">Industry pattern teardowns</a>
-            <a href="industry-case-architecture-lab.md">Industry case architecture lab</a>
-            <a href="visual-maps.md">Visual maps</a>
-            <a href="architecture-review.md">Architecture review</a>
-            <a href="research-standards.md">Research and standards</a>
-            <a href="evidence-chain-architecture.md">Evidence chain architecture</a>
-            <a href="architecture-composition-workbench.md">Composition workbench</a>
-            <a href="protocol-runtime-decision-lab.md">Protocol runtime decision lab</a>
-            <a href="paper-to-product-lab.md">Paper-to-product lab</a>
-            <a href="source-atlas.md">Source atlas</a>
-            <a href="architecture-decisions.md">Architecture decisions</a>
-            <a href="agent-maturity-model.md">Agent maturity model</a>
-            <a href="product-ux-surfaces.md">Product UX surfaces</a>
-            <a href="agent-threat-model.md">Agent threat model</a>
-            <a href="architecture-blueprint.md">Architecture blueprint</a>
-            <a href="deployment-topology-lab.md">Deployment topology lab</a>
-            <a href="source-system-integration-lab.md">Source-system integration lab</a>
-            <a href="learning-path.md">Learning path</a>
-            <a href="agent-control-plane.md">Agent control plane</a>
-            <a href="agent-operations-lifecycle.md">Agent operations lifecycle</a>
-            <a href="eval-release-harness.md">Eval and release harness</a>
-            <a href="run-simulator.md">Run simulator</a>
-            <a href="runtime-ledger.md">Runtime ledger</a>
-            <a href="deep-dive-backlog.md">Backlog</a>
-            <a href="references.md">References</a>
+            <a href="agent-native-product-wiki.html">Core wiki notes</a>
+            <a href="end-to-end-architecture-walkthrough.html">End-to-end walkthrough</a>
+            <a href="aspect-playbook.html">Aspect playbook</a>
+            <a href="product-object-model-lab.html">Product object model lab</a>
+            <a href="intent-to-action-router.html">Intent to action router</a>
+            <a href="capability-registry.html">Capability registry</a>
+            <a href="skill-lifecycle-lab.html">Skill lifecycle lab</a>
+            <a href="identity-access-lab.html">Identity and access lab</a>
+            <a href="memory-governance.html">Memory governance</a>
+            <a href="memory-lifecycle-simulator.html">Memory lifecycle simulator</a>
+            <a href="approval-handoff.html">Approval handoff</a>
+            <a href="durable-execution.html">Durable execution</a>
+            <a href="deep-agent-lab.html">Deep agent lab</a>
+            <a href="deep-agent-runbook.html">Deep agent runbook</a>
+            <a href="subagent-handoff-simulator.html">Subagent handoff simulator</a>
+            <a href="implementation-lab.html">Implementation lab</a>
+            <a href="case-studies.html">Case studies</a>
+            <a href="industry-pattern-teardowns.html">Industry pattern teardowns</a>
+            <a href="industry-case-architecture-lab.html">Industry case architecture lab</a>
+            <a href="visual-maps.html">Visual maps</a>
+            <a href="architecture-review.html">Architecture review</a>
+            <a href="research-standards.html">Research and standards</a>
+            <a href="evidence-chain-architecture.html">Evidence chain architecture</a>
+            <a href="architecture-composition-workbench.html">Composition workbench</a>
+            <a href="protocol-runtime-decision-lab.html">Protocol runtime decision lab</a>
+            <a href="paper-to-product-lab.html">Paper-to-product lab</a>
+            <a href="source-atlas.html">Source atlas</a>
+            <a href="architecture-decisions.html">Architecture decisions</a>
+            <a href="agent-maturity-model.html">Agent maturity model</a>
+            <a href="product-ux-surfaces.html">Product UX surfaces</a>
+            <a href="agent-threat-model.html">Agent threat model</a>
+            <a href="architecture-blueprint.html">Architecture blueprint</a>
+            <a href="deployment-topology-lab.html">Deployment topology lab</a>
+            <a href="source-system-integration-lab.html">Source-system integration lab</a>
+            <a href="learning-path.html">Learning path</a>
+            <a href="agent-control-plane.html">Agent control plane</a>
+            <a href="agent-operations-lifecycle.html">Agent operations lifecycle</a>
+            <a href="eval-release-harness.html">Eval and release harness</a>
+            <a href="run-simulator.html">Run simulator</a>
+            <a href="runtime-ledger.html">Runtime ledger</a>
+            <a href="deep-dive-backlog.html">Backlog</a>
+            <a href="references.html">References</a>
           </div>
           <div class="deep-dive-grid" id="deep-dive-grid"></div>
         </section>

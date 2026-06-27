@@ -1,0 +1,105 @@
+project:
+  type: website
+  output-dir: _site
+  render:
+    - index.qmd
+    - "*.md"
+  resources:
+    - assets/
+    - interactive.html
+    - .nojekyll
+
+website:
+  title: "Enterprise Agents Wiki"
+  site-url: "https://capableguptadotcom.github.io/agents-wiki/"
+  repo-url: "https://github.com/capableguptadotcom/agents-wiki"
+  page-navigation: true
+  search: true
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: interactive.html
+        text: Interactive Labs
+      - href: end-to-end-architecture-walkthrough.md
+        text: Assembly
+      - href: references.md
+        text: Sources
+    right:
+      - icon: github
+        href: "https://github.com/capableguptadotcom/agents-wiki"
+        aria-label: GitHub
+  sidebar:
+    style: docked
+    search: true
+    contents:
+      - section: "Start"
+        contents:
+          - index.qmd
+          - end-to-end-architecture-walkthrough.md
+          - agent-native-product-wiki.md
+          - learning-path.md
+          - deep-dive-backlog.md
+      - section: "Core Architecture"
+        contents:
+          - architecture-blueprint.md
+          - architecture-review.md
+          - design-philosophy-lab.md
+          - architecture-composition-workbench.md
+          - architecture-decisions.md
+          - agent-maturity-model.md
+      - section: "Product Boundaries"
+        contents:
+          - product-object-model-lab.md
+          - intent-to-action-router.md
+          - capability-registry.md
+          - identity-access-lab.md
+          - source-system-integration-lab.md
+          - protocol-runtime-decision-lab.md
+      - section: "Execution"
+        contents:
+          - approval-handoff.md
+          - durable-execution.md
+          - deep-agent-lab.md
+          - deep-agent-runbook.md
+          - subagent-handoff-simulator.md
+          - run-simulator.md
+      - section: "Governance"
+        contents:
+          - memory-governance.md
+          - memory-lifecycle-simulator.md
+          - skill-lifecycle-lab.md
+          - agent-control-plane.md
+          - agent-operations-lifecycle.md
+          - eval-release-harness.md
+          - runtime-ledger.md
+          - agent-threat-model.md
+      - section: "Evidence"
+        contents:
+          - research-standards.md
+          - evidence-chain-architecture.md
+          - paper-to-product-lab.md
+          - source-atlas.md
+          - case-studies.md
+          - industry-pattern-teardowns.md
+          - industry-case-architecture-lab.md
+          - visual-maps.md
+      - section: "Implementation"
+        contents:
+          - deployment-topology-lab.md
+          - implementation-lab.md
+          - product-ux-surfaces.md
+          - aspect-playbook.md
+          - references.md
+
+format:
+  html:
+    theme: cosmo
+    css: quarto.css
+    toc: true
+    toc-depth: 3
+    code-copy: true
+    smooth-scroll: true
+    link-external-newwindow: true
+execute:
+  freeze: auto

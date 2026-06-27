@@ -1,6 +1,6 @@
 # Design Philosophy Lab
 
-This note complements the interactive Design Philosophy section in [index.html](index.html#design-philosophy).
+This note complements the interactive Design Philosophy section in [interactive.html](interactive.html#design-philosophy).
 
 The purpose is to apply deep-module and information-hiding thinking to agent-native product architecture. An agent boundary is not good because it has a modern name. It is good when a small interface hides real complexity, owns a clear invariant, and lowers cognitive load for the teams that call it.
 

@@ -2,7 +2,7 @@
 
 Current as of 2026-06-27.
 
-The interactive eval harness in [index.html](index.html#agentops) shows how an agent product turns real failures, traces, corrections, incidents, and review comments into release-blocking tests.
+The interactive eval harness in [interactive.html](interactive.html#agentops) shows how an agent product turns real failures, traces, corrections, incidents, and review comments into release-blocking tests.
 
 The core rule:
 

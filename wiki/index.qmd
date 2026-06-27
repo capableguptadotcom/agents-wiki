@@ -1,0 +1,72 @@
+---
+title: "Enterprise Agents Wiki"
+subtitle: "A markdown-first architecture lab for building agents as first-class product citizens."
+---
+
+This wiki is now structured as a Quarto website. The durable source is markdown: every concept note, architecture decision, walkthrough, and reference map lives in `wiki/*.md` or `wiki/*.qmd`, and GitHub Actions renders the static website.
+
+The old hand-built interactive application is still available as a carried lab:
+
+[Open the interactive labs](interactive.html){.btn .btn-primary}
+
+## Why Quarto
+
+Quarto fits this project better than Astro right now because the core artifact is research-heavy documentation, not a component application. We need readable markdown, citations, diagrams, source maps, sidebars, search, and static publishing. Astro is stronger when the site is primarily a frontend app with markdown content. Quarto is stronger when the site is primarily knowledge work with optional interactive artifacts.
+
+The working rule:
+
+```text
+Markdown owns the ideas.
+Quarto owns the documentation site.
+Custom HTML and JavaScript own focused interactive labs.
+```
+
+## Current Mental Model
+
+```{mermaid}
+flowchart LR
+  A["Work surface"] --> B["Context binder"]
+  B --> C["Authority chain"]
+  C --> D["Bounded agent loop"]
+  D --> E["Capability gateway"]
+  E --> F["Approval"]
+  F --> G["Durable workflow"]
+  G --> H["Source truth"]
+  H --> I["Memory and skills"]
+  I --> J["Observability and audit"]
+  J --> K["Eval and release"]
+```
+
+The agent is one actor inside a product execution system. The product still owns identity, context, tools, source-of-truth writes, approval, workflow, memory, audit, and release.
+
+## Start Here
+
+- [End-to-end architecture walkthrough](end-to-end-architecture-walkthrough.md): the assembly map that shows how all layers connect in one run.
+- [Agent-native product wiki](agent-native-product-wiki.md): the core mental model and product primitives.
+- [Architecture blueprint](architecture-blueprint.md): deployable layers and ownership boundaries.
+- [Product object model lab](product-object-model-lab.md): the records needed to make runs queryable and auditable.
+- [Learning path](learning-path.md): the study order for turning the wiki into a curriculum.
+- [Reference map](references.md): papers, standards, protocols, platforms, and case-study anchors.
+
+## Example Workflows
+
+| Workflow | Why it matters | Primary labs |
+| --- | --- | --- |
+| Healthcare bed flow | Forces context binding, PHI safeguards, approval, workflow, source reconciliation, and evals. | [Assembly](end-to-end-architecture-walkthrough.md), [Source systems](source-system-integration-lab.md), [Runtime ledger](runtime-ledger.md) |
+| Enterprise scheduling | Shows work-surface context, calendar privacy, external-message approval, and scoped user memory. | [Product UX surfaces](product-ux-surfaces.md), [Approval handoff](approval-handoff.md), [Memory lifecycle](memory-lifecycle-simulator.md) |
+| Support resolution | Combines policy evidence, financial side effects, customer communication, and governed skill updates. | [Capability registry](capability-registry.md), [Skill lifecycle](skill-lifecycle-lab.md), [Eval harness](eval-release-harness.md) |
+| Coding agent | Tests repo context, secret boundaries, patch discipline, CI evidence, PR review, and deploy separation. | [Deep agent runbook](deep-agent-runbook.md), [Subagent handoff](subagent-handoff-simulator.md), [Implementation lab](implementation-lab.md) |
+
+## Build Direction
+
+The next useful work is to keep moving content out of the custom app and into markdown-backed Quarto pages, while preserving focused interactive labs where interaction actually improves understanding.
+
+Good migration candidates:
+
+- convert source maps into markdown tables with Quarto cross-links
+- add Mermaid diagrams to architecture notes
+- add executable examples only where they clarify contracts
+- keep the custom `interactive.html` lab for dense scenario switching and contract records
+- eventually split the large JavaScript lab into smaller data files generated from markdown or YAML
+
+The target state is not "one big app." The target state is a browsable knowledge system where markdown explains the architecture and interactive labs prove the contracts.

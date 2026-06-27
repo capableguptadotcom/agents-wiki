@@ -2,7 +2,7 @@
 
 Current as of 2026-06-27.
 
-This note complements the interactive Protocol Runtime section in [index.html](index.html#protocol-runtime).
+This note complements the interactive Protocol Runtime section in [interactive.html](interactive.html#protocol-runtime).
 It answers a practical architecture question:
 
 ```text

@@ -2,7 +2,7 @@
 
 Current as of 2026-06-27.
 
-This note complements the interactive Evidence Chain section in [index.html](index.html#evidence-chain).
+This note complements the interactive Evidence Chain section in [interactive.html](interactive.html#evidence-chain).
 
 The purpose is to get to the crux of product-native agents:
 

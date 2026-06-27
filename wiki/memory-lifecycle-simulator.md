@@ -2,7 +2,7 @@
 
 Current as of 2026-06-27.
 
-The interactive memory lifecycle lab in [index.html](index.html#memory-governance) shows the missing operational piece behind "agent memory":
+The interactive memory lifecycle lab in [interactive.html](interactive.html#memory-governance) shows the missing operational piece behind "agent memory":
 
 ```text
 memory proposal != active memory

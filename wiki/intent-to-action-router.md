@@ -2,7 +2,7 @@
 
 Current as of 2026-06-27.
 
-This note complements the interactive Intent Router in `index.html`.
+This note complements the interactive Intent Router in `interactive.html`.
 
 The central point:
 

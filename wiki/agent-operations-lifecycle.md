@@ -6,7 +6,7 @@ For the concrete eval artifact behind the eval gate, see [Eval and release harne
 
 For the specific path from trace evidence to skill draft, review, eval, release bundle, runtime use, and learning feedback, see [Skill lifecycle lab](skill-lifecycle-lab.md).
 
-The interactive AgentOps section in `index.html` turns this lifecycle into a stage-by-stage walkthrough for four concrete changes:
+The interactive AgentOps section in `interactive.html` turns this lifecycle into a stage-by-stage walkthrough for four concrete changes:
 
 - granting a healthcare `reserve_bed` write tool
 - raising support refund autonomy
@@ -217,7 +217,7 @@ The learning loop should not silently change production behavior. It creates a c
 
 ## Governed Improvement Loop
 
-The interactive AgentOps section in [index.html](index.html#agentops) also includes a governed improvement loop workbench.
+The interactive AgentOps section in [interactive.html](interactive.html#agentops) also includes a governed improvement loop workbench.
 
 Use it when production evidence appears and the team is tempted to "just update the prompt" or "just add memory."
 

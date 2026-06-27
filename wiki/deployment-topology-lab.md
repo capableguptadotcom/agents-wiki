@@ -2,7 +2,7 @@
 
 Current as of 2026-06-27.
 
-This note complements the interactive Deployment Topology section in [index.html](index.html#deployment-topology).
+This note complements the interactive Deployment Topology section in [interactive.html](interactive.html#deployment-topology).
 
 The operating blueprint explains who owns each layer. The deployment topology explains what gets deployed:
 

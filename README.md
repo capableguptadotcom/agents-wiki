@@ -2,13 +2,20 @@
 
 This workspace is a learning and architecture wiki for building agents as first-class product citizens.
 
-Open the interactive walkthrough:
+Open the Quarto source home page:
 
-- [wiki/index.html](wiki/index.html)
+- [wiki/index.qmd](wiki/index.qmd)
+
+Open the carried interactive labs:
+
+- [wiki/interactive.html](wiki/interactive.html)
+
+The published site is rendered from the markdown and Quarto sources in `wiki/` using GitHub Actions.
 
 Supporting notes:
 
 - [Agent-native product wiki](wiki/agent-native-product-wiki.md)
+- [End-to-end architecture walkthrough](wiki/end-to-end-architecture-walkthrough.md)
 - [Aspect-by-aspect playbook](wiki/aspect-playbook.md)
 - [Product object model lab](wiki/product-object-model-lab.md)
 - [Intent to action router](wiki/intent-to-action-router.md)
@@ -84,4 +91,10 @@ This first version focuses on a healthcare bed-flow example because it forces th
 
 ## Next Direction
 
-Use the research and standards map plus the deep-dive backlog to turn each wiki section into a deeper module with examples, exercises, diagrams, and implementation sketches.
+Use the research and standards map plus the deep-dive backlog to turn each wiki section into a deeper markdown-backed module with examples, exercises, diagrams, implementation sketches, and focused interactive labs where interaction adds real understanding.
+
+## Publishing Stack
+
+We are standardizing on Quarto for the documentation site because the durable source is markdown-heavy architecture knowledge. Astro remains a good option if this becomes primarily a component application, but Quarto better fits the current wiki, source maps, diagrams, sidebars, search, and GitHub Pages publishing flow.
+
+The GitHub Actions workflow at `.github/workflows/quarto-pages.yml` installs Quarto, renders `wiki/`, uploads `wiki/_site`, and deploys GitHub Pages.

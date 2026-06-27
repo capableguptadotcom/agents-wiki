@@ -285,7 +285,7 @@ Deep agents need clear ownership transitions:
 
 For a focused simulator of the specialist handoff contract, see [Subagent handoff simulator](subagent-handoff-simulator.md).
 
-The interactive Deep Run section in [index.html](index.html#deep-run) now adds a stage ownership map and run contract record. Use it to inspect which piece owns each stage:
+The interactive Deep Run section in [interactive.html](interactive.html#deep-run) now adds a stage ownership map and run contract record. Use it to inspect which piece owns each stage:
 
 | Stage | Owner | Product control | Records that prove it |
 |---|---|---|---|

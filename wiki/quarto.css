@@ -1,0 +1,46 @@
+:root {
+  --agent-ink: #17202a;
+  --agent-muted: #5f6b7a;
+  --agent-blue: #2563eb;
+  --agent-green: #17845b;
+  --agent-line: #d9e0e8;
+}
+
+.navbar-title {
+  font-weight: 800;
+}
+
+.quarto-title-banner {
+  background: #f6f7fb;
+  border-bottom: 1px solid var(--agent-line);
+}
+
+.quarto-title h1.title {
+  color: var(--agent-ink);
+}
+
+.quarto-title .subtitle {
+  color: var(--agent-muted);
+}
+
+.btn-primary {
+  background: var(--agent-blue);
+  border-color: var(--agent-blue);
+  font-weight: 800;
+}
+
+main table {
+  font-size: 0.94rem;
+}
+
+main table th {
+  color: var(--agent-ink);
+}
+
+main a {
+  font-weight: 600;
+}
+
+pre {
+  border-radius: 8px;
+}

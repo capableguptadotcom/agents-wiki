@@ -2,7 +2,7 @@
 
 Current as of 2026-06-27.
 
-This note complements the interactive Composition section in [index.html](index.html#composition-workbench).
+This note complements the interactive Composition section in [interactive.html](interactive.html#composition-workbench).
 Its purpose is to show how the pieces combine:
 
 ```text

@@ -2,7 +2,7 @@
 
 Current as of 2026-06-27.
 
-The interactive source-system lab in [index.html](index.html#source-systems) turns a vague rule into a concrete engineering rule:
+The interactive source-system lab in [interactive.html](interactive.html#source-systems) turns a vague rule into a concrete engineering rule:
 
 ```text
 Every agent-visible field needs an authoritative source.

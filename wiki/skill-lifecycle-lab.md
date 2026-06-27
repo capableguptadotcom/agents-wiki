@@ -2,7 +2,7 @@
 
 Current as of 2026-06-27.
 
-This note complements the interactive Skill Lifecycle section in [index.html](index.html#skill-lifecycle).
+This note complements the interactive Skill Lifecycle section in [interactive.html](interactive.html#skill-lifecycle).
 
 The core rule:
 

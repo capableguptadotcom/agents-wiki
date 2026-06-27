@@ -30,7 +30,7 @@ For the record lifecycle behind the memory center, see [Memory lifecycle simulat
 
 ## Voice Invocation Contract
 
-The interactive Surface Lab in [index.html](index.html#surface-lab) includes a voice invocation workbench.
+The interactive Surface Lab in [interactive.html](interactive.html#surface-lab) includes a voice invocation workbench.
 
 Voice is not a permission model. It is an intake surface that must attach speech to a product work object, confidence signal, context manifest, and safe next transition.
 

@@ -44,7 +44,7 @@ The wiki uses these sources as anchor points. The goal is not to copy any one pl
   - Useful for AI management system governance.
 - ISO/IEC 23894: https://www.iso.org/standard/77304.html
   - Useful for AI risk management process design.
-- OpenTelemetry GenAI semantic conventions: https://opentelemetry.io/docs/specs/semconv/gen-ai/
+- OpenTelemetry GenAI semantic conventions: https://github.com/open-telemetry/semantic-conventions/tree/main/docs/gen-ai
   - Useful for model, agent, tool, retrieval, span, event, metric, and trace vocabulary.
 - CloudEvents specification: https://github.com/cloudevents/spec
   - Useful for common event envelopes across product, workflow, audit, and eval consumers.
@@ -78,7 +78,7 @@ The wiki uses these sources as anchor points. The goal is not to copy any one pl
 
 ## Tool and Connector Layer
 
-- Model Context Protocol specification: https://modelcontextprotocol.io/specification/2025-11-25
+- Model Context Protocol specification: https://modelcontextprotocol.io/specification/latest
   - Useful for the distinction between tools, resources, prompts, transports, and authorization.
 - Model Context Protocol authorization: https://modelcontextprotocol.io/specification/latest/basic/authorization
   - Useful for OAuth-style authorization guidance for remote MCP servers.
@@ -156,6 +156,7 @@ The wiki should keep these as reusable patterns rather than vendor-specific assu
 See also:
 
 - [Product object model lab](product-object-model-lab.md), which maps release bundles, agent versions, runs, context, access, tools, approvals, workflow events, source responses, timeline, audit, traces, memory proposals, and eval cases as one product graph.
+- [End-to-end architecture walkthrough](end-to-end-architecture-walkthrough.md), which shows how surface, context, authority, agent loop, capability gateway, approval, workflow, source truth, memory, observability, and release connect in one product run.
 - [Intent to action router](intent-to-action-router.md), which defines how utterances, work-surface context, identity, candidate tools, policy classification, clarification, approval, and workflow handoff connect before execution.
 - [Capability registry](capability-registry.md), which defines how skills, resources, tools, workflows, memory classes, and connectors are granted and revoked.
 - [Skill lifecycle lab](skill-lifecycle-lab.md), which defines how skill changes move from evidence to authoring, review, eval, release, runtime proof, and learning.

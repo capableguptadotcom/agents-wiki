@@ -1306,6 +1306,206 @@ pre code {
   margin-bottom: 8px;
 }
 
+.assembly-lab {
+  margin-top: 18px;
+  display: grid;
+  gap: 16px;
+}
+
+.assembly-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: start;
+  padding: 18px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+}
+
+.assembly-header a,
+.assembly-anchor-card a {
+  color: var(--blue);
+  font-weight: 800;
+}
+
+.assembly-intro {
+  margin: 0;
+  color: var(--muted);
+  max-width: 980px;
+}
+
+.assembly-scenarios {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.assembly-scenario-button,
+.assembly-layer-button,
+.assembly-path-step {
+  min-width: 0;
+  border: 1px solid var(--line);
+  background: #ffffff;
+  color: var(--ink);
+  text-align: left;
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.assembly-scenario-button strong,
+.assembly-scenario-button span,
+.assembly-layer-button strong,
+.assembly-layer-button small,
+.assembly-path-step strong,
+.assembly-path-step span {
+  display: block;
+}
+
+.assembly-scenario-button span,
+.assembly-layer-button small,
+.assembly-path-step span {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.assembly-scenario-button.active,
+.assembly-layer-button.active,
+.assembly-path-step.active {
+  border-color: var(--blue);
+  background: #eef5ff;
+}
+
+.assembly-layout {
+  display: grid;
+  grid-template-columns: minmax(250px, 0.75fr) minmax(340px, 1.25fr);
+  gap: 16px;
+  align-items: start;
+}
+
+.assembly-layers,
+.assembly-path {
+  display: grid;
+  gap: 8px;
+}
+
+.assembly-layer-button {
+  display: grid;
+  grid-template-columns: 30px minmax(0, 1fr);
+  column-gap: 10px;
+}
+
+.assembly-layer-button span {
+  grid-row: span 2;
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: #e5e7eb;
+  color: #111827;
+  font-weight: 800;
+}
+
+.assembly-layer-button.active span {
+  background: var(--blue);
+  color: #ffffff;
+}
+
+.assembly-detail,
+.assembly-panel {
+  min-width: 0;
+  padding: 18px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+}
+
+.assembly-kicker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.assembly-kicker span {
+  padding: 5px 8px;
+  border-radius: 999px;
+  background: #eef2f7;
+  color: #334155;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.assembly-request {
+  color: var(--muted);
+}
+
+.assembly-detail-grid,
+.assembly-board,
+.assembly-anchors {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.assembly-card,
+.assembly-anchor-card {
+  min-width: 0;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.assembly-card strong,
+.assembly-anchor-card strong {
+  display: block;
+  color: var(--green);
+  margin-bottom: 6px;
+}
+
+.assembly-card p,
+.assembly-anchor-card p,
+.assembly-anchor-card ul {
+  margin: 0;
+  color: var(--muted);
+}
+
+.assembly-anchor-card ul {
+  padding-left: 18px;
+}
+
+.assembly-card.warning strong {
+  color: var(--red);
+}
+
+.assembly-card.warning {
+  background: #fff7f6;
+  border-color: #f1b8af;
+}
+
+.assembly-test {
+  margin-top: 12px;
+  padding: 14px;
+  border: 1px solid #b7d4ff;
+  border-radius: 8px;
+  background: #eff6ff;
+}
+
+.assembly-test strong,
+.assembly-test span {
+  display: block;
+}
+
+.assembly-test span {
+  margin-top: 4px;
+  color: #1e3a8a;
+}
+
 .lifecycle-track {
   display: grid;
   grid-template-columns: repeat(6, minmax(0, 1fr));
@@ -7314,12 +7514,22 @@ select {
   .architecture-grid,
   .split-layout,
   .walkthrough-layout,
+  .assembly-header,
+  .assembly-scenarios,
+  .assembly-layout,
+  .assembly-detail-grid,
+  .assembly-board,
+  .assembly-anchors,
   .object-model-scenarios,
   .object-model-layout,
   .object-model-detail-grid,
   .object-model-board,
   .object-model-matrix-row {
     grid-template-columns: 1fr;
+  }
+
+  .assembly-header {
+    display: grid;
   }
 
   .principle-strip,

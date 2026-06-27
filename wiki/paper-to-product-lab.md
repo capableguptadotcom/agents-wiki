@@ -1,6 +1,6 @@
 # Paper-to-Product Lab
 
-This note complements the interactive Theory Lab in `index.html`. The goal is to translate agent papers into product architecture decisions, not to memorize paper summaries.
+This note complements the interactive Theory Lab in `interactive.html`. The goal is to translate agent papers into product architecture decisions, not to memorize paper summaries.
 
 For case-by-case adoption records that combine paper primitives with standards, public platform evidence, product records, and release-blocking evals, see the [Industry case architecture lab](industry-case-architecture-lab.md).
 

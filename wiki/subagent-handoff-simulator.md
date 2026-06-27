@@ -2,7 +2,7 @@
 
 Current as of 2026-06-27.
 
-This note complements the interactive Subagent Handoff Simulator in `index.html`.
+This note complements the interactive Subagent Handoff Simulator in `interactive.html`.
 
 The core rule:
 

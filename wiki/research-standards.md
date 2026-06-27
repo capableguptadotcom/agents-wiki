@@ -153,7 +153,7 @@ Start narrow, supervised, and high-value. Make every failure become a regression
 
 ## Standards-To-Product Contract Map
 
-The interactive Research and Standards section in [index.html](index.html#research-standards) now includes a standards-to-product contract workbench.
+The interactive Research and Standards section in [interactive.html](interactive.html#research-standards) now includes a standards-to-product contract workbench.
 
 Use it when a source sounds important but the team is not yet sure what to build. The rule is:
 

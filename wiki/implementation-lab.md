@@ -418,7 +418,7 @@ POST /agent-runs
 
 The first browser-only version is captured in [Run simulator](run-simulator.md).
 
-The interactive Implementation section in [index.html](index.html#implementation) also includes a minimum product slice contract workbench. Use it to inspect the contract that must exist at each boundary:
+The interactive Implementation section in [interactive.html](interactive.html#implementation) also includes a minimum product slice contract workbench. Use it to inspect the contract that must exist at each boundary:
 
 | Build step | Boundary | Persist | Blocking test |
 |---|---|---|---|

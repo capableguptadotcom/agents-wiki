@@ -2,7 +2,7 @@
 
 Current as of 2026-06-27.
 
-This note complements the interactive Product Pattern Teardown in `index.html`. The goal is to study current agent products and platforms without treating any vendor page as a complete architecture blueprint.
+This note complements the interactive Product Pattern Teardown in `interactive.html`. The goal is to study current agent products and platforms without treating any vendor page as a complete architecture blueprint.
 
 For case-by-case architecture adoption records that combine public evidence, paper primitives, standards, lifecycle records, and release-blocking evals, use the [Industry case architecture lab](industry-case-architecture-lab.md).
 

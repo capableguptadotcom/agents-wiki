@@ -1,6 +1,8 @@
 # Agent-Native Product Wiki
 
-This document is the long-form companion to the interactive walkthrough in `index.html`.
+This document is the long-form companion to the interactive walkthrough in `interactive.html`.
+
+For the layer-by-layer assembly view that shows how a full request moves through surface, context, authority, agent loop, gateway, approval, workflow, source truth, memory, observability, and release, see [End-to-end architecture walkthrough](end-to-end-architecture-walkthrough.md).
 
 ## 1. The Mental Model
 
