@@ -2,6 +2,7 @@
 
 This note explains how the pieces connect in an agent-native product. It builds on:
 
+- [System diagram spine](system-diagram-spine.md)
 - [Research and standards](research-standards.md)
 - [Evidence chain architecture](evidence-chain-architecture.md)
 - [Product object model lab](product-object-model-lab.md)

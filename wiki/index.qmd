@@ -1,74 +1,121 @@
 ---
 title: "Enterprise Agents Wiki"
-subtitle: "A markdown-first architecture lab for building agents as first-class product citizens."
+subtitle: "An engineering research manual for building AI-native products."
 ---
 
-This wiki is now structured as a Quarto website. The durable source is markdown: every concept note, architecture decision, walkthrough, and reference map lives in `wiki/*.md` or `wiki/*.qmd`, and GitHub Actions renders the static website.
+This wiki exists to turn agent product ideas into buildable contracts.
 
-The old hand-built interactive application is still available as a carried lab:
+It is not a collection of essays. Each accepted page should define claims, sources, boundaries, records, diagrams, failure modes, and tests.
 
-[Open the interactive labs](interactive.html){.btn .btn-primary}
+[Research operating system](research-operating-system.md){.btn .btn-primary}
+[System diagram spine](system-diagram-spine.md){.btn .btn-secondary}
 
-## Why Quarto
+## Current Position
 
-Quarto fits this project better than Astro right now because the core artifact is research-heavy documentation, not a component application. We need readable markdown, citations, diagrams, source maps, sidebars, search, and static publishing. Astro is stronger when the site is primarily a frontend app with markdown content. Quarto is stronger when the site is primarily knowledge work with optional interactive artifacts.
-
-The working rule:
+The product problem:
 
 ```text
-Markdown owns the ideas.
-Quarto owns the documentation site.
-Custom HTML and JavaScript own focused interactive labs.
+Agents should not be bolted onto products as chat boxes.
+They should become governed product actors with explicit authority, tools, workflows, memory, audit, evals, and release controls.
 ```
 
-## Current Mental Model
+The engineering rule:
+
+```text
+The agent coordinates work.
+The product owns authority and records.
+The workflow owns side-effect recovery.
+The source systems own truth.
+The audit log owns accountability.
+The eval and release process owns improvement.
+```
+
+## Canonical Architecture
 
 ```{mermaid}
 flowchart LR
-  A["Work surface"] --> B["Context binder"]
-  B --> C["Authority chain"]
-  C --> D["Bounded agent loop"]
-  D --> E["Capability gateway"]
-  E --> F["Approval"]
-  F --> G["Durable workflow"]
-  G --> H["Source truth"]
-  H --> I["Memory and skills"]
-  I --> J["Observability and audit"]
-  J --> K["Eval and release"]
+  Surface["Work surface"] --> Context["Context manifest"]
+  Context --> Access["Access decision"]
+  Access --> Runtime["Agent runtime"]
+  Runtime --> Gateway["Capability gateway"]
+  Gateway --> Policy["Policy decision"]
+  Policy --> Approval["Approval record"]
+  Approval --> Workflow["Durable workflow"]
+  Workflow --> Source["Source response"]
+  Source --> Verify["Verification result"]
+  Verify --> Timeline["Product timeline"]
+  Verify --> Audit["Audit event"]
+  Verify --> Eval["Eval case"]
+  Eval --> Release["Release bundle"]
 ```
 
-The agent is one actor inside a product execution system. The product still owns identity, context, tools, source-of-truth writes, approval, workflow, memory, audit, and release.
+Every layer must answer:
 
-## Start Here
+| Question | Required artifact |
+|---|---|
+| What boundary is this? | Architecture decision or system contract |
+| What proves the claim? | Claim ID and source evidence |
+| What records are written? | Schema, ERD, event, or API contract |
+| What can fail? | Negative case and recovery path |
+| What blocks release? | Eval fixture or acceptance test |
 
-- [End-to-end architecture walkthrough](end-to-end-architecture-walkthrough.md): the assembly map that shows how all layers connect in one run.
-- [Markdown-first authoring system](markdown-first-authoring.md): the source contract for evolving the wiki without hiding durable knowledge inside JavaScript.
-- [Agent-native product wiki](agent-native-product-wiki.md): the core mental model and product primitives.
-- [Architecture blueprint](architecture-blueprint.md): deployable layers and ownership boundaries.
-- [Deep agent application architecture](deep-agent-application-architecture.md): how planner, subagents, workspace, tools, approval, workflow, memory, and release connect as one product subsystem.
-- [Product object model lab](product-object-model-lab.md): the records needed to make runs queryable and auditable.
-- [Learning path](learning-path.md): the study order for turning the wiki into a curriculum.
-- [Reference map](references.md): papers, standards, protocols, platforms, and case-study anchors.
+## Read First
 
-## Example Workflows
+| Order | Page | Why |
+|---|---|---|
+| 1 | [Research operating system](research-operating-system.md) | Defines the quality bar: claim ledger, evidence classes, page gates, rewrite queue. |
+| 2 | [Site template decision](site-template-decision.md) | Explains why Quarto remains the base and why the old HTML lab is demoted. |
+| 3 | [System diagram spine](system-diagram-spine.md) | Establishes the ERD, state machine, sequence, topology, correlation, and policy diagrams. |
+| 4 | [Architecture blueprint](architecture-blueprint.md) | Gives the current layer model and minimum vertical slice. |
+| 5 | [Implementation lab](implementation-lab.md) | Should become the canonical backend contract spec. |
+| 6 | [References](references.md) and [Source atlas](source-atlas.md) | Current source library; needs conversion into claim-level registry. |
 
-| Workflow | Why it matters | Primary labs |
-| --- | --- | --- |
-| Healthcare bed flow | Forces context binding, PHI safeguards, approval, workflow, source reconciliation, and evals. | [Deep agent architecture](deep-agent-application-architecture.md), [Assembly](end-to-end-architecture-walkthrough.md), [Source systems](source-system-integration-lab.md) |
-| Enterprise scheduling | Shows work-surface context, calendar privacy, external-message approval, and scoped user memory. | [Product UX surfaces](product-ux-surfaces.md), [Approval handoff](approval-handoff.md), [Memory lifecycle](memory-lifecycle-simulator.md) |
-| Support resolution | Combines policy evidence, financial side effects, customer communication, and governed skill updates. | [Capability registry](capability-registry.md), [Skill lifecycle](skill-lifecycle-lab.md), [Eval harness](eval-release-harness.md) |
-| Coding agent | Tests repo context, secret boundaries, patch discipline, CI evidence, PR review, and deploy separation. | [Deep agent architecture](deep-agent-application-architecture.md), [Deep agent runbook](deep-agent-runbook.md), [Subagent handoff](subagent-handoff-simulator.md) |
+## Build Path
 
-## Build Direction
+The first real implementation target is a fake but contract-complete bed-flow run:
 
-The next useful work is to keep moving content out of the custom app and into markdown-backed Quarto pages, while preserving focused interactive labs where interaction actually improves understanding.
+```text
+POST /agent-runs
+-> bind ContextManifest
+-> create AccessDecision
+-> plan TaskGraph
+-> read source evidence
+-> preview reserve_bed
+-> require exact Approval
+-> start durable WorkflowRun
+-> store SourceResponse
+-> create VerificationResult
+-> write TimelineEvent and AuditEvent
+-> sample EvalCase
+```
 
-Good migration candidates:
+Acceptance:
 
-- convert source maps into markdown tables with Quarto cross-links
-- add Mermaid diagrams to architecture notes
-- add executable examples only where they clarify contracts
-- keep the custom `interactive.html` lab for dense scenario switching and contract records
-- split the large JavaScript lab into smaller data files generated from markdown-backed sources
+- ambiguous context stops before source reads
+- denied scope produces no tool call
+- malformed payload is rejected by schema
+- approval binds to canonical payload hash
+- rejected approval never starts workflow
+- workflow retry cannot duplicate a side effect
+- source mismatch becomes `needs_reconciliation`
+- patient-specific facts are not stored as durable memory
+- release is blocked by failed approval, memory, denial, or source-truth evals
 
-The target state is not "one big app." The target state is a browsable knowledge system where markdown explains the architecture and interactive labs prove the contracts.
+## What Changed
+
+The old [interactive app](interactive.html) is no longer the center of the wiki. It is now a derived lab surface indexed at [Interactive labs](interactive-labs.md). Deep links are kept because some simulations are useful, but durable knowledge must move into markdown, diagrams, schemas, and tests.
+
+## Rewrite Priorities
+
+| Priority | Work | Definition of done |
+|---|---|---|
+| 1 | Source registry | `references.md` becomes a claim-level source registry with citation keys, dates, evidence class, caveats, and supported claims. |
+| 2 | Backend contracts | `implementation-lab.md` defines JSON Schemas, API contracts, event payloads, lifecycle enums, and error responses. |
+| 3 | Identity and grants | `identity-access-lab.md` and `capability-registry.md` define a deterministic grant-resolution algorithm and denial taxonomy. |
+| 4 | Approval boundary | `approval-handoff.md` defines state transitions, canonical payload hashing, expiry, modification, escalation, and resume-token rules. |
+| 5 | Eval harness | `eval-release-harness.md` defines fixtures, trajectory assertions, release thresholds, reports, and CI integration. |
+| 6 | Threat model | `agent-threat-model.md` replaces simulated debate with threat cases, controls, denial evals, evidence records, and incident paths. |
+
+## Template Direction
+
+We stay with Quarto for now because the core artifact is research-heavy markdown with diagrams, citations, sidebars, search, and static publishing. Astro/Starlight remains a candidate only if the site becomes a component-driven docs app with many focused interactive islands.

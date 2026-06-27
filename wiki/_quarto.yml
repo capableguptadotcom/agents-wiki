@@ -19,10 +19,12 @@ website:
     left:
       - href: index.qmd
         text: Home
-      - href: interactive.html
-        text: Interactive Labs
-      - href: end-to-end-architecture-walkthrough.md
-        text: Assembly
+      - href: system-diagram-spine.md
+        text: Diagrams
+      - href: implementation-lab.md
+        text: Contracts
+      - href: interactive-labs.md
+        text: Labs
       - href: references.md
         text: Sources
     right:
@@ -36,64 +38,70 @@ website:
       - section: "Start"
         contents:
           - index.qmd
+          - research-operating-system.md
+          - site-template-decision.md
+          - system-diagram-spine.md
           - markdown-first-authoring.md
-          - end-to-end-architecture-walkthrough.md
-          - architecture-assembly-data.md
           - agent-native-product-wiki.md
           - learning-path.md
-          - deep-dive-backlog.md
-      - section: "Core Architecture"
+      - section: "Source Library"
         contents:
-          - architecture-blueprint.md
+          - references.md
+          - source-atlas.md
+          - research-standards.md
+          - evidence-chain-architecture.md
+          - paper-to-product-lab.md
+          - case-studies.md
+          - industry-pattern-teardowns.md
+          - industry-case-architecture-lab.md
+      - section: "Decisions"
+        contents:
+          - architecture-decisions.md
+          - protocol-runtime-decision-lab.md
           - architecture-review.md
           - design-philosophy-lab.md
           - architecture-composition-workbench.md
-          - architecture-decisions.md
           - agent-maturity-model.md
-      - section: "Product Boundaries"
+      - section: "System Contracts"
         contents:
+          - architecture-blueprint.md
+          - implementation-lab.md
           - product-object-model-lab.md
+          - runtime-ledger.md
           - intent-to-action-router.md
           - capability-registry.md
           - identity-access-lab.md
           - source-system-integration-lab.md
-          - protocol-runtime-decision-lab.md
-      - section: "Execution"
+          - deployment-topology-lab.md
+      - section: "Vertical Slices"
+        contents:
+          - end-to-end-architecture-walkthrough.md
+          - architecture-assembly-data.md
+          - deep-agent-application-architecture.md
+          - deep-agent-lab.md
+          - deep-agent-runbook.md
+          - subagent-handoff-simulator.md
+      - section: "Governance"
         contents:
           - approval-handoff.md
           - durable-execution.md
-          - deep-agent-lab.md
-          - deep-agent-runbook.md
-          - deep-agent-application-architecture.md
-          - subagent-handoff-simulator.md
-          - run-simulator.md
-      - section: "Governance"
-        contents:
           - memory-governance.md
           - memory-lifecycle-simulator.md
           - skill-lifecycle-lab.md
           - agent-control-plane.md
           - agent-operations-lifecycle.md
           - eval-release-harness.md
-          - runtime-ledger.md
           - agent-threat-model.md
-      - section: "Evidence"
+      - section: "Labs And UX"
         contents:
-          - research-standards.md
-          - evidence-chain-architecture.md
-          - paper-to-product-lab.md
-          - source-atlas.md
-          - case-studies.md
-          - industry-pattern-teardowns.md
-          - industry-case-architecture-lab.md
-          - visual-maps.md
-      - section: "Implementation"
-        contents:
-          - deployment-topology-lab.md
-          - implementation-lab.md
+          - interactive-labs.md
+          - run-simulator.md
           - product-ux-surfaces.md
+          - visual-maps.md
           - aspect-playbook.md
-          - references.md
+      - section: "Backlog"
+        contents:
+          - deep-dive-backlog.md
 
 format:
   html:

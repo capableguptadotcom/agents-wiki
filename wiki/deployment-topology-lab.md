@@ -2,6 +2,8 @@
 
 Current as of 2026-06-27.
 
+For the canonical deployable container topology, see [System diagram spine](system-diagram-spine.md).
+
 This note complements the interactive Deployment Topology section in [interactive.html](interactive.html#deployment-topology).
 
 The operating blueprint explains who owns each layer. The deployment topology explains what gets deployed:

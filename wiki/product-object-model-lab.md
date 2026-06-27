@@ -2,6 +2,8 @@
 
 Current as of 2026-06-27.
 
+For the canonical product record ERD and store ownership direction, see [System diagram spine](system-diagram-spine.md).
+
 This note complements the interactive Object Model section in [interactive.html](interactive.html#object-model).
 
 The goal is to make "agents as first-class product citizens" concrete. In a real product, an agent is not only a model call, a prompt, a workflow, or a chat transcript. It is a set of durable product records that can be queried, audited, replayed, tested, and governed.

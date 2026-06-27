@@ -2,6 +2,8 @@
 
 Current as of 2026-06-27.
 
+For the canonical `AgentRun` state machine and correlation spine, see [System diagram spine](system-diagram-spine.md).
+
 The runtime ledger explains how a real agent run connects across product UI, agent runtime, tool gateway, approval, workflow engine, source systems, audit, traces, memory, and evals.
 
 For the ERD-style object graph behind these records, see [Product object model lab](product-object-model-lab.md).

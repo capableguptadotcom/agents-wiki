@@ -11202,13 +11202,26 @@ let currentObjectModelRecord = "agent_run";
 let currentImplementationScenario = "bed";
 let currentImplementationContract = "create-run";
 
-function setActiveSection(targetId) {
+function sectionTargetExists(targetId) {
+  return Array.from(document.querySelectorAll(".page-section")).some((section) => section.id === targetId);
+}
+
+function currentHashTarget() {
+  const hash = decodeURIComponent(window.location.hash.replace(/^#/, ""));
+  return sectionTargetExists(hash) ? hash : "overview";
+}
+
+function setActiveSection(targetId, options = {}) {
+  const resolvedTarget = sectionTargetExists(targetId) ? targetId : "overview";
   document.querySelectorAll(".nav-button").forEach((button) => {
-    button.classList.toggle("active", button.dataset.target === targetId);
+    button.classList.toggle("active", button.dataset.target === resolvedTarget);
   });
   document.querySelectorAll(".page-section").forEach((section) => {
-    section.classList.toggle("active", section.id === targetId);
+    section.classList.toggle("active", section.id === resolvedTarget);
   });
+  if (options.updateHash && window.location.hash !== `#${resolvedTarget}`) {
+    history.replaceState(null, "", `#${resolvedTarget}`);
+  }
 }
 
 function renderLayerDetail(layerKey) {
@@ -15664,7 +15677,7 @@ function renderFailure() {
 
 document.addEventListener("click", (event) => {
   const nav = event.target.closest(".nav-button");
-  if (nav) setActiveSection(nav.dataset.target);
+  if (nav) setActiveSection(nav.dataset.target, { updateHash: true });
 
   const layer = event.target.closest(".flow-node");
   if (layer) renderLayerDetail(layer.dataset.layer);
@@ -15920,6 +15933,10 @@ document.addEventListener("click", (event) => {
   if (runtimeStage) renderRuntimeLedger(currentRuntimeScenario, runtimeStage.dataset.runtimeStage);
 });
 
+window.addEventListener("hashchange", () => {
+  setActiveSection(currentHashTarget());
+});
+
 document.getElementById("next-step").addEventListener("click", nextStep);
 document.getElementById("prev-step").addEventListener("click", prevStep);
 document.getElementById("approve-action").addEventListener("click", () => {
@@ -16015,3 +16032,4 @@ renderEvents();
 renderRuntimeLedger();
 renderFailure();
 resetSimulator();
+setActiveSection(currentHashTarget());

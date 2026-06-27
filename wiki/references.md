@@ -2,6 +2,23 @@
 
 The wiki uses these sources as anchor points. The goal is not to copy any one platform, but to extract product architecture patterns.
 
+Status: this page is a source inventory, not yet a complete source registry.
+
+Before a source can support an accepted architecture claim, it should be converted into a claim-level record with:
+
+```text
+citation_key
+source_type
+version_or_publication_date
+accessed_date
+supported_claim_ids
+evidence_strength
+caveats
+affected_boundary
+```
+
+See [Research operating system](research-operating-system.md) for the required claim ledger format.
+
 ## Software Design Philosophy
 
 - A Philosophy of Software Design, John Ousterhout: https://web.stanford.edu/~ouster/cgi-bin/aposd2ndEdExtract.pdf
