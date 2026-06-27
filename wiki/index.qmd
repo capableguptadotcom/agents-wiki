@@ -45,6 +45,7 @@ The agent is one actor inside a product execution system. The product still owns
 - [Markdown-first authoring system](markdown-first-authoring.md): the source contract for evolving the wiki without hiding durable knowledge inside JavaScript.
 - [Agent-native product wiki](agent-native-product-wiki.md): the core mental model and product primitives.
 - [Architecture blueprint](architecture-blueprint.md): deployable layers and ownership boundaries.
+- [Deep agent application architecture](deep-agent-application-architecture.md): how planner, subagents, workspace, tools, approval, workflow, memory, and release connect as one product subsystem.
 - [Product object model lab](product-object-model-lab.md): the records needed to make runs queryable and auditable.
 - [Learning path](learning-path.md): the study order for turning the wiki into a curriculum.
 - [Reference map](references.md): papers, standards, protocols, platforms, and case-study anchors.
@@ -53,10 +54,10 @@ The agent is one actor inside a product execution system. The product still owns
 
 | Workflow | Why it matters | Primary labs |
 | --- | --- | --- |
-| Healthcare bed flow | Forces context binding, PHI safeguards, approval, workflow, source reconciliation, and evals. | [Assembly](end-to-end-architecture-walkthrough.md), [Source systems](source-system-integration-lab.md), [Runtime ledger](runtime-ledger.md) |
+| Healthcare bed flow | Forces context binding, PHI safeguards, approval, workflow, source reconciliation, and evals. | [Deep agent architecture](deep-agent-application-architecture.md), [Assembly](end-to-end-architecture-walkthrough.md), [Source systems](source-system-integration-lab.md) |
 | Enterprise scheduling | Shows work-surface context, calendar privacy, external-message approval, and scoped user memory. | [Product UX surfaces](product-ux-surfaces.md), [Approval handoff](approval-handoff.md), [Memory lifecycle](memory-lifecycle-simulator.md) |
 | Support resolution | Combines policy evidence, financial side effects, customer communication, and governed skill updates. | [Capability registry](capability-registry.md), [Skill lifecycle](skill-lifecycle-lab.md), [Eval harness](eval-release-harness.md) |
-| Coding agent | Tests repo context, secret boundaries, patch discipline, CI evidence, PR review, and deploy separation. | [Deep agent runbook](deep-agent-runbook.md), [Subagent handoff](subagent-handoff-simulator.md), [Implementation lab](implementation-lab.md) |
+| Coding agent | Tests repo context, secret boundaries, patch discipline, CI evidence, PR review, and deploy separation. | [Deep agent architecture](deep-agent-application-architecture.md), [Deep agent runbook](deep-agent-runbook.md), [Subagent handoff](subagent-handoff-simulator.md) |
 
 ## Build Direction
 

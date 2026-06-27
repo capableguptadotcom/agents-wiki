@@ -64,6 +64,7 @@ website:
           - durable-execution.md
           - deep-agent-lab.md
           - deep-agent-runbook.md
+          - deep-agent-application-architecture.md
           - subagent-handoff-simulator.md
           - run-simulator.md
       - section: "Governance"

@@ -30,6 +30,7 @@ Supporting notes:
 - [Durable execution](wiki/durable-execution.md)
 - [Deep agent lab](wiki/deep-agent-lab.md)
 - [Deep agent runbook](wiki/deep-agent-runbook.md)
+- [Deep agent application architecture](wiki/deep-agent-application-architecture.md)
 - [Subagent handoff simulator](wiki/subagent-handoff-simulator.md)
 - [Implementation lab](wiki/implementation-lab.md)
 - [Case studies](wiki/case-studies.md)

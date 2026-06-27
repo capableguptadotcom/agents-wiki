@@ -120,6 +120,7 @@ Artifacts to build:
 Current artifact:
 
 - [Durable execution](durable-execution.md) defines workflow ownership, state machines, idempotency, waits, cancellation, compensation, source reconciliation, platform fit, case-study walkthroughs, and durable-run evals.
+- [Deep agent application architecture](deep-agent-application-architecture.md) connects planner, workspace, subagents, tools, approval, durable workflows, source truth, memory, observability, and release into one product subsystem.
 - [Subagent handoff simulator](subagent-handoff-simulator.md) defines scoped handoff contracts between owner agents and specialists, including allowed tools, output schemas, prohibited authority, synthesis paths, and evals.
 
 ## Module 5: Human Approval and Handoff

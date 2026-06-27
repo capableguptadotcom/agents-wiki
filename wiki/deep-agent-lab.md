@@ -2,6 +2,8 @@
 
 This note explains how a "deep agent" should be understood inside a real application.
 
+For the product architecture that connects the harness to context binding, subagents, tools, approval, workflow, memory, observability, and release, see [Deep agent application architecture](deep-agent-application-architecture.md).
+
 ## Working Definition
 
 A deep agent is not just an LLM with tools. It is a harness that can hold context over a longer task, plan work, use tools, delegate to specialized subagents or skills, write intermediate artifacts, ask for help, recover from failure, and produce a verifiable result.

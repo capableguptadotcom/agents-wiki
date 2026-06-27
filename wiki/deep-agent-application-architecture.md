@@ -1,0 +1,445 @@
+# Deep Agent Application Architecture
+
+Current as of 2026-06-27.
+
+This note answers a narrower question than the [Deep agent lab](deep-agent-lab.md) and [Deep agent runbook](deep-agent-runbook.md):
+
+```text
+If deep agents become first-class product citizens, what is the actual product architecture?
+```
+
+The short answer:
+
+```text
+The agent harness coordinates work.
+The product owns authority, records, workflow, source truth, audit, and release.
+```
+
+A deep agent inside a product is not a bigger prompt. It is a long-running subsystem with a simple outside contract and many hidden internals. Following the deep-module rule from Ousterhout and the information-hiding rule from Parnas, the useful product boundary is not "agent calls tools." The useful boundary is:
+
+```text
+request in a work context
+-> governed run object
+-> exact product state transition or verified no-op
+```
+
+Everything else is implementation detail unless the user, operator, auditor, or release process needs to inspect it.
+
+## Source Anchors
+
+This architecture is a synthesis of research primitives, standards, and current product patterns:
+
+| Source family | What it contributes | Product interpretation |
+|---|---|---|
+| ReAct, MRKL, Toolformer | Reasoning plus action loops, modular tool routing, tool-use traces | Store trajectories, route deterministic logic to typed services, and evaluate tool behavior. |
+| Reflexion, Generative Agents, Voyager | Feedback, memory, reflection, skill libraries | Turn learning into reviewed memory proposals, eval cases, and versioned skills, not silent production mutation. |
+| WebArena, AgentBench, GAIA, SWE-agent | Long-horizon brittleness and agent-computer interface lessons | Build product-specific work surfaces, staging worlds, and trajectory evals. |
+| LangChain Deep Agents and LangGraph | Planner, subagents, workspace-like state, graph execution, interrupts | Useful harness patterns, but not the whole product control plane. |
+| OpenAI Agents SDK and Vercel AI SDK | Agents, tools, handoffs, guardrails, tracing, app-native HITL loops | Useful orchestration and UI loop primitives that must plug into product records. |
+| MCP and A2A | Tool/resource/prompt contracts and cross-agent delegation | Use protocol boundaries intentionally; do not make protocol adoption a substitute for product policy. |
+| OpenTelemetry GenAI, W3C Trace Context, CloudEvents | Trace vocabulary, correlation, event envelopes | Make runs observable and replayable, while keeping compliance audit separate from traces. |
+| OAuth, OIDC, SMART App Launch, FHIR, HIPAA | Identity, delegated scopes, healthcare object modeling, security safeguards | Bind every run to actor, tenant, source object, scope, data class, and audit requirement. |
+| OWASP LLM Top 10, NIST AI RMF, NIST GenAI Profile, ISO 42001 and 23894 | Risk, governance, threat, and lifecycle controls | Treat agents as managed product capabilities with release gates and incident controls. |
+| Temporal, Inngest, Cloudflare Workflows | Durable execution, retries, waits, compensation, event histories | Side effects belong in durable workflows, not in model loops. |
+| Cloudflare Agents, Salesforce Agentforce, ServiceNow AI Agents, Copilot Studio, Rovo, Slack agents | Stateful runtimes, work-surface agents, workflow-native actions, governed publishing, collaboration surfaces | Put agents near product work objects, but keep source truth, approval, and audit in product systems. |
+
+See [Reference map](references.md) and [Source atlas](source-atlas.md) for the canonical source list.
+
+## Product Architecture
+
+The deep-agent subsystem should sit between product surfaces and product workflows:
+
+```mermaid
+flowchart LR
+  User["User in work surface"] --> Surface["Work surface"]
+  Surface --> Binder["Context binder"]
+  Binder --> Authority["Identity and access"]
+  Authority --> Runtime["Owner agent runtime"]
+  Runtime --> Workspace["Run workspace"]
+  Runtime --> Planner["Typed task graph"]
+  Runtime --> Specialists["Scoped subagents"]
+  Specialists --> Runtime
+  Runtime --> Gateway["Capability gateway"]
+  Gateway --> Policy["Policy gateway"]
+  Policy --> Approval["Approval service"]
+  Approval --> Workflow["Durable workflow"]
+  Workflow --> Source["Source systems"]
+  Source --> Verify["Verifier and reconciliation"]
+  Verify --> Timeline["Product timeline"]
+  Verify --> Learning["Eval, memory, and skill lifecycle"]
+  Runtime --> Observability["Traces and run console"]
+  Policy --> Audit["Compliance audit"]
+  Approval --> Audit
+  Workflow --> Audit
+```
+
+The deep module is the `AgentRun`. Callers should not need to know whether the runtime used one model call, a graph, four subagents, a filesystem-style workspace, or a planner. Callers should only see:
+
+- current status
+- source evidence
+- proposed action
+- approval state
+- workflow state
+- final verified product state
+- memory or skill proposals that require review
+
+## Component Contracts
+
+| Component | Owns | Input | Output | Must hide | Must expose |
+|---|---|---|---|---|---|
+| Work surface | User intent in product context | Voice, chat, command, selected object | `AgentRunRequest` | Speech capture and UI mechanics | Selected object, transcript, confidence, correction path |
+| Context binder | Object and tenant binding | Request, session, screen, user claims | `ContextManifest` | Retrieval mechanics and redaction details | Work object, source freshness, ambiguity flags |
+| Identity and access | Effective authority | User, agent version, connector grant, source ACL | `AccessDecision` | Token plumbing | Allowed scopes, denied scopes, reason |
+| Owner agent runtime | Coordination and synthesis | Goal, context, grants, budgets | Task graph, observations, proposal | Model prompts, chain internals, planner mechanics | Steps, evidence, uncertainty, stop reason |
+| Run workspace | Intermediate artifacts | Source excerpts, rankings, drafts, specialist outputs | Versioned artifacts | Scratch reasoning and temporary files | Artifacts that affect a decision |
+| Specialist subagents | Bounded expert work | Scoped task and tool grant | `SpecialistResult` | Prompt and local search strategy | Result, schema, evidence, confidence, limits |
+| Capability gateway | Tool and skill boundary | Tool request or skill request | Validated call, preview, or denial | Adapter details | Schema, side effect, idempotency, policy class |
+| Policy gateway | Enforcement decision | Tool call, data class, authority, side effect | allow, deny, approval_required, clarify | Policy evaluation internals | Decision, rule, evidence, appeal path |
+| Approval service | Human decision record | Exact payload and source bundle | Approved, modified, rejected, escalated | Inbox routing | Payload hash, approver, decision, expiry |
+| Durable workflow | Side effects and recovery | Approved payload, idempotency key | Workflow events and source responses | Retry, wait, compensation logic | Status, cancellation, reconciliation state |
+| Verifier | Reality check | Expected state, source responses, timeline | `VerificationResult` | Adapter-specific reads | completed, waiting, failed, needs_reconciliation |
+| Memory and skill lifecycle | Governed improvement | Run outcome, correction, repeated pattern | Proposal, eval, release candidate | Authoring process details | Review state, source, owner, retention |
+| Observability and audit | Debugging and accountability | Spans, events, policy, approval, workflow | Trace, audit, eval sample | Storage and sampling mechanics | Correlated IDs and exportable evidence |
+| Control plane | Runtime governance | Agent version, grants, policies, evals | Release, rollback, incident action | Deployment internals | Active version, grants, disabled capabilities |
+
+The design smell is a shallow component that only forwards text. A good component owns an invariant that another layer can rely on.
+
+## Runtime Loop
+
+The runtime loop should be typed before it is clever:
+
+```text
+AgentRun
+-> ContextManifest
+-> AccessDecision
+-> TaskGraph
+-> SpecialistHandoff*
+-> ToolCall or ToolCallPreview*
+-> ActionProposal
+-> PolicyDecision
+-> Approval?
+-> WorkflowRun?
+-> VerificationResult
+-> TimelineEvent*
+-> MemoryProposal? / EvalCase? / SkillChangeRequest?
+```
+
+The owner agent can decide which specialist to call and how to synthesize results. It cannot decide that a denied policy is allowed, that a rejected approval is approved, or that a failed source write succeeded.
+
+## Run Contract
+
+A product should be able to store a run contract like this before any write occurs:
+
+```json
+{
+  "run_id": "run_bed_1042",
+  "agent_version_id": "bedflow-agent:v12",
+  "work_object": {
+    "type": "encounter",
+    "id": "E-1042",
+    "tenant_id": "hospital-a",
+    "surface": "bed-board"
+  },
+  "requested_by": {
+    "user_id": "u-221",
+    "role": "charge-nurse",
+    "channel": "voice"
+  },
+  "context_manifest_id": "ctx_884",
+  "authority_decision_id": "access_553",
+  "task_graph_id": "task_231",
+  "workspace_id": "ws_991",
+  "allowed_side_effect_level": "approval_required",
+  "required_records": [
+    "source_references",
+    "policy_decision",
+    "approval",
+    "workflow_events",
+    "verification_result",
+    "audit_events"
+  ],
+  "stop_conditions": [
+    "ambiguous_work_object",
+    "policy_denied",
+    "approval_rejected",
+    "source_reconciliation_failed",
+    "tool_budget_exceeded"
+  ]
+}
+```
+
+This is the difference between a demo agent and a product agent: the run has a durable contract before the model gets to the dangerous parts.
+
+## Healthcare Bed-Flow Slice
+
+Input:
+
+```text
+"Book a monitored bed for this patient."
+```
+
+The product should not pass that text straight to a bed reservation tool. The path is:
+
+```mermaid
+sequenceDiagram
+  participant User
+  participant Surface as Bed board or voice surface
+  participant Binder as Context binder
+  participant Owner as Owner agent
+  participant Capacity as Capacity specialist
+  participant Policy as Policy gateway
+  participant Approval as Approval service
+  participant Workflow as Bed reservation workflow
+  participant Source as ADT and bed board
+  participant Verify as Verifier
+
+  User->>Surface: "Book a monitored bed for this patient"
+  Surface->>Binder: transcript, selected encounter, user session
+  Binder->>Owner: ContextManifest for encounter E-1042
+  Owner->>Capacity: rank monitored beds with source refs
+  Capacity-->>Owner: CandidateRanking with evidence
+  Owner->>Policy: preview reserve_bed payload
+  Policy-->>Approval: approval_required with exact payload
+  Approval-->>Workflow: approved payload plus resume token
+  Workflow->>Source: reserve bed with idempotency key
+  Source-->>Workflow: source response
+  Workflow-->>Verify: result and source response
+  Verify-->>Surface: completed or needs_reconciliation
+```
+
+Records:
+
+| Stage | Product record | Why it exists |
+|---|---|---|
+| Voice intake | `TranscriptRecord` | Lets the user correct clinically meaningful terms. |
+| Binding | `ContextManifest` | Prevents "this patient" from drifting to the wrong encounter. |
+| Evidence | `SourceReference` | Proves candidate beds came from current capacity and patient constraints. |
+| Delegation | `SpecialistHandoff` | Prevents the capacity specialist from reserving beds. |
+| Proposal | `ActionProposal` | Shows the exact `reserve_bed` payload before approval. |
+| Policy | `PolicyDecision` | Captures PHI, role, side effect, and approval rule. |
+| Approval | `Approval` and `PayloadHash` | Prevents vague or stale approval from authorizing a different write. |
+| Execution | `WorkflowEvent` | Handles retries, waits, cancellation, and duplicate prevention. |
+| Truth | `SourceResponse` | Confirms what the bed board or ADT system actually accepted. |
+| Verification | `ReconciliationRecord` | Marks mismatch as `needs_reconciliation`, not completed. |
+| Learning | `EvalCase` or `MemoryProposal` | Turns failure into a test or reviewed organization memory. |
+
+Subagents:
+
+| Specialist | Allowed tools | Return schema | Prohibited authority |
+|---|---|---|---|
+| Context resolver | encounter lookup, facility lookup, user role lookup | `ResolvedWorkObject` | Cannot rank or reserve beds. |
+| Capacity specialist | capacity snapshot, patient constraints, discharge forecast | `CandidateRanking` | Cannot reserve a bed or notify a unit. |
+| Policy specialist | placement rules, isolation rules, approval matrix | `PolicyFinding` | Cannot approve or deny outside policy service. |
+| Communication drafter | notification template, unit contact rules | `DraftMessage` | Cannot send before workflow confirmation. |
+| Reconciliation specialist | bed board read, ADT read, timeline read | `VerificationResult` | Cannot mark complete from model text. |
+
+The user interface should show a compact work-object panel:
+
+- transcript and selected encounter
+- source freshness and ambiguity warnings
+- ranked bed candidates with source links
+- exact reservation payload
+- approval card with modify, reject, clarify, and escalate
+- timeline with workflow and reconciliation status
+- memory proposal only if an organization-level practice should be reviewed
+
+Patient facts should not become durable memory by default. A repeated operational preference, such as an approved unit escalation path, may become an organization memory proposal with owner review, retention, and audit.
+
+## Scheduling Slice
+
+Input:
+
+```text
+"Schedule the quarterly review with finance, legal, and the customer team next week."
+```
+
+Architecture translation:
+
+| Layer | Scheduling design |
+|---|---|
+| Work surface | Account workspace, calendar sidebar, Slack thread, or command bar. |
+| Context binder | Binds account, requester, attendee set, time window, timezone, customer relationship, and channel. |
+| Tool boundary | Calendar reads, CRM reads, availability checks, draft invite, send invite. |
+| Subagents | Attendee resolver, calendar ranker, agenda drafter, privacy reviewer, response monitor. |
+| Approval | Required before sending external invitations or customer-facing agenda text. |
+| Durable workflow | Sends invite, monitors declines, branches to reschedule if quorum fails. |
+| Memory | User-approved meeting preferences can be stored; private calendar content cannot. |
+| Verification | Provider event state and recipient list must match the approved payload. |
+
+The product mistake is to treat "send the invite" as just another tool call. It is an external communication side effect. The correct boundary is an exact draft invite, payload-hashed approval, durable send workflow, and post-send verification.
+
+## Support Resolution Slice
+
+Input:
+
+```text
+"Handle this billing dispute and update the customer."
+```
+
+Architecture translation:
+
+| Layer | Support design |
+|---|---|
+| Work surface | Ticket workspace with account and invoice context. |
+| Context binder | Binds ticket, account, invoice, entitlement, policy set, and support role. |
+| Evidence | Policy retrieval, ledger status, prior communications, entitlement history. |
+| Subagents | Policy specialist, billing evidence specialist, reply drafter, verifier. |
+| Approval | Required for credits, refunds, or customer promises over threshold. |
+| Workflow | Applies credit, updates ledger, sends approved response, updates ticket. |
+| Learning | Reviewed policy edge case may become a skill update, not hidden memory. |
+| Verification | Ledger and ticket state must confirm before the customer response claims resolution. |
+
+The key ordering rule:
+
+```text
+Do not send the customer message until the financial workflow has succeeded or failed explicitly.
+```
+
+## Coding Agent Slice
+
+Input:
+
+```text
+"Add approval-gated bed reservation to the workflow simulator."
+```
+
+Architecture translation:
+
+| Layer | Coding design |
+|---|---|
+| Work surface | Repository workspace, issue, branch, or PR. |
+| Context binder | Binds repo, branch, issue, allowed paths, test command, and reviewer policy. |
+| Workspace | File edits, diff, command logs, test artifacts, and notes. |
+| Subagents | Repo mapper, patch specialist, test investigator, review specialist. |
+| Approval | Human review for merge; separate approval for deploy. |
+| Workflow | CI, PR checks, review state, merge queue, deployment workflow. |
+| Memory | Reviewed repo convention can become scoped procedural memory; secrets cannot. |
+| Verification | Tests, lint, diff, PR status, and deployment state are source truth. |
+
+The useful lesson from coding agents is not just that they can edit files. It is that the interface gives them a workspace, tools, tests, diffs, logs, and review gates. Enterprise product agents need the same kind of structured workbench for their domain objects.
+
+## Memory, Skills, And Improvement
+
+Agents should improve through a governed lifecycle:
+
+```mermaid
+flowchart LR
+  Run["Production run"] --> Signal["Failure, correction, or repeated pattern"]
+  Signal --> Classify["Classify signal"]
+  Classify --> Eval["Eval case"]
+  Classify --> Memory["Memory proposal"]
+  Classify --> Skill["Skill change request"]
+  Memory --> Review["Owner and policy review"]
+  Skill --> Review
+  Eval --> Release["Release gate"]
+  Review --> Release
+  Release --> Version["New agent or skill version"]
+  Version --> Canary["Canary and rollback"]
+```
+
+Rules:
+
+- Run state is not memory.
+- Conversation transcript is not memory.
+- A successful action is not permission to store the facts behind it.
+- Memory needs source, scope, owner, retention, inspection, correction, deletion, and use audit.
+- Skill updates need versioning, evals, release notes, rollback, and runtime proof.
+- Production behavior should never change because the model reflected on itself during a run.
+
+## Industry Pattern Synthesis
+
+No current platform standard fully defines "agent as product citizen." The useful pattern is the convergence:
+
+| Industry pattern | Use it for | Do not confuse it with |
+|---|---|---|
+| Agent SDKs | Planning, tools, handoffs, guardrails, tracing | Product authorization or compliance audit |
+| Graph runtimes | State machines, interrupts, resumable agent flows | Durable business workflow by default |
+| MCP servers | Tool/resource/prompt integration contracts | Enterprise control plane |
+| A2A delegation | Cross-agent task ownership when another agent is truly the actor | Internal API calls that do not need agent identity |
+| Workflow engines | Durable side effects, waits, retries, compensation | Model reasoning |
+| Product work surfaces | User trust, correction, approval, recovery | Chat history |
+| OTel GenAI and trace context | Debuggability and correlation | Compliance audit or user-visible truth |
+| NIST, OWASP, ISO | Governance and risk management | Proof that a specific action was correct |
+| FHIR and SMART | Healthcare resource and scope contracts | Local operational truth without adapter mapping |
+
+The architecture should therefore be vendor-adaptable:
+
+```text
+agent runtime can change
+tool protocol can change
+model can change
+workflow engine can change
+product records and invariants should survive
+```
+
+## First Vertical Slice
+
+Build only one complete loop before broadening:
+
+```text
+voice or command intake
+-> context manifest
+-> access decision
+-> typed plan
+-> source evidence
+-> specialist ranking
+-> exact action proposal
+-> policy decision
+-> approval
+-> durable workflow
+-> source reconciliation
+-> timeline and audit
+-> eval sample
+-> optional reviewed memory or skill proposal
+```
+
+Minimum APIs:
+
+| API | Purpose |
+|---|---|
+| `POST /agent-runs` | Create run from work surface and request. |
+| `POST /agent-runs/{id}/context` | Bind context and authority. |
+| `POST /agent-runs/{id}/plan` | Produce typed task graph. |
+| `POST /agent-runs/{id}/handoffs` | Create scoped specialist task. |
+| `POST /tool-calls/preview` | Validate proposed tool call and side-effect class. |
+| `POST /approvals` | Store exact approval payload and payload hash. |
+| `POST /approvals/{id}/decision` | Approve, modify, reject, clarify, or escalate. |
+| `POST /workflows/{type}/start` | Start durable side-effect workflow with idempotency key. |
+| `POST /agent-runs/{id}/verify` | Reconcile source state and decide final status. |
+| `POST /eval-cases` | Store trajectory regression from run evidence. |
+| `POST /memory-proposals` | Propose reviewed memory separate from run state. |
+
+Minimum pass criteria:
+
+- Ambiguous work object stops before source reads.
+- Unauthorized user cannot use the agent to amplify permissions.
+- Side-effecting tool cannot run before policy.
+- Approval binds to exact payload and expires.
+- Rejected or modified payload cannot execute under the old hash.
+- Workflow retry cannot duplicate the side effect.
+- Source mismatch becomes `needs_reconciliation`.
+- Memory proposal does not affect future runs before review.
+- Release gate fails when approval, source truth, memory, or denial evals fail.
+
+## The Crux
+
+The hard problem is not making an agent call `reserve_bed`, `send_invite`, `apply_credit`, or `edit_file`.
+
+The hard problem is making the product answer, for every run:
+
+```text
+What object was the agent acting on?
+What authority did it have?
+What evidence did it use?
+What exact action did it propose?
+Who approved it?
+What workflow executed it?
+What did the source system confirm?
+What did the user see?
+What was audited?
+What became an eval?
+What was allowed to become memory or a skill?
+Which version will behave this way tomorrow?
+```
+
+That is the architecture of agents as first-class product citizens.
