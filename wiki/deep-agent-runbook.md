@@ -2,7 +2,7 @@
 
 This runbook explains how a deep agent behaves inside a product over multiple iterations.
 
-The existing [Deep agent lab](deep-agent-lab.md) names the parts of the harness. [Deep agent application architecture](deep-agent-application-architecture.md) shows how the harness becomes a governed product subsystem. This note shows those parts operating together:
+The existing [Deep agent lab](deep-agent-lab.md) names the parts of the harness. [Deep agent application architecture](deep-agent-application-architecture.qmd) shows how the harness becomes a governed product subsystem. This note shows those parts operating together:
 
 ```text
 intake

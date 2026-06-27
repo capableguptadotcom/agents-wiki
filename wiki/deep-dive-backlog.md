@@ -28,7 +28,7 @@ Current artifact:
 - [Industry case architecture lab](industry-case-architecture-lab.md) turns public product evidence, paper primitives, standards, lifecycle records, and release gates into case-level adoption decision records.
 - [Architecture decisions](architecture-decisions.md) converts those boundaries into ADR-style adopt, reject, evidence, scenario, and source-anchor decisions.
 - [Agent maturity model](agent-maturity-model.md) turns those decisions into autonomy-readiness criteria and a deep-dive queue.
-- [Design philosophy lab](design-philosophy-lab.md) applies deep-module and information-hiding checks to product boundaries before they become platform architecture.
+- [Design philosophy lab](design-philosophy-lab.qmd) applies deep-module and information-hiding checks to product boundaries before they become platform architecture.
 
 ## Module 1: Agent Product Objects
 
@@ -120,7 +120,7 @@ Artifacts to build:
 Current artifact:
 
 - [Durable execution](durable-execution.md) defines workflow ownership, state machines, idempotency, waits, cancellation, compensation, source reconciliation, platform fit, case-study walkthroughs, and durable-run evals.
-- [Deep agent application architecture](deep-agent-application-architecture.md) connects planner, workspace, subagents, tools, approval, durable workflows, source truth, memory, observability, and release into one product subsystem.
+- [Deep agent application architecture](deep-agent-application-architecture.qmd) connects planner, workspace, subagents, tools, approval, durable workflows, source truth, memory, observability, and release into one product subsystem.
 - [Subagent handoff simulator](subagent-handoff-simulator.md) defines scoped handoff contracts between owner agents and specialists, including allowed tools, output schemas, prohibited authority, synthesis paths, and evals.
 
 ## Module 5: Human Approval and Handoff

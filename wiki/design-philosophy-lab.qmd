@@ -68,7 +68,7 @@ The crux is not "which agent framework should we use?" The crux is where the pro
 
 ## How The Pieces Connect
 
-```mermaid
+```{mermaid}
 flowchart TD
   Surface["Surface timeline"] --> Context["Context binder"]
   Context --> Runtime["Agent runtime"]

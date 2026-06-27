@@ -4,7 +4,7 @@ Current as of 2026-06-27.
 
 This note turns the wiki's research, standards, case studies, and simulator into architecture decision records for an agent-native product.
 
-Use [Design philosophy lab](design-philosophy-lab.md) as the pre-ADR quality gate. A boundary should not become an ADR until it hides real complexity, owns an invariant, and has a proof test.
+Use [Design philosophy lab](design-philosophy-lab.qmd) as the pre-ADR quality gate. A boundary should not become an ADR until it hides real complexity, owns an invariant, and has a proof test.
 
 The core rule:
 

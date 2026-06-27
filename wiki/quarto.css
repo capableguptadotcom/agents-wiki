@@ -1,16 +1,18 @@
 :root {
-  --agent-bg: #f7f8fb;
+  --agent-bg: #f8fafc;
   --agent-paper: #ffffff;
   --agent-ink: #17202a;
   --agent-muted: #5d6675;
-  --agent-line: #d8dee8;
-  --agent-soft-line: #e8edf3;
+  --agent-line: #d9e1ea;
+  --agent-soft-line: #edf1f6;
   --agent-blue: #1f5fbf;
   --agent-green: #13795b;
   --agent-red: #b42318;
-  --agent-amber: #a16207;
-  --agent-code: #0f172a;
-  --agent-shadow: 0 12px 28px rgba(15, 23, 42, 0.06);
+  --agent-code: #101828;
+}
+
+html {
+  scroll-padding-top: 4.5rem;
 }
 
 body {
@@ -19,8 +21,8 @@ body {
 }
 
 .navbar {
+  background: rgba(255, 255, 255, 0.98);
   border-bottom: 1px solid var(--agent-line);
-  background: rgba(255, 255, 255, 0.96);
 }
 
 .navbar-title {
@@ -28,14 +30,14 @@ body {
   letter-spacing: 0;
 }
 
-.sidebar {
-  border-right: 1px solid var(--agent-line);
+#quarto-sidebar {
   background: #fbfcfe;
+  border-right: 1px solid var(--agent-line);
 }
 
-.sidebar-item-text,
-.sidebar-title {
-  font-size: 0.94rem;
+.sidebar-title,
+.sidebar-item-text {
+  font-size: 0.93rem;
 }
 
 .sidebar-item-container .active {
@@ -44,34 +46,37 @@ body {
 }
 
 .quarto-title-banner {
-  background: #eef3f8;
-  border-bottom: 1px solid var(--agent-line);
+  background: transparent;
+  border-bottom: 1px solid var(--agent-soft-line);
 }
 
 .quarto-title h1.title {
   color: var(--agent-ink);
+  font-size: 2rem;
   font-weight: 850;
   letter-spacing: 0;
 }
 
 .quarto-title .subtitle {
   color: var(--agent-muted);
+  font-size: 1.05rem;
 }
 
 main.content {
-  background: var(--agent-paper);
-  border: 1px solid var(--agent-soft-line);
-  box-shadow: var(--agent-shadow);
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  padding-top: 1.25rem;
 }
 
 main.content h2 {
   border-bottom: 1px solid var(--agent-soft-line);
   padding-bottom: 0.35rem;
-  margin-top: 2.2rem;
+  margin-top: 2.35rem;
 }
 
 main.content h3 {
-  margin-top: 1.6rem;
+  margin-top: 1.7rem;
 }
 
 main.content p,
@@ -104,6 +109,7 @@ main.content a {
 
 main table {
   width: 100%;
+  min-width: 720px;
   font-size: 0.91rem;
   border: 1px solid var(--agent-line);
   background: var(--agent-paper);
@@ -120,6 +126,16 @@ main table td {
   vertical-align: top;
 }
 
+.table-responsive,
+.cell-output-display,
+.cell-output,
+.quarto-layout-panel,
+div.sourceCode,
+pre {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
 pre {
   border-radius: 6px;
   border: 1px solid #263244;
@@ -132,6 +148,22 @@ code {
 
 pre code {
   color: #e5e7eb;
+  white-space: pre-wrap;
+}
+
+.cell-output-display svg,
+.mermaid svg,
+main.content img {
+  max-width: 100%;
+  height: auto;
+}
+
+.mermaid,
+.cell-output-display:has(svg) {
+  padding: 1rem;
+  border: 1px solid var(--agent-line);
+  border-radius: 6px;
+  background: var(--agent-paper);
 }
 
 .callout {
@@ -141,13 +173,6 @@ pre code {
 
 .callout.callout-style-default {
   border-left-width: 4px;
-}
-
-.mermaid {
-  padding: 1rem;
-  border: 1px solid var(--agent-line);
-  border-radius: 6px;
-  background: #ffffff;
 }
 
 #TOC {
@@ -168,4 +193,20 @@ blockquote {
 
 hr {
   border-color: var(--agent-line);
+}
+
+@media (max-width: 1400px) {
+  #quarto-margin-sidebar {
+    display: none;
+  }
+}
+
+@media (max-width: 991px) {
+  main table {
+    min-width: 640px;
+  }
+
+  .quarto-title h1.title {
+    font-size: 1.65rem;
+  }
 }

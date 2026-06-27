@@ -57,7 +57,7 @@ Interactive work is not allowed to be the only source of a contract, claim, or d
 
 1. Keep Quarto and improve the template.
 2. Add [Research operating system](research-operating-system.md).
-3. Add [System diagram spine](system-diagram-spine.md).
+3. Add [System diagram spine](system-diagram-spine.qmd).
 4. Add [Interactive labs index](interactive-labs.md) and demote `interactive.html`.
 5. Fix `interactive.html#section` deep links while the legacy app remains.
 6. Rewrite contract pages under the new standard.

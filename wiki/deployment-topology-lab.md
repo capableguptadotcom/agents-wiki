@@ -2,7 +2,7 @@
 
 Current as of 2026-06-27.
 
-For the canonical deployable container topology, see [System diagram spine](system-diagram-spine.md).
+For the canonical deployable container topology, see [System diagram spine](system-diagram-spine.qmd).
 
 This note complements the interactive Deployment Topology section in [interactive.html](interactive.html#deployment-topology).
 

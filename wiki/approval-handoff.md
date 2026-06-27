@@ -2,7 +2,7 @@
 
 Current as of 2026-06-27.
 
-For the canonical policy and approval gate flow, see [System diagram spine](system-diagram-spine.md).
+For the canonical policy and approval gate flow, see [System diagram spine](system-diagram-spine.qmd).
 
 Approval is not a button that says "looks good." In an agent-native product, approval is a product record attached to exact action arguments, source evidence, policy decision, payload hash, approver authority, audit, and workflow resume behavior.
 

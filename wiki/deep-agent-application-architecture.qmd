@@ -49,7 +49,7 @@ See [Reference map](references.md) and [Source atlas](source-atlas.md) for the c
 
 The deep-agent subsystem should sit between product surfaces and product workflows:
 
-```mermaid
+```{mermaid}
 flowchart LR
   User["User in work surface"] --> Surface["Work surface"]
   Surface --> Binder["Context binder"]
@@ -180,7 +180,7 @@ Input:
 
 The product should not pass that text straight to a bed reservation tool. The path is:
 
-```mermaid
+```{mermaid}
 sequenceDiagram
   participant User
   participant Surface as Bed board or voice surface
@@ -322,7 +322,7 @@ The useful lesson from coding agents is not just that they can edit files. It is
 
 Agents should improve through a governed lifecycle:
 
-```mermaid
+```{mermaid}
 flowchart LR
   Run["Production run"] --> Signal["Failure, correction, or repeated pattern"]
   Signal --> Classify["Classify signal"]

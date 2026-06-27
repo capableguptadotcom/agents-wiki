@@ -28,7 +28,7 @@ Rules:
 |---|---|---|
 | Large overview sections | Duplicates markdown and hides durable concepts in JavaScript. | Move to contract pages and diagrams. |
 | Pattern browsing | Too broad; weak evidence and no claim IDs. | Source registry plus claim ledger. |
-| Visual maps | Not tied to implementation diagrams. | [System diagram spine](system-diagram-spine.md). |
+| Visual maps | Not tied to implementation diagrams. | [System diagram spine](system-diagram-spine.qmd). |
 | Learning path cards | Mostly static prose. | Quarto pages with exercises and proof checks. |
 
 ## Next Lab Standard

@@ -2,7 +2,7 @@ project:
   type: website
   output-dir: _site
   render:
-    - index.qmd
+    - "*.qmd"
     - "*.md"
   resources:
     - assets/
@@ -19,7 +19,7 @@ website:
     left:
       - href: index.qmd
         text: Home
-      - href: system-diagram-spine.md
+      - href: system-diagram-spine.qmd
         text: Diagrams
       - href: implementation-lab.md
         text: Contracts
@@ -40,7 +40,7 @@ website:
           - index.qmd
           - research-operating-system.md
           - site-template-decision.md
-          - system-diagram-spine.md
+          - system-diagram-spine.qmd
           - markdown-first-authoring.md
           - agent-native-product-wiki.md
           - learning-path.md
@@ -59,7 +59,7 @@ website:
           - architecture-decisions.md
           - protocol-runtime-decision-lab.md
           - architecture-review.md
-          - design-philosophy-lab.md
+          - design-philosophy-lab.qmd
           - architecture-composition-workbench.md
           - agent-maturity-model.md
       - section: "System Contracts"
@@ -77,7 +77,7 @@ website:
         contents:
           - end-to-end-architecture-walkthrough.md
           - architecture-assembly-data.md
-          - deep-agent-application-architecture.md
+          - deep-agent-application-architecture.qmd
           - deep-agent-lab.md
           - deep-agent-runbook.md
           - subagent-handoff-simulator.md
@@ -105,11 +105,18 @@ website:
 
 format:
   html:
-    theme: cosmo
+    theme: zephyr
     css: quarto.css
+    page-layout: article
+    grid:
+      sidebar-width: 280px
+      body-width: 920px
+      margin-width: 220px
+      gutter-width: 1rem
     toc: true
     toc-depth: 3
     code-copy: true
+    code-overflow: wrap
     smooth-scroll: true
     link-external-newwindow: true
 execute:

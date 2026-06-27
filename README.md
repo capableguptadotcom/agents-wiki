@@ -12,7 +12,7 @@ Local source entry points:
 
 - [wiki/index.qmd](wiki/index.qmd)
 - [wiki/research-operating-system.md](wiki/research-operating-system.md)
-- [wiki/system-diagram-spine.md](wiki/system-diagram-spine.md)
+- [wiki/system-diagram-spine.qmd](wiki/system-diagram-spine.qmd)
 - [wiki/implementation-lab.md](wiki/implementation-lab.md)
 
 ## Quality Bar
@@ -65,7 +65,7 @@ create AgentRun
 -> sample EvalCase
 ```
 
-See [System diagram spine](wiki/system-diagram-spine.md) for the ERD, run state machine, sequence diagram, deployment topology, correlation map, and policy gate flow.
+See [System diagram spine](wiki/system-diagram-spine.qmd) for the ERD, run state machine, sequence diagram, deployment topology, correlation map, and policy gate flow.
 
 ## Site Stack
 

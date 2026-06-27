@@ -2,7 +2,7 @@
 
 This note explains how a "deep agent" should be understood inside a real application.
 
-For the product architecture that connects the harness to context binding, subagents, tools, approval, workflow, memory, observability, and release, see [Deep agent application architecture](deep-agent-application-architecture.md).
+For the product architecture that connects the harness to context binding, subagents, tools, approval, workflow, memory, observability, and release, see [Deep agent application architecture](deep-agent-application-architecture.qmd).
 
 ## Working Definition
 

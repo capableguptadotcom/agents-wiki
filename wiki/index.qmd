@@ -8,7 +8,7 @@ This wiki exists to turn agent product ideas into buildable contracts.
 It is not a collection of essays. Each accepted page should define claims, sources, boundaries, records, diagrams, failure modes, and tests.
 
 [Research operating system](research-operating-system.md){.btn .btn-primary}
-[System diagram spine](system-diagram-spine.md){.btn .btn-secondary}
+[System diagram spine](system-diagram-spine.qmd){.btn .btn-secondary}
 
 ## Current Position
 
@@ -65,7 +65,7 @@ Every layer must answer:
 |---|---|---|
 | 1 | [Research operating system](research-operating-system.md) | Defines the quality bar: claim ledger, evidence classes, page gates, rewrite queue. |
 | 2 | [Site template decision](site-template-decision.md) | Explains why Quarto remains the base and why the old HTML lab is demoted. |
-| 3 | [System diagram spine](system-diagram-spine.md) | Establishes the ERD, state machine, sequence, topology, correlation, and policy diagrams. |
+| 3 | [System diagram spine](system-diagram-spine.qmd) | Establishes the ERD, state machine, sequence, topology, correlation, and policy diagrams. |
 | 4 | [Architecture blueprint](architecture-blueprint.md) | Gives the current layer model and minimum vertical slice. |
 | 5 | [Implementation lab](implementation-lab.md) | Should become the canonical backend contract spec. |
 | 6 | [References](references.md) and [Source atlas](source-atlas.md) | Current source library; needs conversion into claim-level registry. |
