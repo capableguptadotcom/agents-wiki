@@ -17,7 +17,7 @@ This page defines the canonical visual model for the wiki. These diagrams are no
 
 Use this to decide database tables, foreign-key style links, append-only records, and which store owns each object.
 
-```{mermaid}
+```mermaid
 erDiagram
   AGENT ||--o{ AGENT_VERSION : releases
   RELEASE_BUNDLE ||--o{ AGENT_VERSION : pins
@@ -52,7 +52,7 @@ Every side effect must be reconstructable from `AgentRun`, `ToolCall`, `PolicyDe
 
 Use this to implement UI status, workflow recovery, cancellation, and incident handling.
 
-```{mermaid}
+```mermaid
 stateDiagram-v2
   [*] --> received
   received --> binding_context
@@ -95,7 +95,7 @@ No UI may show `completed` from model text. Completion requires source confirmat
 
 Use this as the first build target. It is the smallest slice that proves the architecture.
 
-```{mermaid}
+```mermaid
 sequenceDiagram
   participant Surface as Work surface
   participant RunAPI as AgentRun API
@@ -138,7 +138,7 @@ The sequence must pass with a fake bed hold before any broader agent platform wo
 
 Use this to decide deployable services and which layer owns enforcement.
 
-```{mermaid}
+```mermaid
 flowchart TB
   subgraph Client["Product surfaces"]
     Voice["Voice or command bar"]
@@ -215,7 +215,7 @@ The model is not an enforcement boundary. Enforcement lives in context binding, 
 
 Use this to make debugging, audit, replay, and eval sampling possible.
 
-```{mermaid}
+```mermaid
 flowchart LR
   Request["request_id"] --> Run["run_id"]
   Run --> Trace["trace_id"]
@@ -248,7 +248,7 @@ Every write-side effect needs `run_id`, `tool_call_id`, `policy_decision_id`, `a
 
 Use this to keep dangerous transitions outside model discretion.
 
-```{mermaid}
+```mermaid
 flowchart TD
   Proposed["Tool call or action proposal"] --> Schema["Schema validation"]
   Schema -->|invalid| DenyMalformed["deny: malformed payload"]
