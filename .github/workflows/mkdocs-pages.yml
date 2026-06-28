@@ -32,8 +32,11 @@ jobs:
       - name: Verify wiki source
         run: |
           node scripts/generate-assembly-data.mjs
+          node scripts/generate-flow-tutorial-data.mjs
           node --check wiki/assets/generated/assembly-data.js
+          node --check wiki/assets/generated/flow-tutorial-data.js
           node --check wiki/assets/app.js
+          node --check wiki/assets/javascripts/flow-tutorial.js
           node scripts/verify-wiki.mjs
 
       - name: Build MkDocs website

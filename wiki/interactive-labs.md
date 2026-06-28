@@ -8,6 +8,7 @@ Rules:
 
 - Canonical ideas live in markdown.
 - Labs must link back to the page that owns the contract.
+- Focused widgets should keep scenario data in markdown and generate browser data during CI.
 - A broken or confusing lab should be removed or replaced by a small focused widget.
 - Deep links must work with `interactive.html#section`.
 

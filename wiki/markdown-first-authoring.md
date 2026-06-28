@@ -21,7 +21,7 @@ JavaScript should not become the hidden source of product theory.
 | Site home | `wiki/index.md` | Introduce the learning path and route readers. | Keep it short; link to deeper notes. |
 | Navigation | `mkdocs.yml` | Sidebar, navigation sections, search, theme, and render scope. | Every major markdown page should be reachable from the nav. |
 | Interactive labs | `wiki/interactive.html` plus `wiki/assets/app.js` | Dense scenario switching, generated records, and live walkthroughs. | Every lab must have a markdown companion page. |
-| Generated lab data | Markdown data files such as `wiki/architecture-assembly-data.md` | Structured scenario data that powers focused interactive labs. | Generated JS files are build artifacts, not durable source. |
+| Generated lab data | Markdown data files such as `wiki/architecture-assembly-data.md` and `wiki/interactive-flow-tutorial-data.md` | Structured scenario data that powers focused interactive labs. | Generated JS files are build artifacts, not durable source. |
 | Styles | `wiki/assets/stylesheets/research.css` and `wiki/assets/styles.css` | Material theme refinement and carried lab style. | Styling should not encode architecture content. |
 | Publishing | `.github/workflows/mkdocs-pages.yml` | Build and deploy Material for MkDocs to GitHub Pages. | CI must render from source, not commit generated `site/`. |
 
@@ -88,3 +88,5 @@ The next migration should be incremental:
 5. Repeat only where the interaction benefits from structured data.
 
 The first migration is the Architecture Assembly lab. Its explanatory source is [End-to-end architecture walkthrough](end-to-end-architecture-walkthrough.md), and its structured scenario source is [Architecture Assembly Data](architecture-assembly-data.md).
+
+The focused [Interactive Flow Tutorial](interactive-flow-tutorial.md) follows the same pattern: explanation stays on the tutorial page, structured steps and scenarios live in [Interactive Flow Tutorial Data](interactive-flow-tutorial-data.md), and CI generates the browser data asset.

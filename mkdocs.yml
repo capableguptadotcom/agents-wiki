@@ -54,6 +54,7 @@ nav:
   - Source Library:
       - References: references.md
       - Source Atlas: source-atlas.md
+      - Interactive Flow Tutorial Data: interactive-flow-tutorial-data.md
       - Research Standards: research-standards.md
       - Evidence Chain Architecture: evidence-chain-architecture.md
       - Paper To Product Lab: paper-to-product-lab.md
@@ -131,6 +132,7 @@ extra_css:
 extra_javascript:
   - https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js
   - assets/javascripts/diagram-viewer.js
+  - assets/generated/flow-tutorial-data.js
   - assets/javascripts/flow-tutorial.js
 
 plugins:

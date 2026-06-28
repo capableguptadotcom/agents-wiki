@@ -8,6 +8,8 @@ Book a monitored bed for this ED patient.
 
 The point is to see the crux of agent-native product architecture: the model can coordinate work, but the product must bind context, enforce authority, gate side effects, execute durably, verify source truth, and control learning.
 
+The interactive steps and scenarios are generated from [Interactive Flow Tutorial Data](interactive-flow-tutorial-data.md).
+
 <div class="agent-tutorial" data-agent-tutorial>
   <div class="tutorial-loading">Loading tutorial...</div>
 </div>
