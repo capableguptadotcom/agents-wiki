@@ -44,6 +44,7 @@ theme:
 nav:
   - Start:
       - Home: index.md
+      - Interactive Flow Tutorial: interactive-flow-tutorial.md
       - Research Operating System: research-operating-system.md
       - Site Template Decision: site-template-decision.md
       - System Diagram Spine: system-diagram-spine.md
@@ -130,6 +131,7 @@ extra_css:
 extra_javascript:
   - https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js
   - assets/javascripts/diagram-viewer.js
+  - assets/javascripts/flow-tutorial.js
 
 plugins:
   - search

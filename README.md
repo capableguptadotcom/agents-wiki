@@ -11,6 +11,7 @@ Published site:
 Local source entry points:
 
 - [wiki/index.md](wiki/index.md)
+- [wiki/interactive-flow-tutorial.md](wiki/interactive-flow-tutorial.md)
 - [wiki/research-operating-system.md](wiki/research-operating-system.md)
 - [wiki/system-diagram-spine.md](wiki/system-diagram-spine.md)
 - [wiki/implementation-lab.md](wiki/implementation-lab.md)

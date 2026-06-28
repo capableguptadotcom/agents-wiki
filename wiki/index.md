@@ -5,6 +5,7 @@ subtitle: "Product architecture for governed AI agents."
 
 Build agents as product actors, not chat widgets.
 
+[Interactive tutorial](interactive-flow-tutorial.md)
 [System diagrams](system-diagram-spine.md)
 [Research standard](research-operating-system.md)
 
@@ -58,6 +59,7 @@ Use a fake bed-reservation flow. It is concrete enough to expose the hard parts 
 
 | Page | Use it for |
 |---|---|
+| [Interactive flow tutorial](interactive-flow-tutorial.md) | Step through the bed-flow run and inspect where the product must stop, prove, approve, execute, verify, and learn. |
 | [System diagram spine](system-diagram-spine.md) | Canonical ERD, state machine, sequence, topology, correlation, and policy flow. |
 | [Architecture blueprint](architecture-blueprint.md) | Layer boundaries and the minimum product architecture. |
 | [Implementation lab](implementation-lab.md) | API, schema, event, and error-contract work queue. |
